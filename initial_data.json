@@ -2514,22 +2514,6 @@
 },
 {
   "model": "products.product",
-  "pk": 202,
-  "fields": {
-    "category": 4,
-    "name": "Casual Wear with Medicated Inner Sole - Obsidian Black",
-    "slug": "medicated-comfort-loafer-obsidian-black",
-    "description": "Handcrafted genuine leather casual loafer featuring a high-density casual wear medicated inner sole for superior arch support and all-day comfort.",
-    "regular_price": "6999.00",
-    "sale_price": "3999.00",
-    "is_featured": true,
-    "is_active": true,
-    "created_at": "2026-08-20T05:51:43.086Z",
-    "updated_at": "2026-08-20T07:19:37.664Z"
-  }
-},
-{
-  "model": "products.product",
   "pk": 203,
   "fields": {
     "category": 4,
@@ -2718,6 +2702,22 @@
     "is_active": true,
     "created_at": "2026-08-20T06:19:27.662Z",
     "updated_at": "2026-08-20T07:19:37.540Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 215,
+  "fields": {
+    "category": 10,
+    "name": "SOLO Medicated Orthopedic Memory Foam Inner Sole",
+    "slug": "",
+    "description": "Engineered with high-density medicated memory foam, orthopedic arch cushioning, and honeycomb shock-absorption technology. Fits seamlessly inside all formal, casual, and daily wear shoes for all-day comfort and heel pressure relief.",
+    "regular_price": "2499.00",
+    "sale_price": "1499.00",
+    "is_featured": false,
+    "is_active": true,
+    "created_at": "2026-08-21T18:34:15.797Z",
+    "updated_at": "2026-08-21T18:34:15.797Z"
   }
 },
 {
@@ -10660,60 +10660,6 @@
 },
 {
   "model": "products.productsize",
-  "pk": 1177,
-  "fields": {
-    "product": 202,
-    "size": "39",
-    "stock": 15
-  }
-},
-{
-  "model": "products.productsize",
-  "pk": 1178,
-  "fields": {
-    "product": 202,
-    "size": "40",
-    "stock": 15
-  }
-},
-{
-  "model": "products.productsize",
-  "pk": 1179,
-  "fields": {
-    "product": 202,
-    "size": "41",
-    "stock": 15
-  }
-},
-{
-  "model": "products.productsize",
-  "pk": 1180,
-  "fields": {
-    "product": 202,
-    "size": "42",
-    "stock": 15
-  }
-},
-{
-  "model": "products.productsize",
-  "pk": 1181,
-  "fields": {
-    "product": 202,
-    "size": "43",
-    "stock": 15
-  }
-},
-{
-  "model": "products.productsize",
-  "pk": 1182,
-  "fields": {
-    "product": 202,
-    "size": "44",
-    "stock": 15
-  }
-},
-{
-  "model": "products.productsize",
   "pk": 1183,
   "fields": {
     "product": 203,
@@ -12639,6 +12585,42 @@
   }
 },
 {
+  "model": "products.productsize",
+  "pk": 1397,
+  "fields": {
+    "product": 215,
+    "size": "Free Size (Trimmable)",
+    "stock": 50
+  }
+},
+{
+  "model": "products.productsize",
+  "pk": 1398,
+  "fields": {
+    "product": 215,
+    "size": "6/39 - 7/40",
+    "stock": 50
+  }
+},
+{
+  "model": "products.productsize",
+  "pk": 1399,
+  "fields": {
+    "product": 215,
+    "size": "8/41 - 9/42",
+    "stock": 50
+  }
+},
+{
+  "model": "products.productsize",
+  "pk": 1400,
+  "fields": {
+    "product": 215,
+    "size": "10/43 - 11/44",
+    "stock": 50
+  }
+},
+{
   "model": "products.productimage",
   "pk": 34,
   "fields": {
@@ -14008,24 +13990,6 @@
 },
 {
   "model": "products.productimage",
-  "pk": 235,
-  "fields": {
-    "product": 202,
-    "image": "products/casual_medicated_black_grey_sole.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 236,
-  "fields": {
-    "product": 202,
-    "image": "products/medicated_inner_sole.png",
-    "is_primary": false
-  }
-},
-{
-  "model": "products.productimage",
   "pk": 237,
   "fields": {
     "product": 203,
@@ -14238,6 +14202,15 @@
     "product": 214,
     "image": "products/medicated_inner_sole.png",
     "is_primary": false
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 261,
+  "fields": {
+    "product": 215,
+    "image": "products/medicated_insole_accessory.png",
+    "is_primary": true
   }
 },
 {
