@@ -4,16 +4,16 @@
 
 {% block content %}
 {% load static %}
-<!-- Clean Luxury Category Header (No Picture) -->
-<div class="bg-neutral-900 text-white mb-8 border-b border-yellow-600/20 shadow-md">
+<!-- Clean Luxury White Category Header (No Picture) -->
+<div class="bg-white text-gray-900 mb-6 border-b border-gray-200 shadow-sm">
     <div class="max-w-7xl mx-auto px-6 py-8 md:py-12 text-center space-y-3">
-        <span class="inline-block bg-brandYellow text-soloPurple font-extrabold text-[11px] md:text-xs uppercase tracking-widest px-4 py-1.5 rounded-full shadow-md">
+        <span class="inline-block bg-brandYellow text-soloPurple font-extrabold text-[11px] md:text-xs uppercase tracking-widest px-4 py-1.5 rounded-full shadow-sm">
             OFFICIAL COLLECTION 2026
         </span>
-        <h1 class="text-3xl md:text-5xl font-serif font-bold uppercase tracking-[0.15em] text-white drop-shadow-lg">
+        <h1 class="text-3xl md:text-5xl font-serif font-normal uppercase tracking-[0.2em] text-gray-900">
             {{ current_category.name }}
         </h1>
-        <p class="text-xs md:text-sm font-semibold uppercase tracking-widest text-brandYellow">
+        <p class="text-xs md:text-sm font-semibold uppercase tracking-widest text-gray-500">
             {{ products|length }} PREMIUM ITEMS AVAILABLE
         </p>
     </div>
