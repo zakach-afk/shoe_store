@@ -134,10 +134,20 @@
                     <img src="{{ product.secondary_image_url }}" alt="Medicated Inner Sole" class="slide-img-2 w-full h-full object-contain transition-all duration-500 rounded-xl absolute inset-0 p-2 opacity-0 scale-95 pointer-events-none">
                     
                     <!-- Two Navigation Dots Indicator at the Bottom -->
-                    <div class="absolute bottom-3 left-0 right-0 flex items-center justify-center space-x-1.5 z-20" onclick="event.stopPropagation()">
-                        <button type="button" onclick="cardDotClick(event, this, 0)" class="slide-dot-0 w-4 h-1.5 rounded-full bg-gray-900 transition-all shadow-sm focus:outline-none" title="Shoe Photo"></button>
-                        <button type="button" onclick="cardDotClick(event, this, 1)" class="slide-dot-1 w-1.5 h-1.5 rounded-full bg-gray-300 hover:bg-gray-700 transition-all shadow-sm focus:outline-none" title="Inner Sole"></button>
+                    <div class="absolute bottom-2.5 left-0 right-0 flex items-center justify-center z-20" onclick="event.stopPropagation()">
+                        <div class="bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-full shadow-md flex items-center space-x-1.5 border border-gray-200">
+                            <button type="button" onclick="cardDotClick(event, this, 0)" class="slide-dot-0 w-4 h-2 rounded-full bg-black transition-all shadow-sm focus:outline-none" title="Shoe Photo"></button>
+                            <button type="button" onclick="cardDotClick(event, this, 1)" class="slide-dot-1 w-2 h-2 rounded-full bg-gray-300 hover:bg-black transition-all shadow-sm focus:outline-none" title="Medicated Inner Sole"></button>
+                        </div>
                     </div>
+
+                    <!-- Mini Arrows on Hover -->
+                    <button type="button" onclick="cardPrevSlide(event, this)" class="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-7 h-7 rounded-full bg-white/90 shadow hover:bg-white text-gray-800 flex items-center justify-center opacity-0 group-hover:opacity-100 transition focus:outline-none border border-gray-100" title="Previous Image">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button type="button" onclick="cardNextSlide(event, this)" class="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-7 h-7 rounded-full bg-white/90 shadow hover:bg-white text-gray-800 flex items-center justify-center opacity-0 group-hover:opacity-100 transition focus:outline-none border border-gray-100" title="Next Image">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
                     {% endif %}
                 {% else %}
                 <div class="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400 font-bold text-xs">NO IMAGE</div>
@@ -221,10 +231,20 @@
                     <img src="{{ product.secondary_image_url }}" alt="Medicated Inner Sole" class="slide-img-2 w-full h-full object-contain transition-all duration-500 rounded-xl absolute inset-0 p-2 opacity-0 scale-95 pointer-events-none">
                     
                     <!-- Two Navigation Dots Indicator at the Bottom -->
-                    <div class="absolute bottom-3 left-0 right-0 flex items-center justify-center space-x-1.5 z-20" onclick="event.stopPropagation()">
-                        <button type="button" onclick="cardDotClick(event, this, 0)" class="slide-dot-0 w-4 h-1.5 rounded-full bg-gray-900 transition-all shadow-sm focus:outline-none" title="Shoe Photo"></button>
-                        <button type="button" onclick="cardDotClick(event, this, 1)" class="slide-dot-1 w-1.5 h-1.5 rounded-full bg-gray-300 hover:bg-gray-700 transition-all shadow-sm focus:outline-none" title="Inner Sole"></button>
+                    <div class="absolute bottom-2.5 left-0 right-0 flex items-center justify-center z-20" onclick="event.stopPropagation()">
+                        <div class="bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-full shadow-md flex items-center space-x-1.5 border border-gray-200">
+                            <button type="button" onclick="cardDotClick(event, this, 0)" class="slide-dot-0 w-4 h-2 rounded-full bg-black transition-all shadow-sm focus:outline-none" title="Shoe Photo"></button>
+                            <button type="button" onclick="cardDotClick(event, this, 1)" class="slide-dot-1 w-2 h-2 rounded-full bg-gray-300 hover:bg-black transition-all shadow-sm focus:outline-none" title="Medicated Inner Sole"></button>
+                        </div>
                     </div>
+
+                    <!-- Mini Arrows on Hover -->
+                    <button type="button" onclick="cardPrevSlide(event, this)" class="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-7 h-7 rounded-full bg-white/90 shadow hover:bg-white text-gray-800 flex items-center justify-center opacity-0 group-hover:opacity-100 transition focus:outline-none border border-gray-100" title="Previous Image">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button type="button" onclick="cardNextSlide(event, this)" class="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-7 h-7 rounded-full bg-white/90 shadow hover:bg-white text-gray-800 flex items-center justify-center opacity-0 group-hover:opacity-100 transition focus:outline-none border border-gray-100" title="Next Image">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
                     {% endif %}
                 {% else %}
                 <div class="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400 font-bold text-xs">NO IMAGE</div>
@@ -312,17 +332,27 @@
                     <img src="{{ product.secondary_image_url }}" alt="Medicated Inner Sole" class="slide-img-2 w-full h-full object-contain transition-all duration-500 rounded-xl absolute inset-0 p-2 opacity-0 scale-95 pointer-events-none">
                     
                     <!-- Two Navigation Dots Indicator at the Bottom -->
-                    <div class="absolute bottom-3 left-0 right-0 flex items-center justify-center space-x-1.5 z-20" onclick="event.stopPropagation()">
-                        <button type="button" onclick="cardDotClick(event, this, 0)" class="slide-dot-0 w-4 h-1.5 rounded-full bg-gray-900 transition-all shadow-sm focus:outline-none" title="Shoe Photo"></button>
-                        <button type="button" onclick="cardDotClick(event, this, 1)" class="slide-dot-1 w-1.5 h-1.5 rounded-full bg-gray-300 hover:bg-gray-700 transition-all shadow-sm focus:outline-none" title="Inner Sole"></button>
+                    <div class="absolute bottom-2.5 left-0 right-0 flex items-center justify-center z-20" onclick="event.stopPropagation()">
+                        <div class="bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-full shadow-md flex items-center space-x-1.5 border border-gray-200">
+                            <button type="button" onclick="cardDotClick(event, this, 0)" class="slide-dot-0 w-4 h-2 rounded-full bg-black transition-all shadow-sm focus:outline-none" title="Shoe Photo"></button>
+                            <button type="button" onclick="cardDotClick(event, this, 1)" class="slide-dot-1 w-2 h-2 rounded-full bg-gray-300 hover:bg-black transition-all shadow-sm focus:outline-none" title="Medicated Inner Sole"></button>
+                        </div>
                     </div>
+
+                    <!-- Mini Arrows on Hover -->
+                    <button type="button" onclick="cardPrevSlide(event, this)" class="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-7 h-7 rounded-full bg-white/90 shadow hover:bg-white text-gray-800 flex items-center justify-center opacity-0 group-hover:opacity-100 transition focus:outline-none border border-gray-100" title="Previous Image">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button type="button" onclick="cardNextSlide(event, this)" class="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-7 h-7 rounded-full bg-white/90 shadow hover:bg-white text-gray-800 flex items-center justify-center opacity-0 group-hover:opacity-100 transition focus:outline-none border border-gray-100" title="Next Image">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
                     {% endif %}
                 {% else %}
                 <div class="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400 font-bold text-xs">NO IMAGE</div>
                 {% endif %}
 
                 <div class="absolute bottom-3 right-3 z-20 opacity-0 group-hover:opacity-100 transition duration-300 {% if product.secondary_image_url %}hidden md:block{% endif %}">
-                    <button type="button" class="w-10 h-10 bg-white text-gray-900 rounded-full shadow-lg flex items-center justify-center hover:bg-brandYellow transition">
+                    <button type="button" class="w-10 h-10 bg-white text-gray-900 rounded-full shadow-lg flex items-center justify-center hover:bg-brandYellow transition" title="Choose Size">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
                         </svg>
@@ -400,17 +430,27 @@
                     <img src="{{ product.secondary_image_url }}" alt="Medicated Inner Sole" class="slide-img-2 w-full h-full object-contain transition-all duration-500 rounded-xl absolute inset-0 p-2 opacity-0 scale-95 pointer-events-none">
                     
                     <!-- Two Navigation Dots Indicator at the Bottom -->
-                    <div class="absolute bottom-3 left-0 right-0 flex items-center justify-center space-x-1.5 z-20" onclick="event.stopPropagation()">
-                        <button type="button" onclick="cardDotClick(event, this, 0)" class="slide-dot-0 w-4 h-1.5 rounded-full bg-gray-900 transition-all shadow-sm focus:outline-none" title="Shoe Photo"></button>
-                        <button type="button" onclick="cardDotClick(event, this, 1)" class="slide-dot-1 w-1.5 h-1.5 rounded-full bg-gray-300 hover:bg-gray-700 transition-all shadow-sm focus:outline-none" title="Inner Sole"></button>
+                    <div class="absolute bottom-2.5 left-0 right-0 flex items-center justify-center z-20" onclick="event.stopPropagation()">
+                        <div class="bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-full shadow-md flex items-center space-x-1.5 border border-gray-200">
+                            <button type="button" onclick="cardDotClick(event, this, 0)" class="slide-dot-0 w-4 h-2 rounded-full bg-black transition-all shadow-sm focus:outline-none" title="Shoe Photo"></button>
+                            <button type="button" onclick="cardDotClick(event, this, 1)" class="slide-dot-1 w-2 h-2 rounded-full bg-gray-300 hover:bg-black transition-all shadow-sm focus:outline-none" title="Medicated Inner Sole"></button>
+                        </div>
                     </div>
+
+                    <!-- Mini Arrows on Hover -->
+                    <button type="button" onclick="cardPrevSlide(event, this)" class="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-7 h-7 rounded-full bg-white/90 shadow hover:bg-white text-gray-800 flex items-center justify-center opacity-0 group-hover:opacity-100 transition focus:outline-none border border-gray-100" title="Previous Image">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button type="button" onclick="cardNextSlide(event, this)" class="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-7 h-7 rounded-full bg-white/90 shadow hover:bg-white text-gray-800 flex items-center justify-center opacity-0 group-hover:opacity-100 transition focus:outline-none border border-gray-100" title="Next Image">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
                     {% endif %}
                 {% else %}
                 <div class="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400 font-bold text-xs">NO IMAGE</div>
                 {% endif %}
 
                 <div class="absolute bottom-3 right-3 z-20 opacity-0 group-hover:opacity-100 transition duration-300 {% if product.secondary_image_url %}hidden md:block{% endif %}">
-                    <button type="button" class="w-10 h-10 bg-white text-gray-900 rounded-full shadow-lg flex items-center justify-center hover:bg-brandYellow transition">
+                    <button type="button" class="w-10 h-10 bg-white text-gray-900 rounded-full shadow-lg flex items-center justify-center hover:bg-brandYellow transition" title="Choose Size">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
                         </svg>
@@ -433,6 +473,7 @@
         {% endfor %}
     </div>
 </section>
+{% endif %}
 {% endif %}
 
 <!-- 6. Trust Features Strip -->

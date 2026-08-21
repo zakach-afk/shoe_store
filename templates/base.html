@@ -835,18 +835,20 @@
                     img1.classList.add('opacity-0', 'scale-95');
                     img2.classList.remove('opacity-0', 'scale-95');
                     img2.classList.add('opacity-100', 'scale-100');
+                    cardEl.dataset.currentSlide = "1";
                     if (dot0 && dot1) {
-                        dot0.className = 'slide-dot-0 w-1.5 h-1.5 rounded-full bg-gray-300 hover:bg-gray-700 transition-all shadow-sm focus:outline-none';
-                        dot1.className = 'slide-dot-1 w-4 h-1.5 rounded-full bg-gray-900 transition-all shadow-sm focus:outline-none';
+                        dot0.className = 'slide-dot-0 w-2 h-2 rounded-full bg-gray-300 hover:bg-black transition-all shadow-sm focus:outline-none';
+                        dot1.className = 'slide-dot-1 w-4 h-2 rounded-full bg-black transition-all shadow-sm focus:outline-none';
                     }
                 } else {
                     img2.classList.remove('opacity-100', 'scale-100');
                     img2.classList.add('opacity-0', 'scale-95');
                     img1.classList.remove('opacity-0', 'scale-95');
                     img1.classList.add('opacity-100', 'scale-100');
+                    cardEl.dataset.currentSlide = "0";
                     if (dot0 && dot1) {
-                        dot0.className = 'slide-dot-0 w-4 h-1.5 rounded-full bg-gray-900 transition-all shadow-sm focus:outline-none';
-                        dot1.className = 'slide-dot-1 w-1.5 h-1.5 rounded-full bg-gray-300 hover:bg-gray-700 transition-all shadow-sm focus:outline-none';
+                        dot0.className = 'slide-dot-0 w-4 h-2 rounded-full bg-black transition-all shadow-sm focus:outline-none';
+                        dot1.className = 'slide-dot-1 w-2 h-2 rounded-full bg-gray-300 hover:bg-black transition-all shadow-sm focus:outline-none';
                     }
                 }
             }
@@ -857,6 +859,24 @@
             const cardEl = dotEl.closest('.product-slide-card');
             if (cardEl) {
                 cardShowSlide(cardEl, slideIndex);
+            }
+        }
+
+        function cardNextSlide(e, btn) {
+            if (e) e.stopPropagation();
+            const cardEl = btn.closest('.product-slide-card');
+            if (cardEl) {
+                const cur = cardEl.dataset.currentSlide === "1" ? 0 : 1;
+                cardShowSlide(cardEl, cur);
+            }
+        }
+
+        function cardPrevSlide(e, btn) {
+            if (e) e.stopPropagation();
+            const cardEl = btn.closest('.product-slide-card');
+            if (cardEl) {
+                const cur = cardEl.dataset.currentSlide === "1" ? 0 : 1;
+                cardShowSlide(cardEl, cur);
             }
         }
 
