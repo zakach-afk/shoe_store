@@ -207,10 +207,10 @@
                 <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400">Featured Collections</h3>
                 <div class="grid grid-cols-2 gap-3">
                     {% for product in drawer_featured_products %}
-                    <div onclick="openQuickViewModal('{{ product.name|escapejs }}', '{{ product.active_price }}', '{{ product.regular_price }}', '{% if product.images.first %}{{ product.images.first.image.url }}{% endif %}')" class="group block bg-gray-50 border border-gray-100 rounded-lg p-2 hover:border-soloPurple/30 transition cursor-pointer">
-                        <div class="aspect-square w-full overflow-hidden rounded-md bg-gray-200 mb-2">
-                            {% if product.images.first %}
-                                <img src="{{ product.images.first.image.url }}" alt="{{ product.name }}" class="h-full w-full object-cover group-hover:scale-105 transition duration-300">
+                    <div onclick="openQuickViewModal('{{ product.name|escapejs }}', '{{ product.active_price }}', '{{ product.regular_price }}', '{% if product.main_image %}{{ product.main_image.image.url }}{% endif %}')" class="group block bg-gray-50 border border-gray-100 rounded-lg p-2 hover:border-soloPurple/30 transition cursor-pointer">
+                        <div class="aspect-square w-full overflow-hidden rounded-md bg-white p-1 mb-2 border border-gray-100">
+                            {% if product.main_image %}
+                                <img src="{{ product.main_image.image.url }}" alt="{{ product.name }}" class="h-full w-full object-contain group-hover:scale-105 transition duration-300">
                             {% else %}
                                 <div class="h-full w-full flex items-center justify-center text-[10px] text-gray-400">No Image</div>
                             {% endif %}

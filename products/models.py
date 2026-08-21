@@ -44,6 +44,16 @@ class Product(models.Model):
         """Returns the sale price if available, otherwise regular price"""
         return self.sale_price if self.sale_price else self.regular_price
 
+    @property
+    def main_image(self):
+        primary = self.images.filter(is_primary=True).first()
+        if primary:
+            return primary
+        non_sole = self.images.exclude(image__icontains='medicated_inner_sole').exclude(image__icontains='sole').first()
+        if non_sole:
+            return non_sole
+        return self.images.first()
+
 
 class ProductSize(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='sizes')
@@ -58,6 +68,9 @@ class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to='products/')
     is_primary = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['-is_primary', 'id']
 
     def __str__(self):
         return f"Image for {self.product.name}"

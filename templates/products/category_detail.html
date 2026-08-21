@@ -23,8 +23,8 @@
 <section class="max-w-7xl mx-auto px-4 py-8">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
         {% for product in products %}
-        <div onclick="openQuickViewModal('{{ product.name|escapejs }}', '{{ product.active_price }}', '{{ product.regular_price }}', '{% if product.images.first %}{{ product.images.first.image.url }}{% endif %}', '{% if product.images.all.1 %}{{ product.images.all.1.image.url }}{% endif %}')" class="group flex flex-col justify-between text-left cursor-pointer">
-            <div class="relative overflow-hidden rounded-2xl bg-gray-100 mb-3 aspect-[3/4]">
+        <div onclick="openQuickViewModal('{{ product.name|escapejs }}', '{{ product.active_price }}', '{{ product.regular_price }}', '{% if product.main_image %}{{ product.main_image.image.url }}{% endif %}', '{% if product.images.all.1 %}{{ product.images.all.1.image.url }}{% endif %}')" class="group flex flex-col justify-between text-left cursor-pointer">
+            <div class="relative overflow-hidden rounded-2xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center p-2 border border-gray-100/80">
                 <!-- Black Discount Pill Tag -->
                 {% if product.discount_percentage > 0 %}
                 <span class="absolute top-3 left-3 bg-black text-white text-[11px] font-extrabold px-2.5 py-1 rounded-md shadow z-10 uppercase tracking-wider">
@@ -39,9 +39,9 @@
                 </span>
                 {% endif %}
 
-                <!-- Product Lifestyle Image -->
-                {% if product.images.first %}
-                <img src="{{ product.images.first.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                <!-- Product Lifestyle Image (Fully Fitted & Uncropped) -->
+                {% if product.main_image %}
+                <img src="{{ product.main_image.image.url }}" alt="{{ product.name }}" class="w-full h-full object-contain group-hover:scale-105 transition duration-500 rounded-xl">
                 {% else %}
                 <div class="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400 font-bold text-xs">NO IMAGE</div>
                 {% endif %}
