@@ -306,10 +306,10 @@
                     <!-- Gallery Thumbnails -->
                     <div id="qvThumbnailsRow" class="flex items-center justify-center space-x-3 w-full pt-1">
                         <button type="button" id="qvThumb1" onclick="switchQvMainImage(currentQvPrimaryUrl, this)" class="qv-thumb-btn w-12 h-12 rounded-lg overflow-hidden border-2 border-black bg-white p-0.5 shadow-sm focus:outline-none transition">
-                            <img id="qvThumb1Img" src="" class="w-full h-full object-cover rounded">
+                            <img id="qvThumb1Img" src="" class="w-full h-full object-contain rounded">
                         </button>
-                        <button type="button" id="qvThumb2" onclick="switchQvMainImage(currentQvSecondaryUrl, this)" class="qv-thumb-btn w-12 h-12 rounded-lg overflow-hidden border border-gray-300 bg-white p-0.5 shadow-sm focus:outline-none transition relative" title="Casual Wear Medicated Inner Sole">
-                            <img id="qvThumb2Img" src="{% static 'images/medicated_sole.png' %}" onerror="this.src='/media/products/medicated_inner_sole.png';" class="w-full h-full object-contain rounded">
+                        <button type="button" id="qvThumb2" onclick="switchQvMainImage(currentQvSecondaryUrl, this)" class="qv-thumb-btn w-12 h-12 rounded-lg overflow-hidden border border-gray-300 bg-white p-0.5 shadow-sm focus:outline-none transition relative" title="Medicated Inner Sole">
+                            <img id="qvThumb2Img" src="/media/products/medicated_inner_sole.png" class="w-full h-full object-contain rounded">
                             <span class="absolute -top-1 -right-1 bg-emerald-600 text-white text-[8px] font-extrabold px-1 rounded-full shadow">SOLE</span>
                         </button>
                     </div>
@@ -559,23 +559,42 @@
                 qvRegularPrice.classList.add('hidden');
             }
             
+            // Check if Medicated in title
+            const isMedicated = name.toLowerCase().includes('medicated') || (name.toLowerCase().includes('comfort') && name.toLowerCase().includes('loafer'));
+            
             currentQvPrimaryUrl = imageUrl || '';
-            currentQvSecondaryUrl = secondaryImageUrl || '/media/products/medicated_inner_sole.png';
+            currentQvSecondaryUrl = secondaryImageUrl || (isMedicated ? '/media/products/medicated_inner_sole.png' : '');
 
             if (imageUrl) qvProductImage.src = imageUrl;
             if (document.getElementById('qvThumb1Img')) document.getElementById('qvThumb1Img').src = currentQvPrimaryUrl;
+            if (document.getElementById('qvThumb2Img') && currentQvSecondaryUrl) {
+                document.getElementById('qvThumb2Img').src = currentQvSecondaryUrl;
+            }
 
-            // Check if Medicated in title
-            const isMedicated = name.toLowerCase().includes('medicated') || (name.toLowerCase().includes('comfort') && name.toLowerCase().includes('loafer'));
             const qvMedicatedBadge = document.getElementById('qvMedicatedBadge');
             const qvThumb2 = document.getElementById('qvThumb2');
 
-            if (isMedicated) {
-                if (qvMedicatedBadge) qvMedicatedBadge.classList.remove('hidden');
+            if (currentQvSecondaryUrl || isMedicated) {
                 if (qvThumb2) qvThumb2.classList.remove('hidden');
             } else {
+                if (qvThumb2) qvThumb2.classList.add('hidden');
+            }
+
+            if (isMedicated) {
+                if (qvMedicatedBadge) qvMedicatedBadge.classList.remove('hidden');
+            } else {
                 if (qvMedicatedBadge) qvMedicatedBadge.classList.add('hidden');
-                if (qvThumb2 && !secondaryImageUrl) qvThumb2.classList.add('hidden');
+            }
+
+            // Reset thumbnail borders to first image active
+            document.querySelectorAll('.qv-thumb-btn').forEach(b => {
+                b.classList.remove('border-2', 'border-black');
+                b.classList.add('border', 'border-gray-300');
+            });
+            const firstThumb = document.getElementById('qvThumb1');
+            if (firstThumb) {
+                firstThumb.classList.remove('border', 'border-gray-300');
+                firstThumb.classList.add('border-2', 'border-black');
             }
 
             currentQvQty = 1;
@@ -803,7 +822,30 @@
             window.location.href = '/checkout/';
         }
 
-        document.addEventListener('DOMContentLoaded', updateCartBadge);
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartBadge();
+
+            // Auto-slide 2-image cards (Shoes & Medicated Insole) every 3 seconds
+            setInterval(() => {
+                document.querySelectorAll('.product-slide-card[data-has-secondary="true"]').forEach(card => {
+                    const img1 = card.querySelector('.slide-img-1');
+                    const img2 = card.querySelector('.slide-img-2');
+                    if (img1 && img2) {
+                        if (img1.classList.contains('opacity-100')) {
+                            img1.classList.remove('opacity-100');
+                            img1.classList.add('opacity-0');
+                            img2.classList.remove('opacity-0');
+                            img2.classList.add('opacity-100');
+                        } else {
+                            img2.classList.remove('opacity-100');
+                            img2.classList.add('opacity-0');
+                            img1.classList.remove('opacity-0');
+                            img1.classList.add('opacity-100');
+                        }
+                    }
+                });
+            }, 3000);
+        });
     </script>
 
     <!-- Floating Luxury WhatsApp Chat Widget -->

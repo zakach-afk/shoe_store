@@ -54,6 +54,19 @@ class Product(models.Model):
             return non_sole
         return self.images.first()
 
+    @property
+    def secondary_image(self):
+        main = self.main_image
+        if main:
+            second = self.images.exclude(id=main.id).first()
+            if second:
+                return second
+        return None
+
+    @property
+    def is_medicated(self):
+        return 'medicated' in self.name.lower() or 'medicated' in self.description.lower()
+
 
 class ProductSize(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='sizes')
