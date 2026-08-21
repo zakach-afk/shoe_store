@@ -1,0 +1,824 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SOLO FOOTWEAR{% endblock %}</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandBlue: '#123C91',       /* Deep Royal Blue from logo */
+                        brandYellow: '#FFDB00',     /* CMYK Yellow */
+                        soloPurple: '#1F1259',      /* Deep Navy/Purple */
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Smooth transform animation for hiding/showing header on scroll */
+        header {
+            transition: transform 0.3s ease-in-out;
+        }
+        .header-hidden {
+            transform: translateY(-100%);
+        }
+
+        /* Brisk 1-by-1 entrance animation for mobile category links & featured collection */
+        @keyframes slideInMobile {
+            from {
+                opacity: 0;
+                transform: translateX(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .animate-mobile-item {
+            opacity: 0;
+        }
+
+        #mobileSidebar.drawer-active .animate-mobile-item {
+            animation: slideInMobile 0.35s ease-out forwards;
+        }
+
+        /* Staggered category cascade delays */
+        #mobileSidebar.drawer-active .animate-mobile-item:nth-child(1) { animation-delay: 0.05s; }
+        #mobileSidebar.drawer-active .animate-mobile-item:nth-child(2) { animation-delay: 0.12s; }
+        #mobileSidebar.drawer-active .animate-mobile-item:nth-child(3) { animation-delay: 0.19s; }
+        #mobileSidebar.drawer-active .animate-mobile-item:nth-child(4) { animation-delay: 0.26s; }
+        #mobileSidebar.drawer-active .animate-mobile-item:nth-child(5) { animation-delay: 0.33s; }
+        #mobileSidebar.drawer-active .animate-mobile-item:nth-child(6) { animation-delay: 0.40s; }
+        #mobileSidebar.drawer-active .animate-mobile-item:nth-child(7) { animation-delay: 0.47s; }
+        #mobileSidebar.drawer-active .animate-mobile-item:nth-child(8) { animation-delay: 0.54s; }
+        #mobileSidebar.drawer-active .animate-mobile-item:nth-child(9) { animation-delay: 0.61s; }
+        #mobileSidebar.drawer-active .animate-mobile-item:nth-child(10) { animation-delay: 0.68s; }
+        #mobileSidebar.drawer-active .animate-mobile-item:nth-child(11) { animation-delay: 0.75s; }
+        #mobileSidebar.drawer-active .animate-mobile-item:nth-child(12) { animation-delay: 0.82s; }
+        #mobileSidebar.drawer-active .animate-mobile-item:nth-child(13) { animation-delay: 0.89s; }
+        #mobileSidebar.drawer-active .animate-mobile-item:nth-child(14) { animation-delay: 0.96s; }
+        #mobileSidebar.drawer-active .animate-mobile-item:nth-child(15) { animation-delay: 1.03s; }
+
+        .animate-mobile-featured {
+            opacity: 0;
+        }
+
+        #mobileSidebar.drawer-active .animate-mobile-featured {
+            animation: slideInMobile 0.45s ease-out forwards;
+            animation-delay: 1.15s;
+        }
+
+        /* Glossy Shine Button Animation */
+        .shiny-btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shiny-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                60deg,
+                transparent,
+                rgba(255, 255, 255, 0.35),
+                transparent
+            );
+            transform: rotate(30deg);
+            transition: all 0.6s ease;
+        }
+
+        .shiny-btn:hover::after {
+            left: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans flex flex-col min-h-screen">
+
+    <!-- 1. Auto-sliding Top Announcement Header with Nav Arrows -->
+    <div id="announcementContainer" class="bg-soloPurple text-brandYellow text-xs md:text-sm font-semibold py-2 px-4 relative overflow-hidden flex items-center justify-between select-none z-50">
+        <button id="prevAnnouncement" class="text-brandYellow hover:text-white px-2 py-0.5 text-base md:text-lg focus:outline-none z-10 transition-colors">&lt;</button>
+
+        <div class="flex-1 overflow-hidden relative h-5 text-center">
+            <div class="announcement-slide absolute inset-0 flex items-center justify-center transition-all duration-500 opacity-100 translate-x-0">
+                🚚 FREE DELIVERY NATION-WIDE
+            </div>
+            <div class="announcement-slide absolute inset-0 flex items-center justify-center transition-all duration-500 opacity-0 translate-x-full">
+                🔄 15 DAYS SIZE EXCHANGE POLICY
+            </div>
+            <div class="announcement-slide absolute inset-0 flex items-center justify-center transition-all duration-500 opacity-0 translate-x-full">
+                ✨ OPEN PARCEL POLICY — INSPECT PACKAGE BEFORE PAYING
+            </div>
+            <div class="announcement-slide absolute inset-0 flex items-center justify-center transition-all duration-500 opacity-0 translate-x-full">
+                👞 100% PURE TOP-GRAIN GENUINE LEATHER
+            </div>
+        </div>
+
+        <button id="nextAnnouncement" class="text-brandYellow hover:text-white px-2 py-0.5 text-base md:text-lg focus:outline-none z-10 transition-colors">&gt;</button>
+    </div>
+
+    <!-- 2. Header Area using #FFDB00 -->
+    <header id="mainHeader" class="bg-brandYellow shadow-md sticky top-0 z-40 border-b border-yellow-600/20">
+        <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
+            
+            <!-- Left: Mobile 3-Line Menu Button -->
+            <div class="w-16 md:w-auto">
+                <button id="openMenuBtn" class="md:hidden text-soloPurple text-2xl focus:outline-none font-bold">
+                    ☰
+                </button>
+            </div>
+
+            <!-- Center: BRAND LOGO IMAGE -->
+            <div class="text-center py-2">
+                <a href="/" class="inline-block group">
+                    <img src="{% static 'images/logo.png' %}" onerror="this.onerror=null; this.src='{% static 'logo.png' %}';" alt="SOLO FOOTWEAR" class="h-14 md:h-20 lg:h-24 w-auto object-contain block">
+                </a>
+            </div>
+
+            <!-- Right: Line Icons for User (Admin) and Shopping Bag (Cart) -->
+            <div class="w-16 md:w-auto flex items-center justify-end space-x-5 text-soloPurple">
+                <!-- Admin User Icon -->
+                <a href="/admin" class="hover:opacity-75 transition-opacity" title="Admin Login">
+                    <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                </a>
+
+                <!-- Cart Shopping Bag Icon -->
+                <button id="openCartBtn" onclick="openCartDrawer()" class="relative cursor-pointer hover:opacity-75 transition-opacity focus:outline-none" title="Shopping Cart">
+                    <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                    </svg>
+                    <span id="cartCountBadge" class="absolute -top-1.5 -right-2 bg-soloPurple text-brandYellow font-bold text-[10px] rounded-full w-4 h-4 flex items-center justify-center">0</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Bottom Row: Dynamic Category Navigation Bar -->
+        <nav class="hidden md:flex flex-wrap justify-center items-center gap-x-8 gap-y-3 py-3 px-6 font-normal text-base lg:text-lg text-soloPurple border-t border-yellow-600/15 bg-black/5">
+            {% for category in categories %}
+                <a href="/category/{{ category.slug }}/" class="hover:text-black transition transform hover:scale-105">{{ category.name }}</a>
+            {% empty %}
+                <a href="/category/formals/" class="hover:text-black transition">Formals</a>
+                <a href="/category/casuals/" class="hover:text-black transition">Casuals</a>
+                <a href="/category/peshawari-chappals/" class="hover:text-black transition">Peshawari Chappals</a>
+                <a href="/category/chelsea/" class="hover:text-black transition">Chelsea</a>
+                <a href="/category/slippers/" class="hover:text-black transition">Slippers</a>
+                <a href="/category/accessories/" class="hover:text-black transition">Accessories</a>
+            {% endfor %}
+        </nav>
+    </header>
+
+    <!-- 3. Mobile Navigation Drawer -->
+    <div id="mobileMenuOverlay" class="fixed inset-0 bg-black/40 z-50 hidden opacity-0 transition-opacity duration-300"></div>
+    <div id="mobileSidebar" class="fixed top-0 left-0 w-80 h-full bg-white z-50 -translate-x-full transition-transform duration-300 ease-in-out shadow-2xl flex flex-col p-6 overflow-y-auto">
+        <div class="mb-6 flex justify-between items-center">
+            <button id="closeMenuBtn" class="text-2xl text-black font-light focus:outline-none">&times;</button>
+        </div>
+
+        <nav class="space-y-4 text-2xl text-gray-900 font-normal tracking-tight">
+            {% for category in categories %}
+                <a href="/category/{{ category.slug }}/" class="animate-mobile-item block hover:text-brandBlue transition-colors">{{ category.name }}</a>
+            {% empty %}
+                <a href="/category/formals/" class="animate-mobile-item block hover:text-brandBlue transition-colors">Formals</a>
+                <a href="/category/casuals/" class="animate-mobile-item block hover:text-brandBlue transition-colors">Casuals</a>
+                <a href="/category/peshawari-chappals/" class="animate-mobile-item block hover:text-brandBlue transition-colors">Peshawari Chappals</a>
+                <a href="/category/chelsea/" class="animate-mobile-item block hover:text-brandBlue transition-colors">Chelsea</a>
+                <a href="/category/slippers/" class="animate-mobile-item block hover:text-brandBlue transition-colors">Slippers</a>
+                <a href="/category/accessories/" class="animate-mobile-item block hover:text-brandBlue transition-colors">Accessories</a>
+            {% endfor %}
+        </nav>
+
+        {% if drawer_featured_products %}
+        <div class="animate-mobile-featured">
+            <hr class="my-6 border-gray-200" />
+            <div class="space-y-3">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400">Featured Collections</h3>
+                <div class="grid grid-cols-2 gap-3">
+                    {% for product in drawer_featured_products %}
+                    <div onclick="openQuickViewModal('{{ product.name|escapejs }}', '{{ product.active_price }}', '{{ product.regular_price }}', '{% if product.images.first %}{{ product.images.first.image.url }}{% endif %}')" class="group block bg-gray-50 border border-gray-100 rounded-lg p-2 hover:border-soloPurple/30 transition cursor-pointer">
+                        <div class="aspect-square w-full overflow-hidden rounded-md bg-gray-200 mb-2">
+                            {% if product.images.first %}
+                                <img src="{{ product.images.first.image.url }}" alt="{{ product.name }}" class="h-full w-full object-cover group-hover:scale-105 transition duration-300">
+                            {% else %}
+                                <div class="h-full w-full flex items-center justify-center text-[10px] text-gray-400">No Image</div>
+                            {% endif %}
+                        </div>
+                        <p class="text-xs font-bold text-gray-900 truncate">{{ product.name }}</p>
+                        <p class="text-xs text-soloPurple font-semibold mt-0.5">Rs. {{ product.active_price }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- 4. Dynamic Content Area -->
+    <main class="flex-grow">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- 5. Footer Section -->
+    <footer class="bg-[#F6F6F6] text-neutral-800 border-t border-gray-200 mt-20 pt-16 pb-12">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 text-sm">
+            <div class="space-y-4">
+                <div class="w-40">
+                    <img src="{% static 'images/logo.png' %}" onerror="this.onerror=null; this.src='{% static 'logo.png' %}';" alt="SOLO FOOTWEAR" class="w-full h-auto object-contain block">
+                </div>
+                <p class="text-gray-600 text-xs md:text-sm leading-relaxed pr-4">
+                    We make things that work better and last longer. Our products solve real problems with clean design and honest materials.
+                </p>
+            </div>
+
+            <div>
+                <h3 class="text-2xl font-serif font-light text-neutral-900 mb-6">Help</h3>
+                <ul class="space-y-3.5 text-gray-600 text-xs md:text-sm font-normal">
+                    <li><a href="javascript:void(0)" onclick="openFooterModal('faqs')" class="hover:text-black transition-colors">FAQs</a></li>
+                    <li><a href="javascript:void(0)" onclick="openFooterModal('size-guide')" class="hover:text-black transition-colors">Size Guide</a></li>
+                    <li><a href="javascript:void(0)" onclick="openFooterModal('contact')" class="hover:text-black transition-colors">Contact Us</a></li>
+                    <li><a href="javascript:void(0)" onclick="openFooterModal('cancellation')" class="hover:text-black transition-colors">Order Cancellation</a></li>
+                    <li><a href="javascript:void(0)" onclick="openFooterModal('care-tips')" class="hover:text-black transition-colors">Shoe Care Tips</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-2xl font-serif font-light text-neutral-900 mb-6">Policy & Legal</h3>
+                <ul class="space-y-3.5 text-gray-600 text-xs md:text-sm font-normal">
+                    <li><a href="javascript:void(0)" onclick="openFooterModal('shipping')" class="hover:text-black transition-colors">Shipping Policy</a></li>
+                    <li><a href="javascript:void(0)" onclick="openFooterModal('refund')" class="hover:text-black transition-colors">Refund Policy</a></li>
+                    <li><a href="javascript:void(0)" onclick="openFooterModal('terms')" class="hover:text-black transition-colors">Terms of Service</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-2xl font-serif font-light text-neutral-900 mb-6">Stay Connected</h3>
+                <div class="flex items-center space-x-4 text-neutral-900">
+                    <a href="https://facebook.com" target="_blank" class="hover:text-gray-600 transition-colors" title="Facebook">
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="hover:text-gray-600 transition-colors" title="Instagram">
+                        <svg class="w-6 h-6 fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                    <a href="https://tiktok.com" target="_blank" class="hover:text-gray-600 transition-colors" title="TikTok">
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 1 1-5.2-1.74 2.89 2.89 0 0 1 2.31-1.41V8.9a6.34 6.34 0 0 0-5.11 6.18A6.34 6.34 0 0 0 10.7 21.4a6.34 6.34 0 0 0 6.34-6.34V9.37a8.16 8.16 0 0 0 4.87 1.6V7.47a4.85 4.85 0 0 1-2.32-.78z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 mt-12 pt-6 border-t border-gray-200/80 flex flex-col md:flex-row items-center justify-between text-xs text-gray-500">
+            <p>&copy; 2026 SOLO FOOTWEAR. All rights reserved.</p>
+            <a href="javascript:void(0)" onclick="openFooterModal('terms')" class="hover:underline mt-2 md:mt-0">Terms and Policies</a>
+        </div>
+    </footer>
+
+    <!-- Interactive Footer Information Modal Popup -->
+    <div id="footerModalOverlay" class="fixed inset-0 bg-black/60 z-50 hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-4">
+        <div id="footerModalContainer" class="bg-white rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl p-6 md:p-8 relative transform scale-95 transition-all duration-300">
+            <button onclick="closeFooterModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-900 text-2xl font-bold focus:outline-none w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center transition">&times;</button>
+            <div id="footerModalContent"></div>
+        </div>
+    </div>
+
+    <!-- Quick View / Choose Size Modal Popup -->
+    <div id="quickViewModalOverlay" class="fixed inset-0 bg-black/60 z-50 hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-4">
+        <div id="quickViewModalContainer" class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative transform scale-95 transition-all duration-300">
+            <button onclick="closeQuickViewModal()" class="absolute top-4 right-4 z-20 text-gray-500 hover:text-black text-2xl font-light w-9 h-9 rounded-full bg-white/90 flex items-center justify-center transition shadow-sm border border-gray-200">&times;</button>
+
+            <div class="grid grid-cols-1 md:grid-cols-2">
+                <div class="bg-gray-100 p-4 md:p-6 flex flex-col items-center justify-between rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none">
+                    <div class="w-full h-72 md:h-[340px] flex items-center justify-center bg-white rounded-xl shadow-sm p-2 mb-3">
+                        <img id="qvProductImage" src="" alt="Product Image" class="w-full h-full object-contain rounded-lg">
+                    </div>
+                    
+                    <!-- Gallery Thumbnails -->
+                    <div id="qvThumbnailsRow" class="flex items-center justify-center space-x-3 w-full pt-1">
+                        <button type="button" id="qvThumb1" onclick="switchQvMainImage(currentQvPrimaryUrl, this)" class="qv-thumb-btn w-12 h-12 rounded-lg overflow-hidden border-2 border-black bg-white p-0.5 shadow-sm focus:outline-none transition">
+                            <img id="qvThumb1Img" src="" class="w-full h-full object-cover rounded">
+                        </button>
+                        <button type="button" id="qvThumb2" onclick="switchQvMainImage(currentQvSecondaryUrl, this)" class="qv-thumb-btn w-12 h-12 rounded-lg overflow-hidden border border-gray-300 bg-white p-0.5 shadow-sm focus:outline-none transition relative" title="Casual Wear Medicated Inner Sole">
+                            <img id="qvThumb2Img" src="{% static 'images/medicated_sole.png' %}" onerror="this.src='/media/products/medicated_inner_sole.png';" class="w-full h-full object-contain rounded">
+                            <span class="absolute -top-1 -right-1 bg-emerald-600 text-white text-[8px] font-extrabold px-1 rounded-full shadow">SOLE</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="p-6 md:p-8 flex flex-col justify-between space-y-6">
+                    <div>
+                        <!-- Medicated Sole Callout Banner -->
+                        <div id="qvMedicatedBadge" class="hidden mb-3 bg-emerald-50 border border-emerald-200 text-emerald-800 px-3 py-1.5 rounded-lg text-xs font-bold flex items-center space-x-2 shadow-sm">
+                            <span class="text-sm">🩺</span>
+                            <span>Casual Wear with Medicated Inner Sole (Special Price Rs. 3,999)</span>
+                        </div>
+
+                        <h2 id="qvProductName" class="text-xl md:text-2xl font-black text-gray-900 uppercase tracking-wide mb-2">RELLY - BLACK</h2>
+                        
+                        <div class="flex items-center space-x-3 mb-1">
+                            <span id="qvActivePrice" class="text-xl font-bold text-gray-900">Rs. 3,999.00</span>
+                            <span id="qvRegularPrice" class="text-sm text-gray-400 line-through">Rs. 6,999.00</span>
+                        </div>
+                        <p class="text-xs text-gray-500 mb-6">Shipping calculated at checkout.</p>
+
+                        <div class="mb-4">
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider">Size (Shoe No.) *</label>
+                                <span id="qvSelectedSizeText" class="text-xs text-brandBlue font-extrabold">7/40</span>
+                            </div>
+                            <div id="qvSizeContainer" class="flex flex-wrap gap-2">
+                                <button type="button" onclick="selectQvSize(this)" class="qv-size-btn px-3.5 py-1.5 text-xs rounded-full border border-gray-300 text-gray-700 hover:border-black font-medium transition">6/39</button>
+                                <button type="button" onclick="selectQvSize(this)" class="qv-size-btn px-3.5 py-1.5 text-xs rounded-full bg-black text-white font-bold transition shadow-sm">7/40</button>
+                                <button type="button" onclick="selectQvSize(this)" class="qv-size-btn px-3.5 py-1.5 text-xs rounded-full border border-gray-300 text-gray-700 hover:border-black font-medium transition">8/41</button>
+                                <button type="button" onclick="selectQvSize(this)" class="qv-size-btn px-3.5 py-1.5 text-xs rounded-full border border-gray-300 text-gray-700 hover:border-black font-medium transition">9/42</button>
+                                <button type="button" onclick="selectQvSize(this)" class="qv-size-btn px-3.5 py-1.5 text-xs rounded-full border border-gray-300 text-gray-700 hover:border-black font-medium transition">10/43</button>
+                                <button type="button" onclick="selectQvSize(this)" class="qv-size-btn px-3.5 py-1.5 text-xs rounded-full border border-gray-300 text-gray-700 hover:border-black font-medium transition">11/44</button>
+                            </div>
+                        </div>
+
+                        <!-- Color Selector Pills -->
+                        <div class="mb-6">
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider">Color *</label>
+                                <span id="qvSelectedColorText" class="text-xs text-brandBlue font-extrabold">Black</span>
+                            </div>
+                            <div id="qvColorContainer" class="flex flex-wrap gap-2">
+                                <button type="button" onclick="selectQvColor(this, 'Black')" class="qv-color-btn px-3.5 py-1.5 text-xs rounded-full bg-black text-white font-bold transition shadow-sm flex items-center space-x-1.5">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-black border border-white inline-block"></span>
+                                    <span>Black</span>
+                                </button>
+                                <button type="button" onclick="selectQvColor(this, 'Dark Brown')" class="qv-color-btn px-3.5 py-1.5 text-xs rounded-full border border-gray-300 text-gray-700 hover:border-black font-medium transition flex items-center space-x-1.5">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-[#3d2314] inline-block"></span>
+                                    <span>Dark Brown</span>
+                                </button>
+                                <button type="button" onclick="selectQvColor(this, 'Tan / Camel')" class="qv-color-btn px-3.5 py-1.5 text-xs rounded-full border border-gray-300 text-gray-700 hover:border-black font-medium transition flex items-center space-x-1.5">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-[#c68a4c] inline-block"></span>
+                                    <span>Tan / Camel</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-3">
+                            <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden h-12 bg-white">
+                                <button type="button" onclick="decrementQvQty()" class="px-3.5 py-2 text-gray-600 hover:text-black font-bold text-base">&minus;</button>
+                                <span id="qvQty" class="px-4 py-2 text-sm font-bold text-gray-900 min-w-[36px] text-center">1</span>
+                                <button type="button" onclick="incrementQvQty()" class="px-3.5 py-2 text-gray-600 hover:text-black font-bold text-base">&plus;</button>
+                            </div>
+
+                            <button type="button" onclick="submitQvAddToCart()" class="flex-1 h-12 bg-black hover:bg-gray-900 text-white font-extrabold text-xs uppercase tracking-wider rounded-lg flex items-center justify-center space-x-2 transition shadow-md">
+                                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                                <span>Add to cart</span>
+                            </button>
+                        </div>
+
+                        <button type="button" onclick="submitQvBuyNow()" class="w-full h-12 bg-black hover:bg-gray-900 text-white font-extrabold text-xs uppercase tracking-wider rounded-lg transition shadow-md">
+                            Buy it now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. Slide-Over Shopping Cart Drawer -->
+    <div id="cartMenuOverlay" onclick="closeCartDrawer()" class="fixed inset-0 bg-black/50 z-50 hidden opacity-0 transition-opacity duration-300"></div>
+    <div id="cartSidebar" class="fixed top-0 right-0 w-full max-w-md h-full bg-white z-50 translate-x-full transition-transform duration-300 ease-in-out shadow-2xl flex flex-col">
+        <div class="p-5 border-b border-gray-200 flex items-center justify-between bg-gray-50">
+            <div class="flex items-center space-x-2">
+                <svg class="w-6 h-6 text-brandBlue" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                </svg>
+                <h2 class="text-base font-bold text-gray-900 uppercase tracking-wider">Your Shopping Cart</h2>
+            </div>
+            <button onclick="closeCartDrawer()" class="text-2xl text-gray-400 hover:text-black font-light focus:outline-none">&times;</button>
+        </div>
+
+        <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-5 space-y-4"></div>
+
+        <div id="cartFooterArea" class="p-5 border-t border-gray-200 bg-gray-50 space-y-3">
+            <div class="flex justify-between items-center text-sm font-bold text-gray-900">
+                <span class="uppercase tracking-wider">Subtotal:</span>
+                <span id="cartSubtotalText" class="text-lg text-brandBlue font-extrabold">Rs. 0</span>
+            </div>
+            <p class="text-[11px] text-gray-500 text-center">Taxes included. Free Cash on Delivery Nationwide.</p>
+            <a href="/checkout/" class="shiny-btn block text-center w-full bg-brandBlue text-brandYellow font-extrabold py-3.5 rounded-xl uppercase tracking-wider shadow-lg hover:bg-soloPurple transition text-xs md:text-sm">
+                CHECKOUT (CASH ON DELIVERY)
+            </a>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Header Hide/Show
+        let lastScrollTop = 0;
+        const mainHeader = document.getElementById('mainHeader');
+        window.addEventListener('scroll', () => {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > 50) {
+                if (scrollTop > lastScrollTop) {
+                    mainHeader.classList.add('header-hidden');
+                } else {
+                    mainHeader.classList.remove('header-hidden');
+                }
+            } else {
+                mainHeader.classList.remove('header-hidden');
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        });
+
+        // Mobile Drawer Logic
+        const openBtn = document.getElementById('openMenuBtn');
+        const closeBtn = document.getElementById('closeMenuBtn');
+        const sidebar = document.getElementById('mobileSidebar');
+        const overlay = document.getElementById('mobileMenuOverlay');
+
+        function openDrawer() {
+            if (overlay && sidebar) {
+                overlay.classList.remove('hidden');
+                sidebar.classList.remove('drawer-active');
+                setTimeout(() => {
+                    overlay.classList.remove('opacity-0');
+                    sidebar.classList.remove('-translate-x-full');
+                    sidebar.classList.add('drawer-active');
+                }, 10);
+            }
+        }
+
+        function closeDrawer() {
+            if (overlay && sidebar) {
+                sidebar.classList.add('-translate-x-full');
+                sidebar.classList.remove('drawer-active');
+                overlay.classList.add('opacity-0');
+                setTimeout(() => {
+                    overlay.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        if (openBtn) openBtn.addEventListener('click', openDrawer);
+        if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+        if (overlay) overlay.addEventListener('click', closeDrawer);
+
+        // Announcement Slider
+        const slides = document.querySelectorAll('.announcement-slide');
+        const prevBtn = document.getElementById('prevAnnouncement');
+        const nextBtn = document.getElementById('nextAnnouncement');
+        const container = document.getElementById('announcementContainer');
+        let currentIndex = 0;
+        let slideInterval;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                if (i === index) {
+                    slide.className = 'announcement-slide absolute inset-0 flex items-center justify-center transition-all duration-500 opacity-100 translate-x-0';
+                } else {
+                    slide.className = 'announcement-slide absolute inset-0 flex items-center justify-center transition-all duration-500 opacity-0 translate-x-full';
+                }
+            });
+        }
+
+        function nextSlide() {
+            if (slides.length) {
+                currentIndex = (currentIndex + 1) % slides.length;
+                showSlide(currentIndex);
+            }
+        }
+        function prevSlide() {
+            if (slides.length) {
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                showSlide(currentIndex);
+            }
+        }
+        if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+        if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+
+        // Footer Modal Data
+        const footerModalOverlay = document.getElementById('footerModalOverlay');
+        const footerModalContainer = document.getElementById('footerModalContainer');
+        const footerModalContent = document.getElementById('footerModalContent');
+        const footerData = {
+            'faqs': `<div class="space-y-4"><h2 class="text-2xl font-bold text-gray-900 pb-3 border-b border-gray-200">Frequently Asked Questions</h2><div class="space-y-3 text-xs md:text-sm text-gray-700"><div class="p-3 bg-gray-50 rounded-xl"><h4 class="font-bold text-brandBlue mb-1">Q: How long does delivery take?</h4><p>A: 2 to 4 business days nationwide in Pakistan.</p></div><div class="p-3 bg-gray-50 rounded-xl"><h4 class="font-bold text-brandBlue mb-1">Q: What is size exchange policy?</h4><p>A: 15-day free size exchange policy.</p></div></div></div>`,
+            'size-guide': `<div class="space-y-4"><h2 class="text-2xl font-bold text-gray-900 pb-3 border-b border-gray-200">Size Conversion Guide</h2><p class="text-xs text-gray-600">EU 40 = UK 6 (25cm) | EU 41 = UK 7 (26cm) | EU 42 = UK 8 (27cm) | EU 43 = UK 9 (28cm) | EU 44 = UK 10 (29cm)</p></div>`,
+            'contact': `<div class="space-y-4"><h2 class="text-2xl font-bold text-gray-900 pb-3 border-b border-gray-200">Contact Support</h2><p class="text-sm font-bold text-gray-800">📞 WhatsApp: +92 320 3939044 (03203939044)</p><p class="text-sm font-bold text-gray-800">✉️ Email: support@solofootwear.com</p></div>`,
+            'cancellation': `<div class="space-y-4"><h2 class="text-2xl font-bold text-gray-900 pb-3 border-b border-gray-200">Order Cancellation</h2><p class="text-xs text-gray-600">Contact us within 12 hours on WhatsApp 03203939044 to cancel your order.</p></div>`,
+            'care-tips': `<div class="space-y-4"><h2 class="text-2xl font-bold text-gray-900 pb-3 border-b border-gray-200">Shoe Care Tips</h2><p class="text-xs text-gray-600">Store in cloth bags, keep dry, and apply high quality leather cream regularly.</p></div>`,
+            'shipping': `<div class="space-y-4"><h2 class="text-2xl font-bold text-gray-900 pb-3 border-b border-gray-200">Shipping Policy</h2><p class="text-xs text-gray-600">Free delivery nationwide across Pakistan via Cash on Delivery (COD).</p></div>`,
+            'refund': `<div class="space-y-4"><h2 class="text-2xl font-bold text-gray-900 pb-3 border-b border-gray-200">Refund Policy</h2><p class="text-xs text-gray-600">15-day exchange guarantee on all unworn footwear in original condition.</p></div>`,
+            'terms': `<div class="space-y-4"><h2 class="text-2xl font-bold text-gray-900 pb-3 border-b border-gray-200">Terms of Service</h2><p class="text-xs text-gray-600">SOLO FOOTWEAR reserved rights. Open Parcel Policy available upon delivery.</p></div>`
+        };
+
+        function openFooterModal(topic) {
+            if (footerData[topic] && footerModalOverlay && footerModalContent) {
+                footerModalContent.innerHTML = footerData[topic];
+                footerModalOverlay.classList.remove('hidden');
+                setTimeout(() => {
+                    footerModalOverlay.classList.remove('opacity-0');
+                }, 10);
+            }
+        }
+        function closeFooterModal() {
+            if (footerModalOverlay) {
+                footerModalOverlay.classList.add('opacity-0');
+                setTimeout(() => footerModalOverlay.classList.add('hidden'), 300);
+            }
+        }
+
+        // Quick View Modal
+        const quickViewModalOverlay = document.getElementById('quickViewModalOverlay');
+        const quickViewModalContainer = document.getElementById('quickViewModalContainer');
+        const qvProductImage = document.getElementById('qvProductImage');
+        const qvProductName = document.getElementById('qvProductName');
+        const qvActivePrice = document.getElementById('qvActivePrice');
+        const qvRegularPrice = document.getElementById('qvRegularPrice');
+        let currentQvQty = 1;
+        let selectedQvSize = '7/40';
+
+        let currentQvPrimaryUrl = '';
+        let currentQvSecondaryUrl = '/media/products/medicated_inner_sole.png';
+
+        function openQuickViewModal(name, activePrice, regPrice, imageUrl, secondaryImageUrl) {
+            if (!quickViewModalOverlay) return;
+            qvProductName.textContent = name;
+            qvActivePrice.textContent = 'Rs.' + parseFloat(activePrice).toLocaleString('en-US', {minimumFractionDigits: 2});
+            if (regPrice && parseFloat(regPrice) > parseFloat(activePrice)) {
+                qvRegularPrice.textContent = 'Rs.' + parseFloat(regPrice).toLocaleString('en-US', {minimumFractionDigits: 2});
+                qvRegularPrice.classList.remove('hidden');
+            } else {
+                qvRegularPrice.classList.add('hidden');
+            }
+            
+            currentQvPrimaryUrl = imageUrl || '';
+            currentQvSecondaryUrl = secondaryImageUrl || '/media/products/medicated_inner_sole.png';
+
+            if (imageUrl) qvProductImage.src = imageUrl;
+            if (document.getElementById('qvThumb1Img')) document.getElementById('qvThumb1Img').src = currentQvPrimaryUrl;
+
+            // Check if Medicated in title
+            const isMedicated = name.toLowerCase().includes('medicated') || (name.toLowerCase().includes('comfort') && name.toLowerCase().includes('loafer'));
+            const qvMedicatedBadge = document.getElementById('qvMedicatedBadge');
+            const qvThumb2 = document.getElementById('qvThumb2');
+
+            if (isMedicated) {
+                if (qvMedicatedBadge) qvMedicatedBadge.classList.remove('hidden');
+                if (qvThumb2) qvThumb2.classList.remove('hidden');
+            } else {
+                if (qvMedicatedBadge) qvMedicatedBadge.classList.add('hidden');
+                if (qvThumb2 && !secondaryImageUrl) qvThumb2.classList.add('hidden');
+            }
+
+            currentQvQty = 1;
+            document.getElementById('qvQty').textContent = '1';
+
+            quickViewModalOverlay.classList.remove('hidden');
+            setTimeout(() => {
+                quickViewModalOverlay.classList.remove('opacity-0');
+                if (quickViewModalContainer) quickViewModalContainer.classList.remove('scale-95');
+            }, 10);
+        }
+
+        function switchQvMainImage(imgUrl, btn) {
+            if (imgUrl && qvProductImage) {
+                qvProductImage.src = imgUrl;
+                document.querySelectorAll('.qv-thumb-btn').forEach(b => {
+                    b.classList.remove('border-2', 'border-black');
+                    b.classList.add('border', 'border-gray-300');
+                });
+                if (btn) {
+                    btn.classList.remove('border', 'border-gray-300');
+                    btn.classList.add('border-2', 'border-black');
+                }
+            }
+        }
+
+        function closeQuickViewModal() {
+            if (quickViewModalOverlay) {
+                quickViewModalOverlay.classList.add('opacity-0');
+                if (quickViewModalContainer) quickViewModalContainer.classList.add('scale-95');
+                setTimeout(() => quickViewModalOverlay.classList.add('hidden'), 300);
+            }
+        }
+
+        function selectQvSize(btn) {
+            document.querySelectorAll('.qv-size-btn').forEach(b => {
+                b.classList.remove('bg-black', 'text-white', 'font-bold', 'shadow-sm');
+                b.classList.add('border', 'border-gray-300', 'text-gray-700', 'font-medium');
+            });
+            btn.classList.remove('border', 'border-gray-300', 'text-gray-700', 'font-medium');
+            btn.classList.add('bg-black', 'text-white', 'font-bold', 'shadow-sm');
+            selectedQvSize = btn.textContent.trim();
+            if (document.getElementById('qvSelectedSizeText')) {
+                document.getElementById('qvSelectedSizeText').textContent = selectedQvSize;
+            }
+        }
+
+        function selectQvColor(btn, colorName) {
+            document.querySelectorAll('.qv-color-btn').forEach(b => {
+                b.classList.remove('bg-black', 'text-white', 'font-bold', 'shadow-sm');
+                b.classList.add('border', 'border-gray-300', 'text-gray-700', 'font-medium');
+            });
+            btn.classList.remove('border', 'border-gray-300', 'text-gray-700', 'font-medium');
+            btn.classList.add('bg-black', 'text-white', 'font-bold', 'shadow-sm');
+            selectedQvColor = colorName;
+            if (document.getElementById('qvSelectedColorText')) {
+                document.getElementById('qvSelectedColorText').textContent = selectedQvColor;
+            }
+        }
+
+        function incrementQvQty() {
+            currentQvQty += 1;
+            document.getElementById('qvQty').textContent = currentQvQty;
+        }
+
+        function decrementQvQty() {
+            if (currentQvQty > 1) {
+                currentQvQty -= 1;
+                document.getElementById('qvQty').textContent = currentQvQty;
+            }
+        }
+
+        // --- Shopping Cart Engine ---
+        let cartState = JSON.parse(localStorage.getItem('soloCart')) || [];
+
+        function parsePkrPrice(val) {
+            if (typeof val === 'number') return val;
+            if (!val) return 0;
+            let clean = String(val).replace(/Rs\.?/gi, '').replace(/PKR/gi, '').replace(/,/g, '').trim();
+            let parsed = parseFloat(clean) || 0;
+            if (parsed > 0 && parsed < 10) parsed = parsed * 10000;
+            return parsed;
+        }
+
+        function saveCart() {
+            localStorage.setItem('soloCart', JSON.stringify(cartState));
+            updateCartBadge();
+        }
+
+        function updateCartBadge() {
+            const badge = document.getElementById('cartCountBadge');
+            const totalQty = cartState.reduce((sum, item) => sum + item.qty, 0);
+            if (badge) badge.textContent = totalQty;
+        }
+
+        function openCartDrawer() {
+            renderCart();
+            const cOverlay = document.getElementById('cartMenuOverlay');
+            const cSidebar = document.getElementById('cartSidebar');
+            if (cOverlay && cSidebar) {
+                cOverlay.classList.remove('hidden');
+                setTimeout(() => {
+                    cOverlay.classList.remove('opacity-0');
+                    cSidebar.classList.remove('translate-x-full');
+                }, 10);
+            }
+        }
+
+        function closeCartDrawer() {
+            const cOverlay = document.getElementById('cartMenuOverlay');
+            const cSidebar = document.getElementById('cartSidebar');
+            if (cOverlay && cSidebar) {
+                cSidebar.classList.add('translate-x-full');
+                cOverlay.classList.add('opacity-0');
+                setTimeout(() => cOverlay.classList.add('hidden'), 300);
+            }
+        }
+
+        function addToCart(name, price, regPrice, image, size, color, qty = 1) {
+            const numPrice = parsePkrPrice(price);
+            const itemSize = size || selectedQvSize || '7/40';
+            const itemColor = color || selectedQvColor || 'Black';
+            const existingIndex = cartState.findIndex(item => item.name === name && item.size === itemSize && item.color === itemColor);
+
+            if (existingIndex > -1) {
+                cartState[existingIndex].qty += qty;
+            } else {
+                cartState.push({
+                    name: name,
+                    price: numPrice,
+                    image: image,
+                    size: itemSize,
+                    color: itemColor,
+                    qty: qty
+                });
+            }
+            saveCart();
+            openCartDrawer();
+        }
+
+        function updateCartItemQty(index, change) {
+            if (cartState[index]) {
+                cartState[index].qty += change;
+                if (cartState[index].qty <= 0) cartState.splice(index, 1);
+                saveCart();
+                renderCart();
+            }
+        }
+
+        function removeCartItem(index) {
+            if (cartState[index]) {
+                cartState.splice(index, 1);
+                saveCart();
+                renderCart();
+            }
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cartItemsContainer');
+            const subtotalText = document.getElementById('cartSubtotalText');
+            if (!container) return;
+
+            if (cartState.length === 0) {
+                container.innerHTML = `
+                    <div class="h-full flex flex-col items-center justify-center text-center py-12 space-y-4">
+                        <div class="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center text-3xl text-gray-400">🛍️</div>
+                        <p class="text-sm font-bold text-gray-700 uppercase tracking-wide">Your cart is currently empty</p>
+                        <p class="text-xs text-gray-400">Discover our handcrafted leather footwear collection.</p>
+                        <button onclick="closeCartDrawer()" class="px-6 py-2.5 bg-brandBlue text-brandYellow text-xs font-bold uppercase rounded-lg shadow">Start Shopping</button>
+                    </div>
+                `;
+                if (subtotalText) subtotalText.textContent = 'Rs. 0';
+                return;
+            }
+
+            let subtotal = 0;
+            let html = '';
+
+            cartState.forEach((item, index) => {
+                let itemPrice = parsePkrPrice(item.price);
+                item.price = itemPrice;
+                const itemTotal = itemPrice * item.qty;
+                subtotal += itemTotal;
+                html += `
+                    <div class="flex items-center space-x-3 p-3 bg-gray-50 border border-gray-100 rounded-xl">
+                        <div class="w-16 h-16 rounded-lg overflow-hidden bg-gray-200 flex-shrink-0">
+                            ${item.image ? `<img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover">` : `<div class="w-full h-full flex items-center justify-center text-[10px] text-gray-400">No Image</div>`}
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h4 class="text-xs font-bold text-gray-900 truncate uppercase">${item.name}</h4>
+                            <p class="text-[11px] text-gray-500">Size (No.): <span class="font-bold text-gray-700">${item.size}</span> | Color: <span class="font-bold text-gray-700">${item.color || 'Black'}</span></p>
+                            <p class="text-xs font-bold text-soloPurple mt-0.5">Rs. ${itemPrice.toLocaleString('en-US')}</p>
+                        </div>
+                        <div class="flex flex-col items-end space-y-2">
+                            <button onclick="removeCartItem(${index})" class="text-gray-400 hover:text-red-500 text-xs font-bold">&times;</button>
+                            <div class="flex items-center space-x-2 bg-white border border-gray-300 rounded-lg px-2 py-0.5 text-xs">
+                                <button onclick="updateCartItemQty(${index}, -1)" class="font-bold text-gray-600 hover:text-black">-</button>
+                                <span class="font-bold text-gray-900">${item.qty}</span>
+                                <button onclick="updateCartItemQty(${index}, 1)" class="font-bold text-gray-600 hover:text-black">+</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            saveCart();
+            container.innerHTML = html;
+            if (subtotalText) subtotalText.textContent = 'Rs. ' + subtotal.toLocaleString('en-US');
+        }
+
+        function submitQvAddToCart() {
+            const name = qvProductName.textContent.trim();
+            const price = qvActivePrice.textContent.trim();
+            const image = qvProductImage.src;
+            addToCart(name, price, '', image, selectedQvSize, selectedQvColor, currentQvQty);
+            closeQuickViewModal();
+        }
+
+        function submitQvBuyNow() {
+            const name = qvProductName.textContent.trim();
+            const price = qvActivePrice.textContent.trim();
+            const image = qvProductImage.src;
+            addToCart(name, price, '', image, selectedQvSize, selectedQvColor, currentQvQty);
+            closeQuickViewModal();
+            window.location.href = '/checkout/';
+        }
+
+        document.addEventListener('DOMContentLoaded', updateCartBadge);
+    </script>
+
+    <!-- Floating Luxury WhatsApp Chat Widget -->
+    <a href="https://wa.me/923203939044?text=Hi%20SOLO%20Footwear,%20I%20want%20to%20inquire%20about%20your%20shoes" 
+       target="_blank" 
+       rel="noopener" 
+       class="fixed bottom-6 right-6 z-50 group flex items-center space-x-2.5 bg-[#25D366] hover:bg-[#20bd5a] text-white p-3.5 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-105 border-2 border-brandYellow/80"
+       title="Chat with Us on WhatsApp">
+        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+        </svg>
+        <span class="hidden md:inline-block font-bold text-xs uppercase tracking-wider pr-1">WhatsApp Chat</span>
+    </a>
+
+
+
+</body>
+</html>

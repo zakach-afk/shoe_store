@@ -1,0 +1,458 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Stylish Footwear Shoes for Men | SOLO FOOTWEAR{% endblock %}
+
+{% block content %}
+<!-- 1. Auto-Rotating Hero Banner Slider with Realistic Lifestyle Background Photos -->
+<section id="heroSliderSection" class="relative text-white h-[380px] md:h-[420px] overflow-hidden group">
+    <!-- Arrow Navigation Buttons -->
+    <button onclick="prevHeroSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 z-30 text-white/70 hover:text-white bg-black/40 hover:bg-black/80 w-11 h-11 rounded-full flex items-center justify-center transition opacity-0 group-hover:opacity-100 border border-white/20">
+        &#10094;
+    </button>
+    <button onclick="nextHeroSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 z-30 text-white/70 hover:text-white bg-black/40 hover:bg-black/80 w-11 h-11 rounded-full flex items-center justify-center transition opacity-0 group-hover:opacity-100 border border-white/20">
+        &#10095;
+    </button>
+
+    <!-- Horizontal Sliding Container -->
+    <div id="heroSliderTrack" class="flex w-full h-full transition-transform duration-700 ease-in-out">
+        <!-- Slide 1: Premium Luxury Summer Collection -->
+        <div class="hero-slide w-full flex-shrink-0 relative h-full">
+            <img src="{% static 'images/hero_slides/slide_luxury.jpg' %}" alt="Luxury Leather Footwear Collection" class="w-full h-full object-cover object-center">
+            <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent flex flex-col items-start justify-center text-left px-8 md:px-16 py-8 z-20">
+                <div class="max-w-xl space-y-4">
+                    <span class="inline-block bg-brandYellow text-soloPurple font-extrabold text-xs uppercase tracking-widest px-4 py-1.5 rounded-full shadow-md">
+                        SUMMER ESSENTIALS 2026
+                    </span>
+                    <h1 class="text-4xl md:text-6xl font-bold tracking-tight leading-none text-white drop-shadow-xl font-serif">
+                        Summer <br class="hidden md:block"/>Collection
+                    </h1>
+                    <p class="text-xs md:text-base text-gray-200 font-light leading-relaxed drop-shadow-md">
+                        Handcrafted premium leather footwear engineered for effortless luxury, supreme comfort & enduring distinction.
+                    </p>
+                    <div class="pt-2">
+                        <a href="/category/casuals/" class="shiny-btn inline-block bg-red-600 hover:bg-red-700 text-white font-extrabold px-9 py-3.5 rounded-xl transition-all transform hover:-translate-y-0.5 shadow-2xl text-xs md:text-sm uppercase tracking-widest">
+                            SHOP NOW
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Legacy Leather Formals -->
+        <div class="hero-slide w-full flex-shrink-0 relative h-full">
+            <img src="{% static 'images/hero_slides/slide_formals_v3.jpg' %}" alt="Legacy Leather Formals" class="w-full h-full object-cover object-center">
+            <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent flex flex-col items-start justify-center text-left px-8 md:px-16 py-8 z-20">
+                <div class="max-w-xl space-y-4">
+                    <span class="inline-block bg-brandYellow text-soloPurple font-extrabold text-xs uppercase tracking-widest px-4 py-1.5 rounded-full shadow-md">
+                        EXECUTIVE COLLECTION 2026
+                    </span>
+                    <h1 class="text-4xl md:text-6xl font-bold tracking-tight leading-none text-white drop-shadow-xl font-serif">
+                        Legacy Leather <br class="hidden md:block"/>Formals
+                    </h1>
+                    <p class="text-xs md:text-base text-gray-200 font-light leading-relaxed drop-shadow-md">
+                        Mastercrafted full-grain leather dress shoes & executive boots designed for distinction, elegance & comfort.
+                    </p>
+                    <div class="pt-2">
+                        <a href="/category/formals/" class="shiny-btn inline-block bg-red-600 hover:bg-red-700 text-white font-extrabold px-9 py-3.5 rounded-xl transition-all transform hover:-translate-y-0.5 shadow-2xl text-xs md:text-sm uppercase tracking-widest">
+                            EXPLORE FORMALS
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Authentic Peshawari Chappals -->
+        <div class="hero-slide w-full flex-shrink-0 relative h-full">
+            <img src="{% static 'images/hero_slides/slide_peshawari_v3.jpg' %}" alt="Authentic Peshawari Chappals" class="w-full h-full object-cover object-center">
+            <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent flex flex-col items-start justify-center text-left px-8 md:px-16 py-8 z-20">
+                <div class="max-w-xl space-y-4">
+                    <span class="inline-block bg-brandYellow text-soloPurple font-extrabold text-xs uppercase tracking-widest px-4 py-1.5 rounded-full shadow-md">
+                        HERITAGE CRAFTSMANSHIP
+                    </span>
+                    <h1 class="text-4xl md:text-6xl font-bold tracking-tight leading-none text-white drop-shadow-xl font-serif">
+                        Peshawari <br class="hidden md:block"/>Chappals
+                    </h1>
+                    <p class="text-xs md:text-base text-gray-200 font-light leading-relaxed drop-shadow-md">
+                        Double sole Norozi, Zalmi & Kaptan cuts hand-stitched from 100% pure cowhide leather for timeless style.
+                    </p>
+                    <div class="pt-2">
+                        <a href="/category/peshawari-chappals/" class="shiny-btn inline-block bg-red-600 hover:bg-red-700 text-white font-extrabold px-9 py-3.5 rounded-xl transition-all transform hover:-translate-y-0.5 shadow-2xl text-xs md:text-sm uppercase tracking-widest">
+                            DISCOVER PESHAWARI
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dot Indicators -->
+    <div class="absolute bottom-4 left-0 right-0 flex items-center justify-center space-x-2 z-30">
+        <button onclick="goToHeroSlide(0)" class="hero-dot w-6 h-3 rounded-full bg-brandYellow transition-all shadow"></button>
+        <button onclick="goToHeroSlide(1)" class="hero-dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all shadow"></button>
+        <button onclick="goToHeroSlide(2)" class="hero-dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all shadow"></button>
+    </div>
+</section>
+
+
+
+
+
+<section id="peshawari-section" class="max-w-7xl mx-auto px-4 pt-6 pb-14 text-center border-b border-gray-200">
+    <h2 class="text-3xl md:text-5xl font-serif font-normal text-gray-900 uppercase tracking-[0.2em] mb-4">
+        PESHAWARI CHAPPALS
+    </h2>
+    <div class="mb-10">
+        <a href="/category/peshawari-chappals/" class="shiny-btn inline-block px-10 py-2.5 text-xs font-medium uppercase tracking-[0.25em] text-gray-800 border border-gray-300 hover:border-black transition bg-white shadow-sm">
+            VIEW ALL
+        </a>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {% for product in peshawari_products %}
+        <div onclick="openQuickViewModal('{{ product.name|escapejs }}', '{{ product.active_price }}', '{{ product.regular_price }}', '{% if product.images.first %}{{ product.images.first.image.url }}{% endif %}')" class="group flex flex-col justify-between text-left cursor-pointer">
+            <div class="relative overflow-hidden rounded-2xl bg-gray-100 mb-3 aspect-[3/4]">
+                {% if product.discount_percentage > 0 %}
+                <span class="absolute top-3 left-3 bg-black text-white text-[11px] font-extrabold px-2.5 py-1 rounded-md shadow z-10 uppercase tracking-wider">
+                    {{ product.discount_percentage }}% OFF
+                </span>
+                {% endif %}
+
+                {% if product.images.first %}
+                <img src="{{ product.images.first.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                {% else %}
+                <div class="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400 font-bold text-xs">NO IMAGE</div>
+                {% endif %}
+
+                <div class="absolute bottom-3 right-3 z-10 opacity-0 group-hover:opacity-100 transition duration-300">
+                    <button type="button" class="w-10 h-10 bg-white text-gray-900 rounded-full shadow-lg flex items-center justify-center hover:bg-brandYellow transition" title="Choose Size">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <h3 class="font-semibold text-gray-900 text-xs md:text-sm uppercase tracking-wider mb-1 group-hover:text-brandBlue transition truncate">
+                    {{ product.name }}
+                </h3>
+                <div class="flex items-center justify-center space-x-2 text-xs md:text-sm">
+                    <span class="font-extrabold text-gray-900">Rs. {{ product.active_price }}</span>
+                    {% if product.sale_price and product.regular_price > product.sale_price %}
+                    <span class="text-gray-400 line-through text-xs">Rs. {{ product.regular_price }}</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- 3. SECTION: FORMALS -->
+{% if formals_products %}
+<!-- Full-Width Category Banner for Formals -->
+<div class="max-w-7xl mx-auto px-4 pt-12 pb-2">
+    <div class="relative w-full h-[240px] md:h-[360px] rounded-3xl overflow-hidden shadow-lg border border-gray-200 group">
+        <img src="{% static 'images/banners/home_formals_v2.jpg' %}" alt="Formals" class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent flex flex-col items-center justify-end p-6 md:p-8 text-center">
+            <h3 class="text-2xl md:text-4xl font-serif font-bold text-white uppercase tracking-[0.15em] drop-shadow-md">
+                Executive Formal Collection
+            </h3>
+            <p class="text-xs md:text-sm font-extrabold text-brandYellow uppercase tracking-widest mt-1 drop-shadow">
+                Refined Craftsmanship. Pure Leather Luxury.
+            </p>
+        </div>
+    </div>
+</div>
+
+<section class="max-w-7xl mx-auto px-4 pt-6 pb-14 text-center border-b border-gray-200">
+    <h2 class="text-3xl md:text-5xl font-serif font-normal text-gray-900 uppercase tracking-[0.2em] mb-4">
+        FORMALS
+    </h2>
+    <div class="mb-10">
+        <a href="/category/formals/" class="shiny-btn inline-block px-10 py-2.5 text-xs font-medium uppercase tracking-[0.25em] text-gray-800 border border-gray-300 hover:border-black transition bg-white shadow-sm">
+            VIEW ALL
+        </a>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {% for product in formals_products %}
+        <div onclick="openQuickViewModal('{{ product.name|escapejs }}', '{{ product.active_price }}', '{{ product.regular_price }}', '{% if product.images.first %}{{ product.images.first.image.url }}{% endif %}')" class="group flex flex-col justify-between text-left cursor-pointer">
+            <div class="relative overflow-hidden rounded-2xl bg-gray-100 mb-3 aspect-[3/4]">
+                {% if product.discount_percentage > 0 %}
+                <span class="absolute top-3 left-3 bg-black text-white text-[11px] font-extrabold px-2.5 py-1 rounded-md shadow z-10 uppercase tracking-wider">
+                    {{ product.discount_percentage }}% OFF
+                </span>
+                {% endif %}
+
+                {% if product.images.first %}
+                <img src="{{ product.images.first.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                {% else %}
+                <div class="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400 font-bold text-xs">NO IMAGE</div>
+                {% endif %}
+
+                <div class="absolute bottom-3 right-3 z-10 opacity-0 group-hover:opacity-100 transition duration-300">
+                    <button type="button" class="w-10 h-10 bg-white text-gray-900 rounded-full shadow-lg flex items-center justify-center hover:bg-brandYellow transition">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <h3 class="font-semibold text-gray-900 text-xs md:text-sm uppercase tracking-wider mb-1 group-hover:text-brandBlue transition truncate">
+                    {{ product.name }}
+                </h3>
+                <div class="flex items-center justify-center space-x-2 text-xs md:text-sm">
+                    <span class="font-extrabold text-gray-900">Rs. {{ product.active_price }}</span>
+                    {% if product.sale_price and product.regular_price > product.sale_price %}
+                    <span class="text-gray-400 line-through text-xs">Rs. {{ product.regular_price }}</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<!-- 4. SECTION: CASUALS -->
+{% if casuals_products %}
+<!-- Full-Width Category Banner for Casuals -->
+<div class="max-w-7xl mx-auto px-4 pt-12 pb-2">
+    <div class="relative w-full h-[280px] md:h-[400px] rounded-3xl overflow-hidden shadow-lg border border-gray-200 group">
+        <img src="{% static 'images/banners/home_casuals_v2.jpg' %}" alt="Casuals" class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20 flex flex-col items-center justify-center p-6 md:p-8 text-center">
+            <span class="inline-block bg-brandYellow text-soloPurple font-extrabold text-[11px] md:text-xs uppercase tracking-widest px-4 py-1.5 rounded-full mb-3 shadow-md">
+                OFFICIAL COLLECTION 2026
+            </span>
+            <h3 class="text-2xl md:text-4xl font-serif font-bold text-white uppercase tracking-[0.12em] drop-shadow-lg mb-2">
+                Casual Wear & Medicated Casual Wear
+            </h3>
+            <p class="text-xs md:text-sm font-extrabold text-brandYellow uppercase tracking-widest drop-shadow-md">
+                Relaxed Style & Everyday Medicated Arch Comfort
+            </p>
+        </div>
+    </div>
+</div>
+
+<section class="max-w-7xl mx-auto px-4 pt-6 pb-14 text-center border-b border-gray-200">
+    <h2 class="text-3xl md:text-5xl font-serif font-normal text-gray-900 uppercase tracking-[0.2em] mb-4">
+        CASUALS
+    </h2>
+    <div class="mb-10">
+        <a href="/category/casuals/" class="shiny-btn inline-block px-10 py-2.5 text-xs font-medium uppercase tracking-[0.25em] text-gray-800 border border-gray-300 hover:border-black transition bg-white shadow-sm">
+            VIEW ALL
+        </a>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {% for product in casuals_products %}
+        <div onclick="openQuickViewModal('{{ product.name|escapejs }}', '{{ product.active_price }}', '{{ product.regular_price }}', '{% if product.images.first %}{{ product.images.first.image.url }}{% endif %}')" class="group flex flex-col justify-between text-left cursor-pointer">
+            <div class="relative overflow-hidden rounded-2xl bg-gray-100 mb-3 aspect-[3/4]">
+                {% if product.discount_percentage > 0 %}
+                <span class="absolute top-3 left-3 bg-black text-white text-[11px] font-extrabold px-2.5 py-1 rounded-md shadow z-10 uppercase tracking-wider">
+                    {{ product.discount_percentage }}% OFF
+                </span>
+                {% endif %}
+
+                {% if product.images.first %}
+                <img src="{{ product.images.first.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                {% else %}
+                <div class="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400 font-bold text-xs">NO IMAGE</div>
+                {% endif %}
+
+                <div class="absolute bottom-3 right-3 z-10 opacity-0 group-hover:opacity-100 transition duration-300">
+                    <button type="button" class="w-10 h-10 bg-white text-gray-900 rounded-full shadow-lg flex items-center justify-center hover:bg-brandYellow transition">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <h3 class="font-semibold text-gray-900 text-xs md:text-sm uppercase tracking-wider mb-1 group-hover:text-brandBlue transition truncate">
+                    {{ product.name }}
+                </h3>
+                <div class="flex items-center justify-center space-x-2 text-xs md:text-sm">
+                    <span class="font-extrabold text-gray-900">Rs. {{ product.active_price }}</span>
+                    {% if product.sale_price and product.regular_price > product.sale_price %}
+                    <span class="text-gray-400 line-through text-xs">Rs. {{ product.regular_price }}</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<!-- 5. SECTION: CHELSEA -->
+{% if chelsea_products %}
+<!-- Full-Width Category Banner for Chelsea -->
+<div class="max-w-7xl mx-auto px-4 pt-12 pb-2">
+    <div class="relative w-full h-[240px] md:h-[360px] rounded-3xl overflow-hidden shadow-lg border border-gray-200 group">
+        <img src="{% static 'images/banners/home_chelsea_v2.jpg' %}" alt="Chelsea" class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent flex flex-col items-center justify-end p-6 md:p-8 text-center">
+            <h3 class="text-2xl md:text-4xl font-serif font-bold text-white uppercase tracking-[0.15em] drop-shadow-md">
+                Chelsea Ankle Boots Collection
+            </h3>
+            <p class="text-xs md:text-sm font-extrabold text-brandYellow uppercase tracking-widest mt-1 drop-shadow">
+                Handcrafted Leather Boots. Modern Urban Style.
+            </p>
+        </div>
+    </div>
+</div>
+
+<section class="max-w-7xl mx-auto px-4 pt-6 pb-14 text-center border-b border-gray-200">
+    <h2 class="text-3xl md:text-5xl font-serif font-normal text-gray-900 uppercase tracking-[0.2em] mb-4">
+        CHELSEA
+    </h2>
+    <div class="mb-10">
+        <a href="/category/chelsea/" class="shiny-btn inline-block px-10 py-2.5 text-xs font-medium uppercase tracking-[0.25em] text-gray-800 border border-gray-300 hover:border-black transition bg-white shadow-sm">
+            VIEW ALL
+        </a>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {% for product in chelsea_products %}
+        <div onclick="openQuickViewModal('{{ product.name|escapejs }}', '{{ product.active_price }}', '{{ product.regular_price }}', '{% if product.images.first %}{{ product.images.first.image.url }}{% endif %}')" class="group flex flex-col justify-between text-left cursor-pointer">
+            <div class="relative overflow-hidden rounded-2xl bg-gray-100 mb-3 aspect-[3/4]">
+                {% if product.discount_percentage > 0 %}
+                <span class="absolute top-3 left-3 bg-black text-white text-[11px] font-extrabold px-2.5 py-1 rounded-md shadow z-10 uppercase tracking-wider">
+                    {{ product.discount_percentage }}% OFF
+                </span>
+                {% endif %}
+
+                {% if product.images.first %}
+                <img src="{{ product.images.first.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                {% else %}
+                <div class="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400 font-bold text-xs">NO IMAGE</div>
+                {% endif %}
+
+                <div class="absolute bottom-3 right-3 z-10 opacity-0 group-hover:opacity-100 transition duration-300">
+                    <button type="button" class="w-10 h-10 bg-white text-gray-900 rounded-full shadow-lg flex items-center justify-center hover:bg-brandYellow transition">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <h3 class="font-semibold text-gray-900 text-xs md:text-sm uppercase tracking-wider mb-1 group-hover:text-brandBlue transition truncate">
+                    {{ product.name }}
+                </h3>
+                <div class="flex items-center justify-center space-x-2 text-xs md:text-sm">
+                    <span class="font-extrabold text-gray-900">Rs. {{ product.active_price }}</span>
+                    {% if product.sale_price and product.regular_price > product.sale_price %}
+                    <span class="text-gray-400 line-through text-xs">Rs. {{ product.regular_price }}</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<!-- 6. Trust Features Strip -->
+<section class="bg-slate-50 py-10 px-4">
+    <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div class="flex items-center space-x-3 justify-center">
+            <div class="w-10 h-10 rounded-full bg-brandBlue/10 text-brandBlue flex items-center justify-center text-xl font-bold">🚚</div>
+            <div class="text-left">
+                <h4 class="text-xs font-extrabold uppercase text-gray-900">Free Delivery</h4>
+                <p class="text-[11px] text-gray-500">Nationwide Shipping</p>
+            </div>
+        </div>
+        <div class="flex items-center space-x-3 justify-center">
+            <div class="w-10 h-10 rounded-full bg-brandBlue/10 text-brandBlue flex items-center justify-center text-xl font-bold">🔄</div>
+            <div class="text-left">
+                <h4 class="text-xs font-extrabold uppercase text-gray-900">15 Days Exchange</h4>
+                <p class="text-[11px] text-gray-500">Hassle-Free Size Swap</p>
+            </div>
+        </div>
+        <div class="flex items-center space-x-3 justify-center">
+            <div class="w-10 h-10 rounded-full bg-brandBlue/10 text-brandBlue flex items-center justify-center text-xl font-bold">👞</div>
+            <div class="text-left">
+                <h4 class="text-xs font-extrabold uppercase text-gray-900">Genuine Leather</h4>
+                <p class="text-[11px] text-gray-500">100% Handcrafted</p>
+            </div>
+        </div>
+        <div class="flex items-center space-x-3 justify-center">
+            <div class="w-10 h-10 rounded-full bg-brandBlue/10 text-brandBlue flex items-center justify-center text-xl font-bold">💵</div>
+            <div class="text-left">
+                <h4 class="text-xs font-extrabold uppercase text-gray-900">Cash on Delivery</h4>
+                <p class="text-[11px] text-gray-500">Pay Upon Arrival</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Hero Auto Slider JavaScript Script -->
+<script>
+    let currentHeroIndex = 0;
+    const heroSlides = document.querySelectorAll('.hero-slide');
+    const heroDots = document.querySelectorAll('.hero-dot');
+    let heroSliderTimer = null;
+
+    function showHeroSlide(index) {
+        const track = document.getElementById('heroSliderTrack');
+        if (track) {
+            track.style.transform = `translateX(-${index * 100}%)`;
+        }
+
+        heroDots.forEach((dot, idx) => {
+            if (idx === index) {
+                dot.classList.remove('bg-white/50', 'w-3');
+                dot.classList.add('bg-brandYellow', 'w-6');
+            } else {
+                dot.classList.remove('bg-brandYellow', 'w-6');
+                dot.classList.add('bg-white/50', 'w-3');
+            }
+        });
+        currentHeroIndex = index;
+    }
+
+    function nextHeroSlide() {
+        let nextIndex = (currentHeroIndex + 1) % heroSlides.length;
+        showHeroSlide(nextIndex);
+    }
+
+    function prevHeroSlide() {
+        let prevIndex = (currentHeroIndex - 1 + heroSlides.length) % heroSlides.length;
+        showHeroSlide(prevIndex);
+    }
+
+    function goToHeroSlide(index) {
+        showHeroSlide(index);
+        resetHeroTimer();
+    }
+
+    function startHeroTimer() {
+        heroSliderTimer = setInterval(nextHeroSlide, 3000);
+    }
+
+    function resetHeroTimer() {
+        clearInterval(heroSliderTimer);
+        startHeroTimer();
+    }
+
+    const heroSection = document.getElementById('heroSliderSection');
+    if (heroSection) {
+        heroSection.addEventListener('mouseenter', () => clearInterval(heroSliderTimer));
+        heroSection.addEventListener('mouseleave', startHeroTimer);
+    }
+
+    showHeroSlide(0);
+    startHeroTimer();
+</script>
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ current_category.name }} | SOLO FOOTWEAR{% endblock %}
+
+{% block content %}
+{% load static %}
+<!-- High-End Dedicated Category Hero Banner (Split Showcase) -->
+<div class="bg-neutral-900 text-white mb-10 overflow-hidden border-b border-yellow-600/20 shadow-xl relative">
+    <div class="max-w-7xl mx-auto px-6 py-8 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+        <!-- Left Column: Category Info & Stats -->
+        <div class="md:col-span-7 space-y-4 text-center md:text-left z-10">
+            <span class="inline-block bg-brandYellow text-soloPurple font-extrabold text-[11px] md:text-xs uppercase tracking-widest px-4 py-1.5 rounded-full shadow-md">
+                OFFICIAL COLLECTION 2026
+            </span>
+            <h1 class="text-4xl md:text-6xl font-serif font-bold uppercase tracking-[0.12em] text-white drop-shadow-lg">
+                {{ current_category.name }}
+            </h1>
+            <p class="text-xs md:text-sm font-extrabold uppercase tracking-widest text-brandYellow">
+                {{ products|length }} PREMIUM ITEMS AVAILABLE
+            </p>
+        </div>
+
+        <!-- Right Column: Category Product Showcase Image (100% Uncropped & Clear) -->
+        <div class="md:col-span-5 flex justify-center md:justify-end z-10">
+            <div class="relative w-72 h-52 md:w-96 md:h-64 rounded-2xl overflow-hidden shadow-2xl border-2 border-brandYellow/30 bg-neutral-800 flex items-center justify-center p-2 group">
+                <img src="{% static 'images/banners/cat_' %}{{ current_category.slug }}.jpg" onerror="this.onerror=null; {% if products.first and products.first.images.first %}this.src='{{ products.first.images.first.image.url }}';{% else %}this.src='{% static 'images/hero_slides/slide_luxury.jpg' %}';{% endif %}" alt="{{ current_category.name }}" class="w-full h-full object-contain group-hover:scale-105 transition duration-500 rounded-xl">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Product Grid Section -->
+<section class="max-w-7xl mx-auto px-4 py-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {% for product in products %}
+        <div onclick="openQuickViewModal('{{ product.name|escapejs }}', '{{ product.active_price }}', '{{ product.regular_price }}', '{% if product.images.first %}{{ product.images.first.image.url }}{% endif %}', '{% if product.images.all.1 %}{{ product.images.all.1.image.url }}{% endif %}')" class="group flex flex-col justify-between text-left cursor-pointer">
+            <div class="relative overflow-hidden rounded-2xl bg-gray-100 mb-3 aspect-[3/4]">
+                <!-- Black Discount Pill Tag -->
+                {% if product.discount_percentage > 0 %}
+                <span class="absolute top-3 left-3 bg-black text-white text-[11px] font-extrabold px-2.5 py-1 rounded-md shadow z-10 uppercase tracking-wider">
+                    {{ product.discount_percentage }}% OFF
+                </span>
+                {% endif %}
+
+                <!-- Medicated Sole Badge -->
+                {% if 'medicated' in product.name.lower or 'medicated' in product.description.lower %}
+                <span class="absolute top-3 right-3 bg-emerald-600 text-white text-[10px] font-extrabold px-2 py-1 rounded-md shadow z-10 uppercase tracking-wider flex items-center space-x-1">
+                    <span>🩺 MEDICATED SOLE</span>
+                </span>
+                {% endif %}
+
+                <!-- Product Lifestyle Image -->
+                {% if product.images.first %}
+                <img src="{{ product.images.first.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                {% else %}
+                <div class="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400 font-bold text-xs">NO IMAGE</div>
+                {% endif %}
+
+                <!-- Hover Bag Icon -->
+                <div class="absolute bottom-3 right-3 z-10 opacity-0 group-hover:opacity-100 transition duration-300">
+                    <button type="button" class="w-10 h-10 bg-white text-gray-900 rounded-full shadow-lg flex items-center justify-center hover:bg-brandYellow transition" title="Choose Size">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product Title & Price -->
+            <div class="text-center">
+                <h3 class="font-semibold text-gray-900 text-xs md:text-sm uppercase tracking-wider mb-1 group-hover:text-brandBlue transition truncate">
+                    {{ product.name }}
+                </h3>
+                <div class="flex items-center justify-center space-x-2 text-xs md:text-sm">
+                    <span class="font-extrabold text-gray-900">Rs. {{ product.active_price }}</span>
+                    {% if product.sale_price and product.regular_price > product.sale_price %}
+                    <span class="text-gray-400 line-through text-xs">Rs. {{ product.regular_price }}</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-span-full text-center py-20 px-6 bg-gradient-to-b from-white to-gray-50 rounded-3xl shadow-sm border border-gray-200/80 my-6 max-w-2xl mx-auto">
+            <div class="inline-block bg-brandYellow/30 text-soloPurple px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest mb-4 border border-brandYellow/40">
+                ✨ EXCLUSIVE NEW DROPS ARRIVING SOON
+            </div>
+            <h2 class="text-4xl md:text-5xl font-serif font-extrabold text-gray-900 uppercase tracking-[0.15em] mb-4">
+                COMING SOON
+            </h2>
+            <p class="text-sm md:text-base text-gray-600 max-w-md mx-auto font-light leading-relaxed mb-8">
+                Our handcrafted luxury <span class="font-bold text-gray-900">{{ current_category.name }}</span> collection is currently under production by master artisans. Stay tuned!
+            </p>
+            <a href="/" class="shiny-btn inline-block bg-brandBlue text-brandYellow font-extrabold px-9 py-4 rounded-xl uppercase tracking-widest text-xs shadow-xl hover:bg-soloPurple transition">
+                EXPLORE OTHER COLLECTIONS
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% block extra_js %}{% endblock %}
+{% endblock %}

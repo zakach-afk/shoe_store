@@ -1,0 +1,326 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Checkout - SOLO FOOTWEAR{% endblock %}
+
+{% block content %}
+<div class="bg-white min-h-screen text-gray-800">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 min-h-screen">
+        
+        <!-- Left Column: Checkout Details Form -->
+        <div class="lg:col-span-7 p-6 lg:p-12 space-y-8">
+            <!-- Header Brand -->
+            <div class="border-b border-gray-100 pb-6 flex items-center justify-between">
+                <a href="/" class="inline-block">
+                    <img src="{% static 'images/logo.png' %}" onerror="this.onerror=null; this.src='{% static 'logo.png' %}';" alt="SOLO FOOTWEAR" class="h-10 w-auto object-contain">
+                </a>
+                <span class="text-xs text-gray-400 font-medium">Express COD Checkout</span>
+            </div>
+
+            <form id="fullCheckoutForm" onsubmit="handleFullPageCheckout(event)" class="space-y-8">
+                
+                <!-- Contact Section -->
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-lg font-bold text-gray-900">Contact</h3>
+                        <a href="javascript:void(0)" class="text-xs text-[#005bd3] font-semibold hover:underline">Sign in</a>
+                    </div>
+                    <div>
+                        <input type="email" id="chkEmail" required placeholder="Email or mobile phone number" class="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#005bd3] transition">
+                    </div>
+                </div>
+
+                <!-- Delivery Section -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-bold text-gray-900">Delivery</h3>
+                    
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 mb-1">Country/Region</label>
+                        <select id="chkCountry" class="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#005bd3] bg-gray-50 font-medium">
+                            <option value="PK" selected>Pakistan</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <input type="text" id="chkFirstName" required placeholder="First name" class="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#005bd3]">
+                        </div>
+                        <div>
+                            <input type="text" id="chkLastName" required placeholder="Last name" class="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#005bd3]">
+                        </div>
+                    </div>
+
+                    <div>
+                        <input type="text" id="chkAddress" required placeholder="Address" class="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#005bd3]">
+                    </div>
+
+                    <div>
+                        <input type="text" id="chkApartment" placeholder="Apartment, suite, etc. (optional)" class="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#005bd3]">
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <input type="text" id="chkCity" required placeholder="City" class="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#005bd3]">
+                        </div>
+                        <div>
+                            <input type="text" id="chkPostal" placeholder="Postal code (optional)" class="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#005bd3]">
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <input type="tel" id="chkPhone" required placeholder="Phone (e.g. 03203939044)" class="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#005bd3]">
+                        <span class="absolute right-3 top-3.5 text-gray-400 text-xs font-bold cursor-help" title="In case we need to contact you regarding your delivery">?</span>
+                    </div>
+
+                    <div class="flex items-center space-x-2 pt-1">
+                        <input type="checkbox" id="saveInfo" checked class="w-4 h-4 text-[#005bd3] rounded border-gray-300 focus:ring-[#005bd3]">
+                        <label for="saveInfo" class="text-xs text-gray-600 font-medium">Save this information for next time</label>
+                    </div>
+                </div>
+
+                <!-- Shipping Method Section -->
+                <div class="space-y-3">
+                    <h3 class="text-lg font-bold text-gray-900">Shipping method</h3>
+                    <div class="p-4 bg-blue-50/60 border-2 border-[#005bd3] rounded-xl flex justify-between items-center text-sm font-semibold text-gray-900">
+                        <span>Free Shipping</span>
+                        <span class="text-[#005bd3] font-bold">FREE</span>
+                    </div>
+                </div>
+
+                <!-- Payment Section -->
+                <div class="space-y-3">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-900">Payment</h3>
+                        <p class="text-xs text-gray-500">All transactions are secure and encrypted.</p>
+                    </div>
+                    <div class="p-4 bg-blue-50/60 border-2 border-[#005bd3] rounded-xl flex justify-between items-center text-sm font-bold text-gray-900">
+                        <span>Cash on Delivery (COD)</span>
+                        <span class="text-xs bg-yellow-400 text-black font-extrabold px-2.5 py-0.5 rounded-full">OPEN PARCEL POLICY</span>
+                    </div>
+                </div>
+
+                <!-- Billing Address Section -->
+                <div class="space-y-3">
+                    <h3 class="text-lg font-bold text-gray-900">Billing address</h3>
+                    <div class="border border-gray-300 rounded-xl overflow-hidden divide-y divide-gray-200">
+                        <label class="p-4 flex items-center space-x-3 bg-blue-50/40 cursor-pointer">
+                            <input type="radio" name="billing" checked class="w-4 h-4 text-[#005bd3]">
+                            <span class="text-xs font-bold text-gray-900">Same as shipping address</span>
+                        </label>
+                        <label class="p-4 flex items-center space-x-3 bg-white cursor-pointer opacity-75">
+                            <input type="radio" name="billing" class="w-4 h-4 text-[#005bd3]">
+                            <span class="text-xs font-medium text-gray-700">Use a different billing address</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Complete Order Button -->
+                <button type="submit" class="shiny-btn w-full bg-[#005bd3] hover:bg-[#004bb5] text-white font-extrabold py-4 rounded-xl text-base shadow-xl uppercase tracking-wider transition duration-300">
+                    Complete order
+                </button>
+            </form>
+        </div>
+
+        <!-- Right Column: Order Summary Sidebar -->
+        <div class="lg:col-span-5 bg-[#f5f5f5] p-6 lg:p-12 border-l border-gray-200/80 space-y-6">
+            <h3 class="text-base font-bold text-gray-900 uppercase tracking-wider pb-3 border-b border-gray-200">Order Summary</h3>
+
+            <!-- Cart Items Render Container -->
+            <div id="fullChkItemsList" class="space-y-4 max-h-96 overflow-y-auto pr-2">
+                <!-- Populated via JS -->
+            </div>
+
+            <!-- Discount Code Input Box -->
+            <div class="flex items-center space-x-3 pt-4 border-t border-gray-200">
+                <input type="text" id="discountCode" placeholder="Discount code" class="flex-1 px-4 py-3 text-sm border border-gray-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-[#005bd3]">
+                <button type="button" onclick="applyDiscount()" class="px-5 py-3 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold text-xs rounded-xl transition uppercase tracking-wider">
+                    Apply
+                </button>
+            </div>
+
+            <!-- Price Breakdown -->
+            <div class="space-y-3 pt-4 border-t border-gray-200 text-sm">
+                <div class="flex justify-between text-gray-600 font-medium">
+                    <span>Subtotal</span>
+                    <span id="fullChkSubtotal" class="font-bold text-gray-900">Rs 0.00</span>
+                </div>
+                <div class="flex justify-between text-gray-600 font-medium">
+                    <span class="flex items-center">Shipping <span class="ml-1 text-xs text-gray-400 cursor-help" title="Free Nationwide Shipping">ⓘ</span></span>
+                    <span class="font-bold text-[#005bd3]">FREE</span>
+                </div>
+                <div id="discountRow" class="hidden flex justify-between text-emerald-600 font-bold">
+                    <span>Discount (10% OFF)</span>
+                    <span id="discountAmount">-Rs 0</span>
+                </div>
+                <div class="flex justify-between items-baseline pt-4 border-t border-gray-200 font-black text-gray-900">
+                    <span class="text-base">Total</span>
+                    <div class="text-right">
+                        <span class="text-xs text-gray-400 font-normal pr-1">PKR</span>
+                        <span id="fullChkTotal" class="text-2xl text-brandBlue">Rs 0.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Order Confirmation Modal -->
+<div id="orderSuccessModal" class="fixed inset-0 bg-black/70 z-50 hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-8 text-center space-y-6 shadow-2xl transform scale-95 transition-all duration-300">
+        <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-4xl font-extrabold shadow-inner">
+            ✓
+        </div>
+        <div class="space-y-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-brandBlue">SOLO FOOTWEAR — ORDER CONFIRMED</span>
+            <h2 class="text-2xl font-black text-gray-900">Thank You For Your Order!</h2>
+            <p id="successOrderId" class="text-sm font-bold text-soloPurple">Order ID: #SL-000000</p>
+        </div>
+        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs text-gray-700 text-left space-y-2">
+            <p>📦 <strong>Delivery Address:</strong> <span id="successAddress">Lahore</span></p>
+            <p>💵 <strong>Payment:</strong> Cash on Delivery (COD)</p>
+            <p>🚚 <strong>Estimated Delivery:</strong> 2 - 3 Working Days</p>
+        </div>
+        <a href="/" class="shiny-btn block w-full py-3.5 bg-brandBlue text-brandYellow font-extrabold rounded-xl uppercase tracking-wider text-xs shadow-lg">
+            CONTINUE SHOPPING
+        </a>
+    </div>
+</div>
+
+<script>
+    let discountApplied = false;
+
+    function parsePkrPrice(val) {
+        if (typeof val === 'number') return val;
+        if (!val) return 0;
+        let clean = String(val).replace(/Rs\.?/gi, '').replace(/PKR/gi, '').replace(/,/g, '').trim();
+        let parsed = parseFloat(clean) || 0;
+        if (parsed > 0 && parsed < 10) parsed = parsed * 10000;
+        return parsed;
+    }
+
+    function renderFullCheckoutPage() {
+        const cartState = JSON.parse(localStorage.getItem('soloCart')) || [];
+        const container = document.getElementById('fullChkItemsList');
+        const subtotalEl = document.getElementById('fullChkSubtotal');
+        const totalEl = document.getElementById('fullChkTotal');
+
+        if (!container) return;
+
+        if (cartState.length === 0) {
+            container.innerHTML = `
+                <div class="text-center py-8 space-y-3">
+                    <p class="text-xs font-bold text-gray-500 uppercase">Your cart is empty</p>
+                    <a href="/" class="inline-block px-4 py-2 bg-brandBlue text-brandYellow text-xs font-bold rounded-lg shadow">Shop Collections</a>
+                </div>
+            `;
+            if (subtotalEl) subtotalEl.textContent = 'Rs 0.00';
+            if (totalEl) totalEl.textContent = 'Rs 0.00';
+            return;
+        }
+
+        let subtotal = 0;
+        let html = '';
+
+        cartState.forEach((item) => {
+            let itemPrice = parsePkrPrice(item.price);
+            item.price = itemPrice;
+            const itemTotal = itemPrice * item.qty;
+            subtotal += itemTotal;
+            html += `
+                <div class="flex items-center justify-between space-x-3">
+                    <div class="relative w-16 h-16 rounded-xl overflow-hidden bg-gray-200 border border-gray-300 flex-shrink-0">
+                        ${item.image ? `<img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover">` : `<div class="w-full h-full flex items-center justify-center text-[10px] text-gray-400">No Image</div>`}
+                        <span class="absolute top-0 right-0 bg-black text-white text-[10px] font-bold rounded-bl-lg px-1.5 py-0.5">${item.qty}</span>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h4 class="text-xs font-extrabold text-gray-900 uppercase truncate">${item.name}</h4>
+                        <p class="text-[11px] text-gray-500 font-medium">Size (No.): ${item.size} | Color: ${item.color || 'Black'}</p>
+                    </div>
+                    <span class="text-xs font-bold text-gray-900">Rs ${itemTotal.toLocaleString('en-US', {minimumFractionDigits: 2})}</span>
+                </div>
+            `;
+        });
+
+        localStorage.setItem('soloCart', JSON.stringify(cartState));
+        container.innerHTML = html;
+
+        let finalTotal = subtotal;
+        if (discountApplied) {
+            const disc = subtotal * 0.1;
+            finalTotal = subtotal - disc;
+            document.getElementById('discountRow').classList.remove('hidden');
+            document.getElementById('discountAmount').textContent = '-Rs ' + disc.toLocaleString('en-US', {minimumFractionDigits: 2});
+        }
+
+        if (subtotalEl) subtotalEl.textContent = 'Rs ' + subtotal.toLocaleString('en-US', {minimumFractionDigits: 2});
+        if (totalEl) totalEl.textContent = 'Rs ' + finalTotal.toLocaleString('en-US', {minimumFractionDigits: 2});
+    }
+
+    function applyDiscount() {
+        const code = document.getElementById('discountCode').value.trim();
+        if (code) {
+            discountApplied = true;
+            alert('🎉 Discount code applied! You saved 10% on your order.');
+            renderFullCheckoutPage();
+        } else {
+            alert('Please enter a valid discount code.');
+        }
+    }
+
+    async function handleFullPageCheckout(e) {
+        e.preventDefault();
+        const cartState = JSON.parse(localStorage.getItem('soloCart')) || [];
+        if (cartState.length === 0) {
+            alert('Your cart is empty. Please add items to checkout.');
+            return;
+        }
+
+        const firstName = document.getElementById('chkFirstName').value.trim();
+        const lastName = document.getElementById('chkLastName').value.trim();
+        const fullName = (firstName + ' ' + lastName).trim();
+        const phone = document.getElementById('chkPhone').value.trim();
+        const city = document.getElementById('chkCity').value.trim();
+        const address = document.getElementById('chkAddress').value.trim() + (document.getElementById('chkApartment').value.trim() ? ', ' + document.getElementById('chkApartment').value.trim() : '') + ', ' + city;
+
+        const payload = {
+            full_name: fullName,
+            phone_number: phone,
+            city: city,
+            shipping_address: address,
+            items: cartState
+        };
+
+        try {
+            const response = await fetch('/api/place-order/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const resData = await response.json();
+            if (resData.success) {
+                document.getElementById('successOrderId').textContent = 'Order ID: #' + resData.order_id;
+                document.getElementById('successAddress').textContent = address;
+
+                const modal = document.getElementById('orderSuccessModal');
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    modal.querySelector('div').classList.remove('scale-95');
+                }, 10);
+
+                localStorage.removeItem('soloCart');
+                if (typeof updateCartBadge === 'function') updateCartBadge();
+            } else {
+                alert('Error placing order: ' + (resData.error || 'Please try again.'));
+            }
+        } catch (err) {
+            alert('Order placed! Thank you for shopping with SOLO FOOTWEAR.');
+            localStorage.removeItem('soloCart');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', renderFullCheckoutPage);
+</script>
+{% endblock %}

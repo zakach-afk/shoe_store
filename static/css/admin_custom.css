@@ -1,0 +1,235 @@
+/* =========================================================
+   SOLO FOOTWEAR - ULTRA LUXURY MODERN ANIMATED ADMIN DASHBOARD
+   ========================================================= */
+
+/* --- 1. Keyframe Animations --- */
+@keyframes fadeInUpAdmin {
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.99);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes pulseGoldGlow {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(255, 219, 0, 0.3), 0 4px 15px rgba(18, 60, 145, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 24px rgba(255, 219, 0, 0.75), 0 6px 24px rgba(18, 60, 145, 0.6);
+    }
+}
+
+@keyframes shimmerHeader {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* --- 2. Smooth Entrance Animations for Main Dashboard Elements --- */
+main, #content, .flex-1, table, form, aside, .bg-white, .dark\:bg-gray-800 {
+    animation: fadeInUpAdmin 0.45s cubic-bezier(0.16, 1, 0.3, 1) ease-out;
+}
+
+/* --- 3. Sidebar Container & Header Styling --- */
+aside {
+    background: linear-gradient(180deg, #1F1259 0%, #100836 100%) !important;
+    border-right: 1.5px solid rgba(255, 219, 0, 0.25) !important;
+    box-shadow: 6px 0 30px rgba(0, 0, 0, 0.3) !important;
+}
+
+aside header {
+    background: linear-gradient(135deg, #160D42 0%, #0B0526 100%) !important;
+    border-bottom: 3.5px solid #FFDB00 !important;
+    padding: 1.25rem 1rem !important;
+}
+
+aside header img {
+    max-height: 52px !important;
+    width: auto !important;
+    filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.5));
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+aside header img:hover {
+    transform: scale(1.08) rotate(-1deg);
+}
+
+/* --- 4. Sidebar Group Titles & Nav Links --- */
+aside .font-semibold, 
+aside nav > div > span,
+aside nav > div > header {
+    color: #FFDB00 !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase !important;
+    font-size: 0.75rem !important;
+    padding: 0.7rem 1rem !important;
+    background: rgba(255, 219, 0, 0.12) !important;
+    border-radius: 0.65rem !important;
+    margin-bottom: 0.6rem !important;
+    border-left: 4px solid #FFDB00 !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+aside a {
+    color: #E2E8F0 !important;
+    font-weight: 600 !important;
+    transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    border-radius: 0.65rem !important;
+    margin: 0.25rem 0 !important;
+    padding: 0.7rem 0.9rem !important;
+}
+
+aside a:hover {
+    background-color: rgba(255, 219, 0, 0.2) !important;
+    color: #FFDB00 !important;
+    transform: translateX(7px) scale(1.02);
+}
+
+aside a.active, aside a[aria-current="page"] {
+    background: linear-gradient(135deg, #123C91 0%, #1F1259 100%) !important;
+    color: #FFFFFF !important;
+    font-weight: 800 !important;
+    border-left: 5px solid #FFDB00 !important;
+    animation: pulseGoldGlow 3s infinite ease-in-out !important;
+}
+
+/* --- 5. Header Bar & Navbar Polish --- */
+nav.header, header.bg-white, header.dark\:bg-gray-800 {
+    background: linear-gradient(90deg, #123C91 0%, #1F1259 100%) !important;
+    color: #FFFFFF !important;
+    border-bottom: 2.5px solid #FFDB00 !important;
+    box-shadow: 0 6px 25px rgba(18, 60, 145, 0.3) !important;
+}
+
+/* --- 6. Table Styling & Dynamic Hover Effects --- */
+table {
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+    border-radius: 0.9rem !important;
+    overflow: hidden !important;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.09) !important;
+}
+
+table thead th {
+    background: linear-gradient(135deg, #123C91 0%, #1F1259 100%) !important;
+    color: #FFFFFF !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    font-size: 0.78rem !important;
+    padding: 1rem 1.1rem !important;
+    border-bottom: 3.5px solid #FFDB00 !important;
+}
+
+table thead th a, table thead th span {
+    color: #FFDB00 !important;
+    font-weight: 900 !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+table tbody tr {
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+table tbody tr:hover {
+    background-color: rgba(255, 219, 0, 0.1) !important;
+    transform: translateY(-2px) scale(1.002);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+table tbody td {
+    padding: 0.95rem 1.15rem !important;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.7) !important;
+}
+
+/* --- 7. Buttons & Action CTA Polish --- */
+.button-primary, 
+button[type="submit"], 
+input[type="submit"].default,
+.bg-primary-600 {
+    background: linear-gradient(135deg, #123C91 0%, #1F1259 100%) !important;
+    color: #FFFFFF !important;
+    font-weight: 800 !important;
+    border-radius: 0.7rem !important;
+    border: 1.5px solid rgba(255, 219, 0, 0.5) !important;
+    padding: 0.7rem 1.4rem !important;
+    box-shadow: 0 4px 16px rgba(18, 60, 145, 0.35) !important;
+    transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.button-primary:hover, 
+button[type="submit"]:hover,
+input[type="submit"].default:hover,
+.bg-primary-600:hover {
+    background: linear-gradient(135deg, #1F1259 0%, #123C91 100%) !important;
+    color: #FFDB00 !important;
+    border-color: #FFDB00 !important;
+    transform: translateY(-3px) scale(1.03) !important;
+    box-shadow: 0 10px 28px rgba(255, 219, 0, 0.45) !important;
+}
+
+/* --- 8. Input Fields & Glow Focus States --- */
+input[type="text"], 
+input[type="search"],
+input[type="number"],
+input[type="email"],
+select, 
+textarea {
+    border-radius: 0.65rem !important;
+    border: 1.5px solid #CBD5E1 !important;
+    padding: 0.65rem 0.9rem !important;
+    transition: all 0.25s ease !important;
+}
+
+input[type="text"]:focus, 
+input[type="search"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+select:focus, 
+textarea:focus {
+    border-color: #123C91 !important;
+    box-shadow: 0 0 0 4px rgba(18, 60, 145, 0.22), 0 0 12px rgba(255, 219, 0, 0.4) !important;
+}
+
+/* --- 9. Cards, Panels & Metric Containers --- */
+.bg-white, .dark\:bg-gray-800 {
+    border-radius: 0.9rem !important;
+    border: 1px solid rgba(226, 232, 240, 0.85) !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.bg-white:hover {
+    box-shadow: 0 14px 35px rgba(18, 60, 145, 0.1) !important;
+}
+
+/* --- 10. Custom Badges & Highlight Pills --- */
+span.bg-\[\#123C91\], span.bg-blue-600, .badge-brand {
+    background: linear-gradient(135deg, #123C91 0%, #1F1259 100%) !important;
+    color: #FFDB00 !important;
+    font-weight: 900 !important;
+    padding: 0.4rem 0.95rem !important;
+    border-radius: 9999px !important;
+    border: 1.5px solid #FFDB00 !important;
+    box-shadow: 0 3px 10px rgba(18, 60, 145, 0.35) !important;
+}
+
+/* --- 11. Custom Luxury Scrollbars --- */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #1F1259;
+}
+::-webkit-scrollbar-thumb {
+    background: #123C91;
+    border-radius: 4px;
+    border: 1px solid #FFDB00;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #FFDB00;
+}
