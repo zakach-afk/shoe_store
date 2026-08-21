@@ -822,30 +822,45 @@
             window.location.href = '/checkout/';
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            updateCartBadge();
+        // Interactive Card Slide Switcher (Shoe <-> Inner Sole)
+        function cardShowSlide(cardEl, slideIndex) {
+            const img1 = cardEl.querySelector('.slide-img-1');
+            const img2 = cardEl.querySelector('.slide-img-2');
+            const dot0 = cardEl.querySelector('.slide-dot-0');
+            const dot1 = cardEl.querySelector('.slide-dot-1');
 
-            // Auto-slide 2-image cards (Shoes & Medicated Insole) every 3 seconds
-            setInterval(() => {
-                document.querySelectorAll('.product-slide-card[data-has-secondary="true"]').forEach(card => {
-                    const img1 = card.querySelector('.slide-img-1');
-                    const img2 = card.querySelector('.slide-img-2');
-                    if (img1 && img2) {
-                        if (img1.classList.contains('opacity-100')) {
-                            img1.classList.remove('opacity-100');
-                            img1.classList.add('opacity-0');
-                            img2.classList.remove('opacity-0');
-                            img2.classList.add('opacity-100');
-                        } else {
-                            img2.classList.remove('opacity-100');
-                            img2.classList.add('opacity-0');
-                            img1.classList.remove('opacity-0');
-                            img1.classList.add('opacity-100');
-                        }
+            if (img1 && img2) {
+                if (slideIndex === 1) {
+                    img1.classList.remove('opacity-100', 'scale-100');
+                    img1.classList.add('opacity-0', 'scale-95');
+                    img2.classList.remove('opacity-0', 'scale-95');
+                    img2.classList.add('opacity-100', 'scale-100');
+                    if (dot0 && dot1) {
+                        dot0.className = 'slide-dot-0 w-1.5 h-1.5 rounded-full bg-gray-300 hover:bg-gray-700 transition-all shadow-sm focus:outline-none';
+                        dot1.className = 'slide-dot-1 w-4 h-1.5 rounded-full bg-gray-900 transition-all shadow-sm focus:outline-none';
                     }
-                });
-            }, 3000);
-        });
+                } else {
+                    img2.classList.remove('opacity-100', 'scale-100');
+                    img2.classList.add('opacity-0', 'scale-95');
+                    img1.classList.remove('opacity-0', 'scale-95');
+                    img1.classList.add('opacity-100', 'scale-100');
+                    if (dot0 && dot1) {
+                        dot0.className = 'slide-dot-0 w-4 h-1.5 rounded-full bg-gray-900 transition-all shadow-sm focus:outline-none';
+                        dot1.className = 'slide-dot-1 w-1.5 h-1.5 rounded-full bg-gray-300 hover:bg-gray-700 transition-all shadow-sm focus:outline-none';
+                    }
+                }
+            }
+        }
+
+        function cardDotClick(e, dotEl, slideIndex) {
+            if (e) e.stopPropagation();
+            const cardEl = dotEl.closest('.product-slide-card');
+            if (cardEl) {
+                cardShowSlide(cardEl, slideIndex);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', updateCartBadge);
     </script>
 
     <!-- Floating Luxury WhatsApp Chat Widget -->

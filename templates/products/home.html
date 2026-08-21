@@ -111,8 +111,9 @@
     <!-- Product Grid -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
         {% for product in peshawari_products %}
-        <div onclick="openQuickViewModal('{{ product.name|escapejs }}', '{{ product.active_price }}', '{{ product.regular_price }}', '{% if product.main_image %}{{ product.main_image.image.url }}{% endif %}', '{% if product.secondary_image %}{{ product.secondary_image.image.url }}{% elif product.is_medicated %}/media/products/medicated_inner_sole.png{% endif %}')" class="group flex flex-col justify-between text-left cursor-pointer">
-            <div class="relative overflow-hidden rounded-2xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center p-2 border border-gray-100/80 product-slide-card" data-has-secondary="{% if product.secondary_image or product.is_medicated %}true{% else %}false{% endif %}">
+        <div onclick="openQuickViewModal('{{ product.name|escapejs }}', '{{ product.active_price }}', '{{ product.regular_price }}', '{% if product.main_image %}{{ product.main_image.image.url }}{% endif %}', '{{ product.secondary_image_url }}')" class="group flex flex-col justify-between text-left cursor-pointer">
+            <div class="relative overflow-hidden rounded-2xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center p-2 border border-gray-100/80 product-slide-card" 
+                 {% if product.secondary_image_url %}onmouseenter="cardShowSlide(this, 1)" onmouseleave="cardShowSlide(this, 0)"{% endif %}>
                 {% if product.discount_percentage > 0 %}
                 <span class="absolute top-3 left-3 bg-black text-white text-[11px] font-extrabold px-2.5 py-1 rounded-md shadow z-20 uppercase tracking-wider">
                     {{ product.discount_percentage }}% OFF
@@ -125,18 +126,25 @@
                 </span>
                 {% endif %}
 
+                <!-- Main Shoe Photo (Slide 0) -->
                 {% if product.main_image %}
-                    <img src="{{ product.main_image.image.url }}" alt="{{ product.name }}" class="slide-img-1 w-full h-full object-contain transition-opacity duration-700 rounded-xl {% if product.secondary_image or product.is_medicated %}absolute inset-0 p-2 opacity-100{% endif %}">
-                    {% if product.secondary_image %}
-                    <img src="{{ product.secondary_image.image.url }}" alt="{{ product.name }} Detail" class="slide-img-2 w-full h-full object-contain transition-opacity duration-700 rounded-xl absolute inset-0 p-2 opacity-0">
-                    {% elif product.is_medicated %}
-                    <img src="/media/products/medicated_inner_sole.png" alt="Medicated Inner Sole" class="slide-img-2 w-full h-full object-contain transition-opacity duration-700 rounded-xl absolute inset-0 p-2 opacity-0">
+                    <img src="{{ product.main_image.image.url }}" alt="{{ product.name }}" class="slide-img-1 w-full h-full object-contain transition-all duration-500 rounded-xl {% if product.secondary_image_url %}absolute inset-0 p-2 opacity-100 scale-100{% endif %}">
+                    
+                    {% if product.secondary_image_url %}
+                    <!-- Yellow Medicated Insole / Secondary Photo (Slide 1) -->
+                    <img src="{{ product.secondary_image_url }}" alt="Medicated Inner Sole" class="slide-img-2 w-full h-full object-contain transition-all duration-500 rounded-xl absolute inset-0 p-2 opacity-0 scale-95 pointer-events-none">
+                    
+                    <!-- Two Navigation Dots Indicator at the Bottom -->
+                    <div class="absolute bottom-3 left-0 right-0 flex items-center justify-center space-x-1.5 z-20" onclick="event.stopPropagation()">
+                        <button type="button" onclick="cardDotClick(event, this, 0)" class="slide-dot-0 w-4 h-1.5 rounded-full bg-gray-900 transition-all shadow-sm focus:outline-none" title="Shoe Photo"></button>
+                        <button type="button" onclick="cardDotClick(event, this, 1)" class="slide-dot-1 w-1.5 h-1.5 rounded-full bg-gray-300 hover:bg-gray-700 transition-all shadow-sm focus:outline-none" title="Inner Sole"></button>
+                    </div>
                     {% endif %}
                 {% else %}
                 <div class="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400 font-bold text-xs">NO IMAGE</div>
                 {% endif %}
 
-                <div class="absolute bottom-3 right-3 z-20 opacity-0 group-hover:opacity-100 transition duration-300">
+                <div class="absolute bottom-3 right-3 z-20 opacity-0 group-hover:opacity-100 transition duration-300 {% if product.secondary_image_url %}hidden md:block{% endif %}">
                     <button type="button" class="w-10 h-10 bg-white text-gray-900 rounded-full shadow-lg flex items-center justify-center hover:bg-brandYellow transition" title="Choose Size">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
@@ -191,8 +199,9 @@
     <!-- Product Grid -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
         {% for product in formals_products %}
-        <div onclick="openQuickViewModal('{{ product.name|escapejs }}', '{{ product.active_price }}', '{{ product.regular_price }}', '{% if product.main_image %}{{ product.main_image.image.url }}{% endif %}', '{% if product.secondary_image %}{{ product.secondary_image.image.url }}{% elif product.is_medicated %}/media/products/medicated_inner_sole.png{% endif %}')" class="group flex flex-col justify-between text-left cursor-pointer">
-            <div class="relative overflow-hidden rounded-2xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center p-2 border border-gray-100/80 product-slide-card" data-has-secondary="{% if product.secondary_image or product.is_medicated %}true{% else %}false{% endif %}">
+        <div onclick="openQuickViewModal('{{ product.name|escapejs }}', '{{ product.active_price }}', '{{ product.regular_price }}', '{% if product.main_image %}{{ product.main_image.image.url }}{% endif %}', '{{ product.secondary_image_url }}')" class="group flex flex-col justify-between text-left cursor-pointer">
+            <div class="relative overflow-hidden rounded-2xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center p-2 border border-gray-100/80 product-slide-card" 
+                 {% if product.secondary_image_url %}onmouseenter="cardShowSlide(this, 1)" onmouseleave="cardShowSlide(this, 0)"{% endif %}>
                 {% if product.discount_percentage > 0 %}
                 <span class="absolute top-3 left-3 bg-black text-white text-[11px] font-extrabold px-2.5 py-1 rounded-md shadow z-20 uppercase tracking-wider">
                     {{ product.discount_percentage }}% OFF
@@ -205,18 +214,25 @@
                 </span>
                 {% endif %}
 
+                <!-- Main Shoe Photo (Slide 0) -->
                 {% if product.main_image %}
-                    <img src="{{ product.main_image.image.url }}" alt="{{ product.name }}" class="slide-img-1 w-full h-full object-contain transition-opacity duration-700 rounded-xl {% if product.secondary_image or product.is_medicated %}absolute inset-0 p-2 opacity-100{% endif %}">
-                    {% if product.secondary_image %}
-                    <img src="{{ product.secondary_image.image.url }}" alt="{{ product.name }} Detail" class="slide-img-2 w-full h-full object-contain transition-opacity duration-700 rounded-xl absolute inset-0 p-2 opacity-0">
-                    {% elif product.is_medicated %}
-                    <img src="/media/products/medicated_inner_sole.png" alt="Medicated Inner Sole" class="slide-img-2 w-full h-full object-contain transition-opacity duration-700 rounded-xl absolute inset-0 p-2 opacity-0">
+                    <img src="{{ product.main_image.image.url }}" alt="{{ product.name }}" class="slide-img-1 w-full h-full object-contain transition-all duration-500 rounded-xl {% if product.secondary_image_url %}absolute inset-0 p-2 opacity-100 scale-100{% endif %}">
+                    
+                    {% if product.secondary_image_url %}
+                    <!-- Yellow Medicated Insole / Secondary Photo (Slide 1) -->
+                    <img src="{{ product.secondary_image_url }}" alt="Medicated Inner Sole" class="slide-img-2 w-full h-full object-contain transition-all duration-500 rounded-xl absolute inset-0 p-2 opacity-0 scale-95 pointer-events-none">
+                    
+                    <!-- Two Navigation Dots Indicator at the Bottom -->
+                    <div class="absolute bottom-3 left-0 right-0 flex items-center justify-center space-x-1.5 z-20" onclick="event.stopPropagation()">
+                        <button type="button" onclick="cardDotClick(event, this, 0)" class="slide-dot-0 w-4 h-1.5 rounded-full bg-gray-900 transition-all shadow-sm focus:outline-none" title="Shoe Photo"></button>
+                        <button type="button" onclick="cardDotClick(event, this, 1)" class="slide-dot-1 w-1.5 h-1.5 rounded-full bg-gray-300 hover:bg-gray-700 transition-all shadow-sm focus:outline-none" title="Inner Sole"></button>
+                    </div>
                     {% endif %}
                 {% else %}
                 <div class="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400 font-bold text-xs">NO IMAGE</div>
                 {% endif %}
 
-                <div class="absolute bottom-3 right-3 z-20 opacity-0 group-hover:opacity-100 transition duration-300">
+                <div class="absolute bottom-3 right-3 z-20 opacity-0 group-hover:opacity-100 transition duration-300 {% if product.secondary_image_url %}hidden md:block{% endif %}">
                     <button type="button" class="w-10 h-10 bg-white text-gray-900 rounded-full shadow-lg flex items-center justify-center hover:bg-brandYellow transition">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
@@ -275,8 +291,9 @@
     <!-- Product Grid -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
         {% for product in casuals_products %}
-        <div onclick="openQuickViewModal('{{ product.name|escapejs }}', '{{ product.active_price }}', '{{ product.regular_price }}', '{% if product.main_image %}{{ product.main_image.image.url }}{% endif %}', '{% if product.secondary_image %}{{ product.secondary_image.image.url }}{% elif product.is_medicated %}/media/products/medicated_inner_sole.png{% endif %}')" class="group flex flex-col justify-between text-left cursor-pointer">
-            <div class="relative overflow-hidden rounded-2xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center p-2 border border-gray-100/80 product-slide-card" data-has-secondary="{% if product.secondary_image or product.is_medicated %}true{% else %}false{% endif %}">
+        <div onclick="openQuickViewModal('{{ product.name|escapejs }}', '{{ product.active_price }}', '{{ product.regular_price }}', '{% if product.main_image %}{{ product.main_image.image.url }}{% endif %}', '{{ product.secondary_image_url }}')" class="group flex flex-col justify-between text-left cursor-pointer">
+            <div class="relative overflow-hidden rounded-2xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center p-2 border border-gray-100/80 product-slide-card" 
+                 {% if product.secondary_image_url %}onmouseenter="cardShowSlide(this, 1)" onmouseleave="cardShowSlide(this, 0)"{% endif %}>
                 {% if product.discount_percentage > 0 %}
                 <span class="absolute top-3 left-3 bg-black text-white text-[11px] font-extrabold px-2.5 py-1 rounded-md shadow z-20 uppercase tracking-wider">
                     {{ product.discount_percentage }}% OFF
@@ -289,18 +306,25 @@
                 </span>
                 {% endif %}
 
+                <!-- Main Shoe Photo (Slide 0) -->
                 {% if product.main_image %}
-                    <img src="{{ product.main_image.image.url }}" alt="{{ product.name }}" class="slide-img-1 w-full h-full object-contain transition-opacity duration-700 rounded-xl {% if product.secondary_image or product.is_medicated %}absolute inset-0 p-2 opacity-100{% endif %}">
-                    {% if product.secondary_image %}
-                    <img src="{{ product.secondary_image.image.url }}" alt="{{ product.name }} Detail" class="slide-img-2 w-full h-full object-contain transition-opacity duration-700 rounded-xl absolute inset-0 p-2 opacity-0">
-                    {% elif product.is_medicated %}
-                    <img src="/media/products/medicated_inner_sole.png" alt="Medicated Inner Sole" class="slide-img-2 w-full h-full object-contain transition-opacity duration-700 rounded-xl absolute inset-0 p-2 opacity-0">
+                    <img src="{{ product.main_image.image.url }}" alt="{{ product.name }}" class="slide-img-1 w-full h-full object-contain transition-all duration-500 rounded-xl {% if product.secondary_image_url %}absolute inset-0 p-2 opacity-100 scale-100{% endif %}">
+                    
+                    {% if product.secondary_image_url %}
+                    <!-- Yellow Medicated Insole / Secondary Photo (Slide 1) -->
+                    <img src="{{ product.secondary_image_url }}" alt="Medicated Inner Sole" class="slide-img-2 w-full h-full object-contain transition-all duration-500 rounded-xl absolute inset-0 p-2 opacity-0 scale-95 pointer-events-none">
+                    
+                    <!-- Two Navigation Dots Indicator at the Bottom -->
+                    <div class="absolute bottom-3 left-0 right-0 flex items-center justify-center space-x-1.5 z-20" onclick="event.stopPropagation()">
+                        <button type="button" onclick="cardDotClick(event, this, 0)" class="slide-dot-0 w-4 h-1.5 rounded-full bg-gray-900 transition-all shadow-sm focus:outline-none" title="Shoe Photo"></button>
+                        <button type="button" onclick="cardDotClick(event, this, 1)" class="slide-dot-1 w-1.5 h-1.5 rounded-full bg-gray-300 hover:bg-gray-700 transition-all shadow-sm focus:outline-none" title="Inner Sole"></button>
+                    </div>
                     {% endif %}
                 {% else %}
                 <div class="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400 font-bold text-xs">NO IMAGE</div>
                 {% endif %}
 
-                <div class="absolute bottom-3 right-3 z-20 opacity-0 group-hover:opacity-100 transition duration-300">
+                <div class="absolute bottom-3 right-3 z-20 opacity-0 group-hover:opacity-100 transition duration-300 {% if product.secondary_image_url %}hidden md:block{% endif %}">
                     <button type="button" class="w-10 h-10 bg-white text-gray-900 rounded-full shadow-lg flex items-center justify-center hover:bg-brandYellow transition">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
@@ -356,8 +380,9 @@
     <!-- Product Grid -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
         {% for product in chelsea_products %}
-        <div onclick="openQuickViewModal('{{ product.name|escapejs }}', '{{ product.active_price }}', '{{ product.regular_price }}', '{% if product.main_image %}{{ product.main_image.image.url }}{% endif %}', '{% if product.secondary_image %}{{ product.secondary_image.image.url }}{% elif product.is_medicated %}/media/products/medicated_inner_sole.png{% endif %}')" class="group flex flex-col justify-between text-left cursor-pointer">
-            <div class="relative overflow-hidden rounded-2xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center p-2 border border-gray-100/80 product-slide-card" data-has-secondary="{% if product.secondary_image or product.is_medicated %}true{% else %}false{% endif %}">
+        <div onclick="openQuickViewModal('{{ product.name|escapejs }}', '{{ product.active_price }}', '{{ product.regular_price }}', '{% if product.main_image %}{{ product.main_image.image.url }}{% endif %}', '{{ product.secondary_image_url }}')" class="group flex flex-col justify-between text-left cursor-pointer">
+            <div class="relative overflow-hidden rounded-2xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center p-2 border border-gray-100/80 product-slide-card" 
+                 {% if product.secondary_image_url %}onmouseenter="cardShowSlide(this, 1)" onmouseleave="cardShowSlide(this, 0)"{% endif %}>
                 {% if product.discount_percentage > 0 %}
                 <span class="absolute top-3 left-3 bg-black text-white text-[11px] font-extrabold px-2.5 py-1 rounded-md shadow z-20 uppercase tracking-wider">
                     {{ product.discount_percentage }}% OFF
@@ -370,18 +395,25 @@
                 </span>
                 {% endif %}
 
+                <!-- Main Shoe Photo (Slide 0) -->
                 {% if product.main_image %}
-                    <img src="{{ product.main_image.image.url }}" alt="{{ product.name }}" class="slide-img-1 w-full h-full object-contain transition-opacity duration-700 rounded-xl {% if product.secondary_image or product.is_medicated %}absolute inset-0 p-2 opacity-100{% endif %}">
-                    {% if product.secondary_image %}
-                    <img src="{{ product.secondary_image.image.url }}" alt="{{ product.name }} Detail" class="slide-img-2 w-full h-full object-contain transition-opacity duration-700 rounded-xl absolute inset-0 p-2 opacity-0">
-                    {% elif product.is_medicated %}
-                    <img src="/media/products/medicated_inner_sole.png" alt="Medicated Inner Sole" class="slide-img-2 w-full h-full object-contain transition-opacity duration-700 rounded-xl absolute inset-0 p-2 opacity-0">
+                    <img src="{{ product.main_image.image.url }}" alt="{{ product.name }}" class="slide-img-1 w-full h-full object-contain transition-all duration-500 rounded-xl {% if product.secondary_image_url %}absolute inset-0 p-2 opacity-100 scale-100{% endif %}">
+                    
+                    {% if product.secondary_image_url %}
+                    <!-- Yellow Medicated Insole / Secondary Photo (Slide 1) -->
+                    <img src="{{ product.secondary_image_url }}" alt="Medicated Inner Sole" class="slide-img-2 w-full h-full object-contain transition-all duration-500 rounded-xl absolute inset-0 p-2 opacity-0 scale-95 pointer-events-none">
+                    
+                    <!-- Two Navigation Dots Indicator at the Bottom -->
+                    <div class="absolute bottom-3 left-0 right-0 flex items-center justify-center space-x-1.5 z-20" onclick="event.stopPropagation()">
+                        <button type="button" onclick="cardDotClick(event, this, 0)" class="slide-dot-0 w-4 h-1.5 rounded-full bg-gray-900 transition-all shadow-sm focus:outline-none" title="Shoe Photo"></button>
+                        <button type="button" onclick="cardDotClick(event, this, 1)" class="slide-dot-1 w-1.5 h-1.5 rounded-full bg-gray-300 hover:bg-gray-700 transition-all shadow-sm focus:outline-none" title="Inner Sole"></button>
+                    </div>
                     {% endif %}
                 {% else %}
                 <div class="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400 font-bold text-xs">NO IMAGE</div>
                 {% endif %}
 
-                <div class="absolute bottom-3 right-3 z-20 opacity-0 group-hover:opacity-100 transition duration-300">
+                <div class="absolute bottom-3 right-3 z-20 opacity-0 group-hover:opacity-100 transition duration-300 {% if product.secondary_image_url %}hidden md:block{% endif %}">
                     <button type="button" class="w-10 h-10 bg-white text-gray-900 rounded-full shadow-lg flex items-center justify-center hover:bg-brandYellow transition">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>

@@ -56,12 +56,23 @@ class Product(models.Model):
 
     @property
     def secondary_image(self):
+        if self.is_medicated:
+            insole = self.images.filter(image__icontains='medicated_inner_sole').first()
+            if insole:
+                return insole
         main = self.main_image
         if main:
             second = self.images.exclude(id=main.id).first()
             if second:
                 return second
         return None
+
+    @property
+    def secondary_image_url(self):
+        if self.is_medicated:
+            return '/media/products/medicated_inner_sole.png'
+        sec = self.secondary_image
+        return sec.image.url if sec and sec.image else ''
 
     @property
     def is_medicated(self):
