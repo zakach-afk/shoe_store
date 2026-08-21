@@ -4,28 +4,18 @@
 
 {% block content %}
 {% load static %}
-<!-- High-End Dedicated Category Hero Banner (Split Showcase) -->
-<div class="bg-neutral-900 text-white mb-10 overflow-hidden border-b border-yellow-600/20 shadow-xl relative">
-    <div class="max-w-7xl mx-auto px-6 py-8 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-        <!-- Left Column: Category Info & Stats -->
-        <div class="md:col-span-7 space-y-4 text-center md:text-left z-10">
-            <span class="inline-block bg-brandYellow text-soloPurple font-extrabold text-[11px] md:text-xs uppercase tracking-widest px-4 py-1.5 rounded-full shadow-md">
-                OFFICIAL COLLECTION 2026
-            </span>
-            <h1 class="text-4xl md:text-6xl font-serif font-bold uppercase tracking-[0.12em] text-white drop-shadow-lg">
-                {{ current_category.name }}
-            </h1>
-            <p class="text-xs md:text-sm font-extrabold uppercase tracking-widest text-brandYellow">
-                {{ products|length }} PREMIUM ITEMS AVAILABLE
-            </p>
-        </div>
-
-        <!-- Right Column: Category Product Showcase Image (100% Uncropped & Clear) -->
-        <div class="md:col-span-5 flex justify-center md:justify-end z-10">
-            <div class="relative w-72 h-52 md:w-96 md:h-64 rounded-2xl overflow-hidden shadow-2xl border-2 border-brandYellow/30 bg-neutral-800 flex items-center justify-center p-2 group">
-                <img src="{% static 'images/banners/cat_' %}{{ current_category.slug }}.jpg" onerror="this.onerror=null; {% if products.first and products.first.images.first %}this.src='{{ products.first.images.first.image.url }}';{% else %}this.src='{% static 'images/hero_slides/slide_luxury.jpg' %}';{% endif %}" alt="{{ current_category.name }}" class="w-full h-full object-contain group-hover:scale-105 transition duration-500 rounded-xl">
-            </div>
-        </div>
+<!-- Clean Luxury Category Header (No Picture) -->
+<div class="bg-neutral-900 text-white mb-8 border-b border-yellow-600/20 shadow-md">
+    <div class="max-w-7xl mx-auto px-6 py-8 md:py-12 text-center space-y-3">
+        <span class="inline-block bg-brandYellow text-soloPurple font-extrabold text-[11px] md:text-xs uppercase tracking-widest px-4 py-1.5 rounded-full shadow-md">
+            OFFICIAL COLLECTION 2026
+        </span>
+        <h1 class="text-3xl md:text-5xl font-serif font-bold uppercase tracking-[0.15em] text-white drop-shadow-lg">
+            {{ current_category.name }}
+        </h1>
+        <p class="text-xs md:text-sm font-semibold uppercase tracking-widest text-brandYellow">
+            {{ products|length }} PREMIUM ITEMS AVAILABLE
+        </p>
     </div>
 </div>
 
