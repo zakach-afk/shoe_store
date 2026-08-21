@@ -2712,12 +2712,12 @@
     "name": "SOLO Medicated Orthopedic Memory Foam Inner Sole",
     "slug": "",
     "description": "Engineered with high-density medicated memory foam, orthopedic arch cushioning, and honeycomb shock-absorption technology. Fits seamlessly inside all formal, casual, and daily wear shoes for all-day comfort and heel pressure relief.",
-    "regular_price": "2499.00",
-    "sale_price": "1499.00",
+    "regular_price": "1499.00",
+    "sale_price": null,
     "is_featured": false,
     "is_active": true,
     "created_at": "2026-08-21T18:34:15.797Z",
-    "updated_at": "2026-08-21T18:34:15.797Z"
+    "updated_at": "2026-08-21T18:53:02.023Z"
   }
 },
 {
