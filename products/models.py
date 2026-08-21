@@ -46,12 +46,12 @@ class Product(models.Model):
 
     @property
     def main_image(self):
-        primary = self.images.filter(is_primary=True).first()
+        non_sole = self.images.exclude(image__icontains='medicated_inner_sole').exclude(image__icontains='sole')
+        primary = non_sole.filter(is_primary=True).first()
         if primary:
             return primary
-        non_sole = self.images.exclude(image__icontains='medicated_inner_sole').exclude(image__icontains='sole').first()
-        if non_sole:
-            return non_sole
+        if non_sole.exists():
+            return non_sole.first()
         return self.images.first()
 
     @property
