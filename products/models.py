@@ -76,6 +76,10 @@ class Product(models.Model):
 
     @property
     def is_medicated(self):
+        if self.category and self.category.slug == 'accessories':
+            return False
+        if 'inner sole' in self.name.lower() and 'casual' not in self.name.lower() and 'wear' not in self.name.lower():
+            return False
         return 'medicated' in self.name.lower() or 'medicated' in self.description.lower()
 
 

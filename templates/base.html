@@ -559,11 +559,11 @@
                 qvRegularPrice.classList.add('hidden');
             }
             
-            // Check if Medicated in title
-            const isMedicated = name.toLowerCase().includes('medicated') || (name.toLowerCase().includes('comfort') && name.toLowerCase().includes('loafer'));
+            // Check if Medicated shoe (exclude insole accessory itself)
+            const isMedicatedShoe = (name.toLowerCase().includes('medicated') || (name.toLowerCase().includes('comfort') && name.toLowerCase().includes('loafer'))) && !name.toLowerCase().includes('foam inner sole') && !name.toLowerCase().includes('orthopedic memory') && parsePkrPrice(activePrice) > 2000;
             
             currentQvPrimaryUrl = imageUrl || '';
-            currentQvSecondaryUrl = secondaryImageUrl || (isMedicated ? '/media/products/medicated_inner_sole.png' : '');
+            currentQvSecondaryUrl = (secondaryImageUrl && secondaryImageUrl !== imageUrl) ? secondaryImageUrl : (isMedicatedShoe ? '/media/products/medicated_inner_sole.png' : '');
 
             if (imageUrl) qvProductImage.src = imageUrl;
             if (document.getElementById('qvThumb1Img')) document.getElementById('qvThumb1Img').src = currentQvPrimaryUrl;
@@ -571,16 +571,19 @@
                 document.getElementById('qvThumb2Img').src = currentQvSecondaryUrl;
             }
 
+            const qvThumbnailsRow = document.getElementById('qvThumbnailsRow');
             const qvMedicatedBadge = document.getElementById('qvMedicatedBadge');
             const qvThumb2 = document.getElementById('qvThumb2');
 
-            if (currentQvSecondaryUrl || isMedicated) {
+            if (currentQvSecondaryUrl && currentQvSecondaryUrl !== currentQvPrimaryUrl) {
+                if (qvThumbnailsRow) qvThumbnailsRow.classList.remove('hidden');
                 if (qvThumb2) qvThumb2.classList.remove('hidden');
             } else {
                 if (qvThumb2) qvThumb2.classList.add('hidden');
+                if (qvThumbnailsRow) qvThumbnailsRow.classList.add('hidden');
             }
 
-            if (isMedicated) {
+            if (isMedicatedShoe) {
                 if (qvMedicatedBadge) qvMedicatedBadge.classList.remove('hidden');
             } else {
                 if (qvMedicatedBadge) qvMedicatedBadge.classList.add('hidden');
