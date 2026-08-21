@@ -560,10 +560,10 @@
             }
             
             // Check if Medicated shoe (exclude insole accessory itself)
-            const isMedicatedShoe = (name.toLowerCase().includes('medicated') || (name.toLowerCase().includes('comfort') && name.toLowerCase().includes('loafer'))) && !name.toLowerCase().includes('foam inner sole') && !name.toLowerCase().includes('orthopedic memory') && parsePkrPrice(activePrice) > 2000;
+            const isMedicatedShoe = (name.toLowerCase().includes('medicated') || (name.toLowerCase().includes('comfort') && name.toLowerCase().includes('loafer'))) && !name.toLowerCase().includes('inner sole') && !name.toLowerCase().includes('foam') && parsePkrPrice(activePrice) > 2000;
             
             currentQvPrimaryUrl = imageUrl || '';
-            currentQvSecondaryUrl = (secondaryImageUrl && secondaryImageUrl !== imageUrl) ? secondaryImageUrl : (isMedicatedShoe ? '/media/products/medicated_inner_sole.png' : '');
+            currentQvSecondaryUrl = (secondaryImageUrl && secondaryImageUrl !== imageUrl && !secondaryImageUrl.includes('insole_accessory')) ? secondaryImageUrl : (isMedicatedShoe ? '/media/products/medicated_inner_sole.png' : '');
 
             if (imageUrl) qvProductImage.src = imageUrl;
             if (document.getElementById('qvThumb1Img')) document.getElementById('qvThumb1Img').src = currentQvPrimaryUrl;
