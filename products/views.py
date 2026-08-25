@@ -136,6 +136,15 @@ def shipping_policy(request):
     return render(request, 'products/shipping_policy.html', context)
 
 
+def refund_policy(request):
+    categories = Category.objects.all().order_by('order', 'name')
+    context = {
+        'categories': categories,
+    }
+    return render(request, 'products/refund_policy.html', context)
+
+
+
 
 
 
