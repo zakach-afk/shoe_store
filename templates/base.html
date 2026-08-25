@@ -238,8 +238,9 @@
                     <img src="{% static 'images/logo.png' %}" onerror="this.onerror=null; this.src='{% static 'logo.png' %}';" alt="SOLO FOOTWEAR" class="w-full h-auto object-contain block">
                 </div>
                 <p class="text-gray-600 text-xs md:text-sm leading-relaxed pr-4">
-                    We make things that work better and last longer. Our products solve real problems with clean design and honest materials.
+                    We make things that work better and last longer. Our products solve real problems with clean design, honest materials, and medicated arch comfort.
                 </p>
+                <a href="javascript:void(0)" onclick="openFooterModal('about')" class="inline-block text-xs font-bold text-gray-900 hover:text-brandBlue underline tracking-wider uppercase pt-1">Our Story &rarr;</a>
             </div>
 
             <div>
@@ -509,14 +510,68 @@
         const footerModalContainer = document.getElementById('footerModalContainer');
         const footerModalContent = document.getElementById('footerModalContent');
         const footerData = {
-            'faqs': `<div class="space-y-4"><h2 class="text-2xl font-bold text-gray-900 pb-3 border-b border-gray-200">Frequently Asked Questions</h2><div class="space-y-3 text-xs md:text-sm text-gray-700"><div class="p-3 bg-gray-50 rounded-xl"><h4 class="font-bold text-brandBlue mb-1">Q: How long does delivery take?</h4><p>A: 2 to 4 business days nationwide in Pakistan.</p></div><div class="p-3 bg-gray-50 rounded-xl"><h4 class="font-bold text-brandBlue mb-1">Q: What is size exchange policy?</h4><p>A: 15-day free size exchange policy.</p></div></div></div>`,
-            'size-guide': `<div class="space-y-4"><h2 class="text-2xl font-bold text-gray-900 pb-3 border-b border-gray-200">Size Conversion Guide</h2><p class="text-xs text-gray-600">EU 40 = UK 6 (25cm) | EU 41 = UK 7 (26cm) | EU 42 = UK 8 (27cm) | EU 43 = UK 9 (28cm) | EU 44 = UK 10 (29cm)</p></div>`,
-            'contact': `<div class="space-y-4"><h2 class="text-2xl font-bold text-gray-900 pb-3 border-b border-gray-200">Contact Support</h2><p class="text-sm font-bold text-gray-800">📞 WhatsApp: +92 320 3939044 (03203939044)</p><p class="text-sm font-bold text-gray-800">✉️ Email: support@solofootwear.com</p></div>`,
-            'cancellation': `<div class="space-y-4"><h2 class="text-2xl font-bold text-gray-900 pb-3 border-b border-gray-200">Order Cancellation</h2><p class="text-xs text-gray-600">Contact us within 12 hours on WhatsApp 03203939044 to cancel your order.</p></div>`,
-            'care-tips': `<div class="space-y-4"><h2 class="text-2xl font-bold text-gray-900 pb-3 border-b border-gray-200">Shoe Care Tips</h2><p class="text-xs text-gray-600">Store in cloth bags, keep dry, and apply high quality leather cream regularly.</p></div>`,
-            'shipping': `<div class="space-y-4"><h2 class="text-2xl font-bold text-gray-900 pb-3 border-b border-gray-200">Shipping Policy</h2><p class="text-xs text-gray-600">Free delivery nationwide across Pakistan via Cash on Delivery (COD).</p></div>`,
-            'refund': `<div class="space-y-4"><h2 class="text-2xl font-bold text-gray-900 pb-3 border-b border-gray-200">Refund Policy</h2><p class="text-xs text-gray-600">15-day exchange guarantee on all unworn footwear in original condition.</p></div>`,
-            'terms': `<div class="space-y-4"><h2 class="text-2xl font-bold text-gray-900 pb-3 border-b border-gray-200">Terms of Service</h2><p class="text-xs text-gray-600">SOLO FOOTWEAR reserved rights. Open Parcel Policy available upon delivery.</p></div>`
+            'faqs': `<div class="space-y-4">
+                <h2 class="text-2xl font-serif font-bold text-gray-900 pb-3 border-b border-gray-200">Frequently Asked Questions (FAQs)</h2>
+                <div class="space-y-3 text-xs md:text-sm text-gray-700">
+                    <div class="p-3.5 bg-gray-50 rounded-xl border border-gray-100">
+                        <h4 class="font-bold text-gray-900 mb-1">How can I place the order?</h4>
+                        <p class="text-gray-600 leading-relaxed">You can place an order directly on our website or you can call us on <strong class="text-gray-900">0312-7688059</strong> to place an order over the phone.</p>
+                        <div class="mt-2 text-xs bg-white p-2 rounded-md border border-gray-200 inline-block font-semibold text-gray-700">
+                            Customer Support: Mon – Sat 10:00 AM to 08:00 PM
+                        </div>
+                    </div>
+                    <div class="p-3.5 bg-gray-50 rounded-xl border border-gray-100">
+                        <h4 class="font-bold text-gray-900 mb-1">How long will it take for my order to be delivered?</h4>
+                        <p class="text-gray-600 leading-relaxed">All our orders placed before 4PM (Monday-Saturday) are dispatched within 1 working day. However due to non-availability of stock for some items it may take up to 2-3 working days for the order to dispatch. All orders will be delivered within <strong class="text-gray-900">2-3 working days</strong> after placing the order.</p>
+                    </div>
+                    <div class="p-3.5 bg-gray-50 rounded-xl border border-gray-100">
+                        <h4 class="font-bold text-gray-900 mb-1">How will my parcel be delivered?</h4>
+                        <p class="text-gray-600 leading-relaxed">The parcel will be delivered by <strong class="text-gray-900">TCS, Call Courier, or Post-Ex</strong> Courier Services. Deliveries are made between 08:00 AM and 05:00 PM.</p>
+                    </div>
+                    <div class="p-3.5 bg-gray-50 rounded-xl border border-gray-100">
+                        <h4 class="font-bold text-gray-900 mb-1">Can I have my shoes delivered to an address other than my home address?</h4>
+                        <p class="text-gray-600 leading-relaxed">Yes, you can. Please ensure that you enter the desired delivery address while placing your order at checkout.</p>
+                    </div>
+                    <div class="p-3.5 bg-gray-50 rounded-xl border border-gray-100">
+                        <h4 class="font-bold text-gray-900 mb-1">Can I track my order?</h4>
+                        <p class="text-gray-600 leading-relaxed">Yes you can. We will send the details to your phone/email, or please call us on <strong class="text-gray-900">0312-7688059</strong> to obtain the Tracking ID of your parcel to track your parcel online.</p>
+                    </div>
+                    <div class="p-3.5 bg-gray-50 rounded-xl border border-gray-100">
+                        <h4 class="font-bold text-gray-900 mb-1">Can I make changes to my order?</h4>
+                        <p class="text-gray-600 leading-relaxed">You can make any changes to your order before completing checkout. If you have already completed the order, please call us on <strong class="text-gray-900">0312-7688059</strong> and we will make the changes for you. (Please note that changes cannot be made once the parcel has been dispatched).</p>
+                    </div>
+                    <div class="p-3.5 bg-gray-50 rounded-xl border border-gray-100">
+                        <h4 class="font-bold text-gray-900 mb-1">Can I cancel my order?</h4>
+                        <p class="text-gray-600 leading-relaxed">Yes you can cancel your order. Please call or WhatsApp us on <strong class="text-gray-900 text-sm">03192255100</strong> before 1:00 PM and we will cancel the order for you. Please be informed that we will not be able to cancel the order if it has already been dispatched.</p>
+                    </div>
+                    <div class="p-3.5 bg-gray-50 rounded-xl border border-gray-100">
+                        <h4 class="font-bold text-gray-900 mb-1">What is your Refund Policy?</h4>
+                        <p class="text-gray-600 leading-relaxed">For complete information about returns and replacements, please visit our <a href="javascript:void(0)" onclick="openFooterModal('refund')" class="text-brandBlue font-bold underline">Return & Exchange Policy</a> page.</p>
+                    </div>
+                </div>
+            </div>`,
+            'size-guide': `<div class="space-y-4"><h2 class="text-2xl font-serif font-bold text-gray-900 pb-3 border-b border-gray-200">Size Conversion Guide</h2><p class="text-xs text-gray-600">EU 40 = UK 6 (25cm) | EU 41 = UK 7 (26cm) | EU 42 = UK 8 (27cm) | EU 43 = UK 9 (28cm) | EU 44 = UK 10 (29cm)</p></div>`,
+            'contact': `<div class="space-y-4"><h2 class="text-2xl font-serif font-bold text-gray-900 pb-3 border-b border-gray-200">Contact Support</h2><div class="space-y-2 text-sm text-gray-800"><p>💬 <strong>WhatsApp:</strong> <a href="https://wa.me/923192255100" target="_blank" class="text-emerald-600 font-bold underline">03192255100</a></p><p>📞 <strong>Phone Orders:</strong> <a href="tel:03127688059" class="text-brandBlue font-bold underline">0312-7688059</a></p><p>✉️ <strong>Email:</strong> support@solofootwear.com</p><p class="text-xs text-gray-500 pt-2">Mon – Sat: 10:00 AM to 08:00 PM</p></div></div>`,
+            'cancellation': `<div class="space-y-4"><h2 class="text-2xl font-serif font-bold text-gray-900 pb-3 border-b border-gray-200">Order Cancellation</h2><div class="space-y-3 text-xs md:text-sm text-gray-700"><p>Yes, you can cancel your order easily before dispatch.</p><div class="p-4 bg-emerald-50 border border-emerald-200 rounded-xl"><p class="font-bold text-emerald-900 mb-1">To cancel an order:</p><p class="text-emerald-800 text-xs">Please call or WhatsApp us on <strong class="text-sm">03192255100</strong> before 1:00 PM, and our support team will cancel the order for you.</p></div><p class="text-xs text-gray-500 italic">* Note: We will not be able to cancel the order if it has already been dispatched.</p></div></div>`,
+            'care-tips': `<div class="space-y-4"><h2 class="text-2xl font-serif font-bold text-gray-900 pb-3 border-b border-gray-200">Shoe Care Tips</h2><p class="text-xs text-gray-600">Store in cloth bags, keep dry, and apply high quality leather cream regularly.</p></div>`,
+            'shipping': `<div class="space-y-4"><h2 class="text-2xl font-serif font-bold text-gray-900 pb-3 border-b border-gray-200">Shipping Policy</h2><p class="text-xs text-gray-600">Free delivery nationwide across Pakistan via TCS, Call Courier & Post-Ex (Cash on Delivery / COD).</p></div>`,
+            'refund': `<div class="space-y-4"><h2 class="text-2xl font-serif font-bold text-gray-900 pb-3 border-b border-gray-200">Return & Exchange Policy</h2><p class="text-xs text-gray-600">15-day exchange guarantee on all unworn footwear in original condition. Contact our support for quick size swaps.</p></div>`,
+            'terms': `<div class="space-y-4"><h2 class="text-2xl font-serif font-bold text-gray-900 pb-3 border-b border-gray-200">Terms of Service</h2><p class="text-xs text-gray-600">SOLO FOOTWEAR reserved rights. Open Parcel Policy available upon delivery.</p></div>`,
+            'about': `<div class="space-y-4">
+                <h2 class="text-2xl font-serif font-bold text-gray-900 pb-3 border-b border-gray-200">About SOLO Footwear</h2>
+                <div class="space-y-3 text-xs md:text-sm text-gray-700 leading-relaxed">
+                    <p>At <strong>SOLO FOOTWEAR</strong>, we make premium leather shoes and medicated comfort footwear that work better and last longer. Our mission is to combine timeless Pakistani craftsmanship, pure full-grain leather, and modern orthopedic arch support.</p>
+                    <div class="p-4 bg-gray-50 border border-gray-200 rounded-xl space-y-2">
+                        <p class="font-bold text-gray-900">Why Choose SOLO Footwear?</p>
+                        <ul class="list-disc list-inside space-y-1 text-gray-600 text-xs">
+                            <li>100% Handcrafted Genuine Leather</li>
+                            <li>Medicated Memory Foam & Arch Cushioning</li>
+                            <li>Free Nationwide Delivery & Cash on Delivery (COD)</li>
+                            <li>15-Day Hassle-Free Size Exchange Guarantee</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>`
         };
 
         function openFooterModal(topic) {
@@ -887,7 +942,7 @@
     </script>
 
     <!-- Floating Luxury WhatsApp Chat Widget -->
-    <a href="https://wa.me/923203939044?text=Hi%20SOLO%20Footwear,%20I%20want%20to%20inquire%20about%20your%20shoes" 
+    <a href="https://wa.me/923192255100?text=Hi%20SOLO%20Footwear,%20I%20want%20to%20inquire%20about%20your%20shoes" 
        target="_blank" 
        rel="noopener" 
        class="fixed bottom-6 right-6 z-50 group flex items-center space-x-2.5 bg-[#25D366] hover:bg-[#20bd5a] text-white p-3.5 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-105 border-2 border-brandYellow/80"
