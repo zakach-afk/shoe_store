@@ -45,6 +45,15 @@ def checkout(request):
     return render(request, 'products/checkout.html', context)
 
 
+def size_guide(request):
+    categories = Category.objects.all().order_by('order', 'name')
+    context = {
+        'categories': categories,
+    }
+    return render(request, 'products/size_guide.html', context)
+
+
+
 import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
