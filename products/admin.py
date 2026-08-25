@@ -82,16 +82,9 @@ class ProductAdmin(ModelAdmin):
 
     @display(description="Pricing (PKR)")
     def price_display(self, obj):
-        if obj.sale_price:
-            sale_str = f"Rs. {float(obj.sale_price):,.2f}"
-            reg_str = f"Rs. {float(obj.regular_price):,.2f}"
-            return format_html(
-                '<div class="flex flex-col"><span class="font-extrabold text-blue-600 text-sm">{}</span>'
-                '<span class="text-xs text-gray-400 line-through">{}</span></div>',
-                sale_str, reg_str
-            )
-        reg_str = f"Rs. {float(obj.regular_price):,.2f}"
-        return format_html('<span class="font-bold text-gray-900 dark:text-gray-100 text-sm">{}</span>', reg_str)
+        price = obj.active_price
+        price_str = f"Rs. {float(price or 0):,.2f}"
+        return format_html('<span class="font-bold text-gray-900 dark:text-gray-100 text-sm">{}</span>', price_str)
 
     @display(description="Featured", boolean=True)
     def is_featured_badge(self, obj):

@@ -340,7 +340,6 @@
                         
                         <div class="flex items-center space-x-3 mb-1">
                             <span id="qvActivePrice" class="text-xl font-bold text-gray-900">Rs. 3,999.00</span>
-                            <span id="qvRegularPrice" class="text-sm text-gray-400 line-through">Rs. 6,999.00</span>
                         </div>
                         <p class="text-xs text-gray-500 mb-6">Shipping calculated at checkout.</p>
 
@@ -661,12 +660,6 @@
             if (!quickViewModalOverlay) return;
             qvProductName.textContent = name;
             qvActivePrice.textContent = 'Rs.' + parseFloat(activePrice).toLocaleString('en-US', {minimumFractionDigits: 2});
-            if (regPrice && parseFloat(regPrice) > parseFloat(activePrice)) {
-                qvRegularPrice.textContent = 'Rs.' + parseFloat(regPrice).toLocaleString('en-US', {minimumFractionDigits: 2});
-                qvRegularPrice.classList.remove('hidden');
-            } else {
-                qvRegularPrice.classList.add('hidden');
-            }
             
             // Auto-detect default matching color from shoe name
             const lowerName = (name || '').toLowerCase();

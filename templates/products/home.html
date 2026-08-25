@@ -116,12 +116,6 @@
             <div class="relative overflow-hidden rounded-2xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center border border-gray-100/80 product-slide-card">
                 <!-- Badges (Stacked Top-Left to prevent mobile overlap) -->
                 <div class="absolute top-2.5 left-2.5 flex flex-col items-start space-y-1 z-20 pointer-events-none">
-                    {% if product.discount_percentage > 0 %}
-                    <span class="bg-black text-white text-[10px] font-extrabold px-2 py-0.5 rounded shadow uppercase tracking-wider">
-                        {{ product.discount_percentage }}% OFF
-                    </span>
-                    {% endif %}
-
                     {% if product.is_medicated %}
                     <span class="bg-emerald-600 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded shadow uppercase tracking-wider flex items-center space-x-1">
                         <span>🩺 MEDICATED</span>
@@ -172,9 +166,6 @@
                 </h3>
                 <div class="flex items-center justify-center space-x-2 text-xs md:text-sm">
                     <span class="font-extrabold text-gray-900">Rs. {{ product.active_price }}</span>
-                    {% if product.sale_price and product.regular_price > product.sale_price %}
-                    <span class="text-gray-400 line-through text-xs">Rs. {{ product.regular_price }}</span>
-                    {% endif %}
                 </div>
             </div>
         </div>
@@ -217,12 +208,6 @@
             <div class="relative overflow-hidden rounded-2xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center border border-gray-100/80 product-slide-card">
                 <!-- Badges (Stacked Top-Left to prevent mobile overlap) -->
                 <div class="absolute top-2.5 left-2.5 flex flex-col items-start space-y-1 z-20 pointer-events-none">
-                    {% if product.discount_percentage > 0 %}
-                    <span class="bg-black text-white text-[10px] font-extrabold px-2 py-0.5 rounded shadow uppercase tracking-wider">
-                        {{ product.discount_percentage }}% OFF
-                    </span>
-                    {% endif %}
-
                     {% if product.is_medicated %}
                     <span class="bg-emerald-600 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded shadow uppercase tracking-wider flex items-center space-x-1">
                         <span>🩺 MEDICATED</span>
@@ -273,9 +258,6 @@
                 </h3>
                 <div class="flex items-center justify-center space-x-2 text-xs md:text-sm">
                     <span class="font-extrabold text-gray-900">Rs. {{ product.active_price }}</span>
-                    {% if product.sale_price and product.regular_price > product.sale_price %}
-                    <span class="text-gray-400 line-through text-xs">Rs. {{ product.regular_price }}</span>
-                    {% endif %}
                 </div>
             </div>
         </div>
@@ -321,12 +303,6 @@
             <div class="relative overflow-hidden rounded-2xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center border border-gray-100/80 product-slide-card">
                 <!-- Badges (Stacked Top-Left to prevent mobile overlap) -->
                 <div class="absolute top-2.5 left-2.5 flex flex-col items-start space-y-1 z-20 pointer-events-none">
-                    {% if product.discount_percentage > 0 %}
-                    <span class="bg-black text-white text-[10px] font-extrabold px-2 py-0.5 rounded shadow uppercase tracking-wider">
-                        {{ product.discount_percentage }}% OFF
-                    </span>
-                    {% endif %}
-
                     {% if product.is_medicated %}
                     <span class="bg-emerald-600 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded shadow uppercase tracking-wider flex items-center space-x-1">
                         <span>🩺 MEDICATED</span>
@@ -377,9 +353,6 @@
                 </h3>
                 <div class="flex items-center justify-center space-x-2 text-xs md:text-sm">
                     <span class="font-extrabold text-gray-900">Rs. {{ product.active_price }}</span>
-                    {% if product.sale_price and product.regular_price > product.sale_price %}
-                    <span class="text-gray-400 line-through text-xs">Rs. {{ product.regular_price }}</span>
-                    {% endif %}
                 </div>
             </div>
         </div>
@@ -422,12 +395,6 @@
             <div class="relative overflow-hidden rounded-2xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center border border-gray-100/80 product-slide-card">
                 <!-- Badges (Stacked Top-Left to prevent mobile overlap) -->
                 <div class="absolute top-2.5 left-2.5 flex flex-col items-start space-y-1 z-20 pointer-events-none">
-                    {% if product.discount_percentage > 0 %}
-                    <span class="bg-black text-white text-[10px] font-extrabold px-2 py-0.5 rounded shadow uppercase tracking-wider">
-                        {{ product.discount_percentage }}% OFF
-                    </span>
-                    {% endif %}
-
                     {% if product.is_medicated %}
                     <span class="bg-emerald-600 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded shadow uppercase tracking-wider flex items-center space-x-1">
                         <span>🩺 MEDICATED</span>
@@ -478,9 +445,6 @@
                 </h3>
                 <div class="flex items-center justify-center space-x-2 text-xs md:text-sm">
                     <span class="font-extrabold text-gray-900">Rs. {{ product.active_price }}</span>
-                    {% if product.sale_price and product.regular_price > product.sale_price %}
-                    <span class="text-gray-400 line-through text-xs">Rs. {{ product.regular_price }}</span>
-                    {% endif %}
                 </div>
             </div>
         </div>
@@ -521,12 +485,6 @@
         {% for product in chelsea_products %}
         <div onclick="openQuickViewModal('{{ product.name|escapejs }}', '{{ product.active_price }}', '{{ product.regular_price }}', '{% if product.main_image %}{{ product.main_image.image.url }}{% endif %}', '{{ product.secondary_image_url }}')" class="group flex flex-col justify-between text-left cursor-pointer">
             <div class="relative overflow-hidden rounded-2xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center border border-gray-100/80 product-slide-card">
-                {% if product.discount_percentage > 0 %}
-                <span class="absolute top-3 left-3 bg-black text-white text-[11px] font-extrabold px-2.5 py-1 rounded-md shadow z-20 uppercase tracking-wider">
-                    {{ product.discount_percentage }}% OFF
-                </span>
-                {% endif %}
-
                 {% if product.is_medicated %}
                 <span class="absolute top-3 right-3 bg-emerald-600 text-white text-[10px] font-extrabold px-2 py-1 rounded-md shadow z-20 uppercase tracking-wider flex items-center space-x-1">
                     <span>🩺 MEDICATED SOLE</span>
@@ -576,9 +534,6 @@
                 </h3>
                 <div class="flex items-center justify-center space-x-2 text-xs md:text-sm">
                     <span class="font-extrabold text-gray-900">Rs. {{ product.active_price }}</span>
-                    {% if product.sale_price and product.regular_price > product.sale_price %}
-                    <span class="text-gray-400 line-through text-xs">Rs. {{ product.regular_price }}</span>
-                    {% endif %}
                 </div>
             </div>
         </div>
