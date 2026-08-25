@@ -112,7 +112,7 @@
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
         {% for product in peshawari_products %}
         <div onclick="openQuickViewModal('{{ product.name|escapejs }}', '{{ product.active_price }}', '{{ product.regular_price }}', '{% if product.main_image %}{{ product.main_image.image.url }}{% endif %}', '{{ product.secondary_image_url }}')" class="group flex flex-col justify-between text-left cursor-pointer">
-            <div class="relative overflow-hidden rounded-2xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center p-2 border border-gray-100/80 product-slide-card">
+            <div class="relative overflow-hidden rounded-2xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center border border-gray-100/80 product-slide-card">
                 <!-- Badges (Stacked Top-Left to prevent mobile overlap) -->
                 <div class="absolute top-2.5 left-2.5 flex flex-col items-start space-y-1 z-20 pointer-events-none">
                     {% if product.discount_percentage > 0 %}
@@ -130,11 +130,11 @@
 
                 <!-- Main Shoe Photo (Slide 0) -->
                 {% if product.main_image %}
-                    <img src="{{ product.main_image.image.url }}" alt="{{ product.name }}" class="slide-img-1 w-full h-full object-contain transition-all duration-500 rounded-xl {% if product.secondary_image_url %}absolute inset-0 p-2 opacity-100 scale-100{% endif %}">
+                    <img src="{{ product.main_image.image.url }}" alt="{{ product.name }}" class="slide-img-1 w-full h-full object-cover object-center transition-all duration-500 rounded-2xl {% if product.secondary_image_url %}absolute inset-0 opacity-100 scale-100{% endif %}">
                     
                     {% if product.secondary_image_url %}
                     <!-- Yellow Medicated Insole / Secondary Photo (Slide 1) -->
-                    <img src="{{ product.secondary_image_url }}" alt="Medicated Inner Sole" class="slide-img-2 w-full h-full object-contain transition-all duration-500 rounded-xl absolute inset-0 p-2 opacity-0 scale-95 pointer-events-none">
+                    <img src="{{ product.secondary_image_url }}" alt="Medicated Inner Sole" class="slide-img-2 w-full h-full object-contain p-4 bg-[#f8f8f8] transition-all duration-500 rounded-2xl absolute inset-0 opacity-0 scale-95 pointer-events-none">
                     
                     <!-- Two Navigation Dots Indicator at the Bottom -->
                     <div class="absolute bottom-2.5 left-0 right-0 flex items-center justify-center z-20" onclick="event.stopPropagation()">
@@ -212,7 +212,7 @@
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
         {% for product in formals_products %}
         <div onclick="openQuickViewModal('{{ product.name|escapejs }}', '{{ product.active_price }}', '{{ product.regular_price }}', '{% if product.main_image %}{{ product.main_image.image.url }}{% endif %}', '{{ product.secondary_image_url }}')" class="group flex flex-col justify-between text-left cursor-pointer">
-            <div class="relative overflow-hidden rounded-2xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center p-2 border border-gray-100/80 product-slide-card">
+            <div class="relative overflow-hidden rounded-2xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center border border-gray-100/80 product-slide-card">
                 <!-- Badges (Stacked Top-Left to prevent mobile overlap) -->
                 <div class="absolute top-2.5 left-2.5 flex flex-col items-start space-y-1 z-20 pointer-events-none">
                     {% if product.discount_percentage > 0 %}
@@ -230,11 +230,11 @@
 
                 <!-- Main Shoe Photo (Slide 0) -->
                 {% if product.main_image %}
-                    <img src="{{ product.main_image.image.url }}" alt="{{ product.name }}" class="slide-img-1 w-full h-full object-contain transition-all duration-500 rounded-xl {% if product.secondary_image_url %}absolute inset-0 p-2 opacity-100 scale-100{% endif %}">
+                    <img src="{{ product.main_image.image.url }}" alt="{{ product.name }}" class="slide-img-1 w-full h-full object-cover object-center transition-all duration-500 rounded-2xl {% if product.secondary_image_url %}absolute inset-0 opacity-100 scale-100{% endif %}">
                     
                     {% if product.secondary_image_url %}
                     <!-- Yellow Medicated Insole / Secondary Photo (Slide 1) -->
-                    <img src="{{ product.secondary_image_url }}" alt="Medicated Inner Sole" class="slide-img-2 w-full h-full object-contain transition-all duration-500 rounded-xl absolute inset-0 p-2 opacity-0 scale-95 pointer-events-none">
+                    <img src="{{ product.secondary_image_url }}" alt="Medicated Inner Sole" class="slide-img-2 w-full h-full object-contain p-4 bg-[#f8f8f8] transition-all duration-500 rounded-2xl absolute inset-0 opacity-0 scale-95 pointer-events-none">
                     
                     <!-- Two Navigation Dots Indicator at the Bottom -->
                     <div class="absolute bottom-2.5 left-0 right-0 flex items-center justify-center z-20" onclick="event.stopPropagation()">
@@ -316,7 +316,7 @@
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
         {% for product in casuals_products %}
         <div onclick="openQuickViewModal('{{ product.name|escapejs }}', '{{ product.active_price }}', '{{ product.regular_price }}', '{% if product.main_image %}{{ product.main_image.image.url }}{% endif %}', '{{ product.secondary_image_url }}')" class="group flex flex-col justify-between text-left cursor-pointer">
-            <div class="relative overflow-hidden rounded-2xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center p-2 border border-gray-100/80 product-slide-card">
+            <div class="relative overflow-hidden rounded-2xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center border border-gray-100/80 product-slide-card">
                 <!-- Badges (Stacked Top-Left to prevent mobile overlap) -->
                 <div class="absolute top-2.5 left-2.5 flex flex-col items-start space-y-1 z-20 pointer-events-none">
                     {% if product.discount_percentage > 0 %}
@@ -334,11 +334,11 @@
 
                 <!-- Main Shoe Photo (Slide 0) -->
                 {% if product.main_image %}
-                    <img src="{{ product.main_image.image.url }}" alt="{{ product.name }}" class="slide-img-1 w-full h-full object-contain transition-all duration-500 rounded-xl {% if product.secondary_image_url %}absolute inset-0 p-2 opacity-100 scale-100{% endif %}">
+                    <img src="{{ product.main_image.image.url }}" alt="{{ product.name }}" class="slide-img-1 w-full h-full object-cover object-center transition-all duration-500 rounded-2xl {% if product.secondary_image_url %}absolute inset-0 opacity-100 scale-100{% endif %}">
                     
                     {% if product.secondary_image_url %}
                     <!-- Yellow Medicated Insole / Secondary Photo (Slide 1) -->
-                    <img src="{{ product.secondary_image_url }}" alt="Medicated Inner Sole" class="slide-img-2 w-full h-full object-contain transition-all duration-500 rounded-xl absolute inset-0 p-2 opacity-0 scale-95 pointer-events-none">
+                    <img src="{{ product.secondary_image_url }}" alt="Medicated Inner Sole" class="slide-img-2 w-full h-full object-contain p-4 bg-[#f8f8f8] transition-all duration-500 rounded-2xl absolute inset-0 opacity-0 scale-95 pointer-events-none">
                     
                     <!-- Two Navigation Dots Indicator at the Bottom -->
                     <div class="absolute bottom-2.5 left-0 right-0 flex items-center justify-center z-20" onclick="event.stopPropagation()">
@@ -417,7 +417,7 @@
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
         {% for product in chelsea_products %}
         <div onclick="openQuickViewModal('{{ product.name|escapejs }}', '{{ product.active_price }}', '{{ product.regular_price }}', '{% if product.main_image %}{{ product.main_image.image.url }}{% endif %}', '{{ product.secondary_image_url }}')" class="group flex flex-col justify-between text-left cursor-pointer">
-            <div class="relative overflow-hidden rounded-2xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center p-2 border border-gray-100/80 product-slide-card">
+            <div class="relative overflow-hidden rounded-2xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center border border-gray-100/80 product-slide-card">
                 <!-- Badges (Stacked Top-Left to prevent mobile overlap) -->
                 <div class="absolute top-2.5 left-2.5 flex flex-col items-start space-y-1 z-20 pointer-events-none">
                     {% if product.discount_percentage > 0 %}
@@ -435,11 +435,11 @@
 
                 <!-- Main Shoe Photo (Slide 0) -->
                 {% if product.main_image %}
-                    <img src="{{ product.main_image.image.url }}" alt="{{ product.name }}" class="slide-img-1 w-full h-full object-contain transition-all duration-500 rounded-xl {% if product.secondary_image_url %}absolute inset-0 p-2 opacity-100 scale-100{% endif %}">
+                    <img src="{{ product.main_image.image.url }}" alt="{{ product.name }}" class="slide-img-1 w-full h-full object-cover object-center transition-all duration-500 rounded-2xl {% if product.secondary_image_url %}absolute inset-0 opacity-100 scale-100{% endif %}">
                     
                     {% if product.secondary_image_url %}
                     <!-- Yellow Medicated Insole / Secondary Photo (Slide 1) -->
-                    <img src="{{ product.secondary_image_url }}" alt="Medicated Inner Sole" class="slide-img-2 w-full h-full object-contain transition-all duration-500 rounded-xl absolute inset-0 p-2 opacity-0 scale-95 pointer-events-none">
+                    <img src="{{ product.secondary_image_url }}" alt="Medicated Inner Sole" class="slide-img-2 w-full h-full object-contain p-4 bg-[#f8f8f8] transition-all duration-500 rounded-2xl absolute inset-0 opacity-0 scale-95 pointer-events-none">
                     
                     <!-- Two Navigation Dots Indicator at the Bottom -->
                     <div class="absolute bottom-2.5 left-0 right-0 flex items-center justify-center z-20" onclick="event.stopPropagation()">
@@ -518,7 +518,7 @@
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
         {% for product in chelsea_products %}
         <div onclick="openQuickViewModal('{{ product.name|escapejs }}', '{{ product.active_price }}', '{{ product.regular_price }}', '{% if product.main_image %}{{ product.main_image.image.url }}{% endif %}', '{{ product.secondary_image_url }}')" class="group flex flex-col justify-between text-left cursor-pointer">
-            <div class="relative overflow-hidden rounded-2xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center p-2 border border-gray-100/80 product-slide-card">
+            <div class="relative overflow-hidden rounded-2xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center border border-gray-100/80 product-slide-card">
                 {% if product.discount_percentage > 0 %}
                 <span class="absolute top-3 left-3 bg-black text-white text-[11px] font-extrabold px-2.5 py-1 rounded-md shadow z-20 uppercase tracking-wider">
                     {{ product.discount_percentage }}% OFF
@@ -533,11 +533,11 @@
 
                 <!-- Main Shoe Photo (Slide 0) -->
                 {% if product.main_image %}
-                    <img src="{{ product.main_image.image.url }}" alt="{{ product.name }}" class="slide-img-1 w-full h-full object-contain transition-all duration-500 rounded-xl {% if product.secondary_image_url %}absolute inset-0 p-2 opacity-100 scale-100{% endif %}">
+                    <img src="{{ product.main_image.image.url }}" alt="{{ product.name }}" class="slide-img-1 w-full h-full object-cover object-center transition-all duration-500 rounded-2xl {% if product.secondary_image_url %}absolute inset-0 opacity-100 scale-100{% endif %}">
                     
                     {% if product.secondary_image_url %}
                     <!-- Yellow Medicated Insole / Secondary Photo (Slide 1) -->
-                    <img src="{{ product.secondary_image_url }}" alt="Medicated Inner Sole" class="slide-img-2 w-full h-full object-contain transition-all duration-500 rounded-xl absolute inset-0 p-2 opacity-0 scale-95 pointer-events-none">
+                    <img src="{{ product.secondary_image_url }}" alt="Medicated Inner Sole" class="slide-img-2 w-full h-full object-contain p-4 bg-[#f8f8f8] transition-all duration-500 rounded-2xl absolute inset-0 opacity-0 scale-95 pointer-events-none">
                     
                     <!-- Two Navigation Dots Indicator at the Bottom -->
                     <div class="absolute bottom-2.5 left-0 right-0 flex items-center justify-center z-20" onclick="event.stopPropagation()">
