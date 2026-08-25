@@ -23,7 +23,18 @@ allowed_hosts_env = os.environ.get('ALLOWED_HOSTS', '*')
 ALLOWED_HOSTS = [h.strip() for h in allowed_hosts_env.split(',') if h.strip()]
 
 csrf_trusted_env = os.environ.get('CSRF_TRUSTED_ORIGINS', '')
-CSRF_TRUSTED_ORIGINS = [o.strip() for o in csrf_trusted_env.split(',') if o.strip()]
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.onrender.com',
+    'https://shoe-store-1-8o2d.onrender.com',
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+]
+if csrf_trusted_env:
+    for o in csrf_trusted_env.split(','):
+        if o.strip() and o.strip() not in CSRF_TRUSTED_ORIGINS:
+            CSRF_TRUSTED_ORIGINS.append(o.strip())
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Application definition
 INSTALLED_APPS = [
