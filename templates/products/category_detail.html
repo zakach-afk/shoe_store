@@ -20,10 +20,46 @@
 </div>
 
 <!-- Product Grid Section -->
-<section class="max-w-7xl mx-auto px-4 py-8">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+<section class="max-w-7xl mx-auto px-4 py-6 md:py-8">
+    <!-- Toolbar: Filter Button & 1 / 2 View Switcher (Matches Mobile Reference) -->
+    <div class="flex items-center justify-between mb-6 pb-3 border-b border-gray-200">
+        <!-- Filter Button -->
+        <button type="button" onclick="toggleFilterDrawer()" class="flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-gray-800 bg-gray-50 hover:bg-gray-100 border border-gray-200 px-3.5 py-2 rounded-xl transition shadow-sm focus:outline-none">
+            <svg class="w-4 h-4 text-gray-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
+            </svg>
+            <span>Filter</span>
+            <span id="activeFilterBadge" class="bg-gray-200 text-gray-800 text-[10px] font-extrabold px-2 py-0.5 rounded-full">All</span>
+        </button>
+
+        <!-- Right Side: 1-Column vs 2-Column View Toggle -->
+        <div class="flex items-center space-x-1.5 bg-gray-100 p-1 rounded-xl border border-gray-200">
+            <!-- 1 Product View Button (▯ Single Large Card) -->
+            <button type="button" id="gridBtn1Col" onclick="setProductGridCols(1)" class="w-8 h-8 rounded-lg flex items-center justify-center text-gray-400 hover:text-gray-900 transition focus:outline-none" title="1 Product View">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <rect x="5" y="4" width="14" height="16" rx="2"></rect>
+                </svg>
+            </button>
+            <!-- 2 Products View Button (⠿ 2 Columns Grid) -->
+            <button type="button" id="gridBtn2Col" onclick="setProductGridCols(2)" class="w-8 h-8 rounded-lg flex items-center justify-center bg-white text-gray-900 shadow-sm transition focus:outline-none" title="2 Products View">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <rect x="4" y="4" width="6" height="6" rx="1"></rect>
+                    <rect x="14" y="4" width="6" height="6" rx="1"></rect>
+                    <rect x="4" y="14" width="6" height="6" rx="1"></rect>
+                    <rect x="14" y="14" width="6" height="6" rx="1"></rect>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div id="categoryProductGrid" class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 transition-all duration-300">
         {% for product in products %}
-        <div onclick="openQuickViewModal('{{ product.name|escapejs }}', '{{ product.active_price }}', '{{ product.regular_price }}', '{% if product.main_image %}{{ product.main_image.image.url }}{% endif %}', '{{ product.secondary_image_url }}')" class="group flex flex-col justify-between text-left cursor-pointer">
+        <div data-product-card 
+             data-price="{{ product.active_price|stringformat:'.2f' }}" 
+             data-medicated="{% if product.is_medicated %}1{% else %}0{% endif %}" 
+             data-name="{{ product.name }}"
+             onclick="openQuickViewModal('{{ product.name|escapejs }}', '{{ product.active_price }}', '{{ product.regular_price }}', '{% if product.main_image %}{{ product.main_image.image.url }}{% endif %}', '{{ product.secondary_image_url }}')" 
+             class="group flex flex-col justify-between text-left cursor-pointer">
             <div class="relative overflow-hidden rounded-2xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center border border-gray-100/80 product-slide-card">
                 <!-- Badges (Stacked Top-Left to prevent mobile overlap) -->
                 <div class="absolute top-2.5 left-2.5 flex flex-col items-start space-y-1 z-20 pointer-events-none">
@@ -105,5 +141,170 @@
         {% endfor %}
     </div>
 </section>
-{% block extra_js %}{% endblock %}
+
+<!-- Filter Slide-over Drawer -->
+<div id="filterDrawerOverlay" onclick="toggleFilterDrawer()" class="fixed inset-0 bg-black/50 z-50 hidden opacity-0 transition-opacity duration-300"></div>
+<div id="filterDrawer" class="fixed inset-y-0 left-0 w-full max-w-xs bg-white z-50 shadow-2xl transform -translate-x-full transition-transform duration-300 flex flex-col">
+    <!-- Drawer Header -->
+    <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+        <h3 class="font-serif font-bold text-lg text-gray-900 uppercase tracking-wider">Filter Products</h3>
+        <button type="button" onclick="toggleFilterDrawer()" class="p-2 text-gray-500 hover:text-black">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+    </div>
+
+    <!-- Drawer Body -->
+    <div class="flex-1 overflow-y-auto p-5 space-y-6">
+        <!-- Feature Filter -->
+        <div>
+            <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">Feature</h4>
+            <div class="space-y-2">
+                <label class="flex items-center space-x-3 cursor-pointer">
+                    <input type="radio" name="featureFilter" value="all" checked onchange="applyFilters()" class="text-black focus:ring-black">
+                    <span class="text-sm font-medium text-gray-800">All Products</span>
+                </label>
+                <label class="flex items-center space-x-3 cursor-pointer">
+                    <input type="radio" name="featureFilter" value="medicated" onchange="applyFilters()" class="text-black focus:ring-black">
+                    <span class="text-sm font-medium text-gray-800">🩺 Medicated Insole Only</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Sort By -->
+        <div>
+            <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">Sort By</h4>
+            <select id="sortSelect" onchange="applyFilters()" class="w-full text-sm border-gray-300 rounded-xl p-2.5 focus:border-black focus:ring-black">
+                <option value="featured">Featured / Default</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="name-asc">Name: A to Z</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Drawer Footer -->
+    <div class="p-5 border-t border-gray-200">
+        <button type="button" onclick="resetFilters()" class="w-full py-2.5 text-xs font-bold uppercase tracking-widest text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-xl transition mb-2">
+            Reset Filters
+        </button>
+        <button type="button" onclick="toggleFilterDrawer()" class="w-full py-3 text-xs font-bold uppercase tracking-widest text-white bg-black hover:bg-neutral-800 rounded-xl transition shadow">
+            View Results
+        </button>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+    // Grid 1 vs 2 Columns View Switcher
+    function setProductGridCols(cols) {
+        const grid = document.getElementById('categoryProductGrid');
+        const btn1 = document.getElementById('gridBtn1Col');
+        const btn2 = document.getElementById('gridBtn2Col');
+        if (!grid) return;
+
+        if (cols === 1) {
+            grid.classList.remove('grid-cols-2');
+            grid.classList.add('grid-cols-1');
+            btn1.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
+            btn1.classList.remove('text-gray-400');
+            btn2.classList.remove('bg-white', 'text-gray-900', 'shadow-sm');
+            btn2.classList.add('text-gray-400');
+            try { localStorage.setItem('solo_category_grid_cols', '1'); } catch(e){}
+        } else {
+            grid.classList.remove('grid-cols-1');
+            grid.classList.add('grid-cols-2');
+            btn2.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
+            btn2.classList.remove('text-gray-400');
+            btn1.classList.remove('bg-white', 'text-gray-900', 'shadow-sm');
+            btn1.classList.add('text-gray-400');
+            try { localStorage.setItem('solo_category_grid_cols', '2'); } catch(e){}
+        }
+    }
+
+    // Restore saved grid view
+    try {
+        const savedCols = localStorage.getItem('solo_category_grid_cols');
+        if (savedCols === '1') {
+            setProductGridCols(1);
+        }
+    } catch(e){}
+
+    // Filter Drawer Toggle
+    function toggleFilterDrawer() {
+        const drawer = document.getElementById('filterDrawer');
+        const overlay = document.getElementById('filterDrawerOverlay');
+        if (!drawer || !overlay) return;
+
+        if (drawer.classList.contains('-translate-x-full')) {
+            overlay.classList.remove('hidden');
+            setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+            drawer.classList.remove('-translate-x-full');
+            document.body.style.overflow = 'hidden';
+        } else {
+            overlay.classList.add('opacity-0');
+            drawer.classList.add('-translate-x-full');
+            setTimeout(() => overlay.classList.add('hidden'), 300);
+            document.body.style.overflow = '';
+        }
+    }
+
+    // Client-side instant filter and sort
+    function applyFilters() {
+        const featureVal = document.querySelector('input[name="featureFilter"]:checked')?.value || 'all';
+        const sortVal = document.getElementById('sortSelect')?.value || 'featured';
+        const badge = document.getElementById('activeFilterBadge');
+        const countSpan = document.getElementById('productVisibleCount');
+        const cards = Array.from(document.querySelectorAll('[data-product-card]'));
+        const grid = document.getElementById('categoryProductGrid');
+
+        let visibleCount = 0;
+        let filteredCards = [];
+
+        cards.forEach(card => {
+            const isMedicated = card.dataset.medicated === '1';
+            let match = true;
+            if (featureVal === 'medicated' && !isMedicated) {
+                match = false;
+            }
+
+            if (match) {
+                card.classList.remove('hidden');
+                visibleCount++;
+                filteredCards.push(card);
+            } else {
+                card.classList.add('hidden');
+            }
+        });
+
+        // Update badge
+        if (badge) {
+            badge.textContent = featureVal === 'medicated' ? '1' : 'All';
+        }
+        if (countSpan) {
+            countSpan.textContent = visibleCount;
+        }
+
+        // Sorting
+        if (sortVal === 'price-asc') {
+            filteredCards.sort((a, b) => parseFloat(a.dataset.price || 0) - parseFloat(b.dataset.price || 0));
+        } else if (sortVal === 'price-desc') {
+            filteredCards.sort((a, b) => parseFloat(b.dataset.price || 0) - parseFloat(a.dataset.price || 0));
+        } else if (sortVal === 'name-asc') {
+            filteredCards.sort((a, b) => (a.dataset.name || '').localeCompare(b.dataset.name || ''));
+        }
+
+        if (grid && filteredCards.length > 0) {
+            filteredCards.forEach(card => grid.appendChild(card));
+        }
+    }
+
+    function resetFilters() {
+        const allRadio = document.querySelector('input[name="featureFilter"][value="all"]');
+        if (allRadio) allRadio.checked = true;
+        const sortSelect = document.getElementById('sortSelect');
+        if (sortSelect) sortSelect.value = 'featured';
+        applyFilters();
+    }
+</script>
+{% endblock %}
 {% endblock %}
