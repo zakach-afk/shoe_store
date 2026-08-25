@@ -14,6 +14,8 @@ urlpatterns = [
     path('pages/contact/', views.contact, name='contact_alt'),
     path('order-cancellation/', views.order_cancellation, name='order_cancellation'),
     path('pages/order-cancellation/', views.order_cancellation, name='order_cancellation_alt'),
+    path('shoe-care-tips/', views.shoe_care_tips, name='shoe_care_tips'),
+    path('pages/shoe-care-tips/', views.shoe_care_tips, name='shoe_care_tips_alt'),
     path('api/place-order/', views.api_place_order, name='api_place_order'),
     path('category/<slug:slug>/', views.category_detail, name='category_detail'),
 ]

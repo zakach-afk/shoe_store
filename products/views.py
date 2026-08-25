@@ -120,6 +120,15 @@ def order_cancellation(request):
     return render(request, 'products/order_cancellation.html', context)
 
 
+def shoe_care_tips(request):
+    categories = Category.objects.all().order_by('order', 'name')
+    context = {
+        'categories': categories,
+    }
+    return render(request, 'products/shoe_care_tips.html', context)
+
+
+
 
 
 
