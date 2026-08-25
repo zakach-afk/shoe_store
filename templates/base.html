@@ -102,6 +102,18 @@
         .shiny-btn:hover::after {
             left: 100%;
         }
+
+        /* Subtle Shoe Focus Zoom (No excessive crop, shoes prominent) */
+        .product-slide-card .slide-img-1 {
+            object-fit: cover !important;
+            object-position: center bottom !important;
+            transform: scale(1.26);
+            transform-origin: center bottom;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+        }
+        .group:hover .product-slide-card .slide-img-1 {
+            transform: scale(1.32);
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans flex flex-col min-h-screen">
@@ -930,20 +942,20 @@
 
             if (img1 && img2) {
                 if (slideIndex === 1) {
-                    img1.classList.remove('opacity-100', 'scale-100');
-                    img1.classList.add('opacity-0', 'scale-95');
-                    img2.classList.remove('opacity-0', 'scale-95');
-                    img2.classList.add('opacity-100', 'scale-100');
+                    img1.classList.remove('opacity-100');
+                    img1.classList.add('opacity-0', 'pointer-events-none');
+                    img2.classList.remove('opacity-0', 'pointer-events-none');
+                    img2.classList.add('opacity-100');
                     cardEl.dataset.currentSlide = "1";
                     if (dot0 && dot1) {
                         dot0.className = 'slide-dot-0 w-2 h-2 rounded-full bg-gray-300 hover:bg-black transition-all shadow-sm focus:outline-none';
                         dot1.className = 'slide-dot-1 w-4 h-2 rounded-full bg-black transition-all shadow-sm focus:outline-none';
                     }
                 } else {
-                    img2.classList.remove('opacity-100', 'scale-100');
-                    img2.classList.add('opacity-0', 'scale-95');
-                    img1.classList.remove('opacity-0', 'scale-95');
-                    img1.classList.add('opacity-100', 'scale-100');
+                    img2.classList.remove('opacity-100');
+                    img2.classList.add('opacity-0', 'pointer-events-none');
+                    img1.classList.remove('opacity-0', 'pointer-events-none');
+                    img1.classList.add('opacity-100');
                     cardEl.dataset.currentSlide = "0";
                     if (dot0 && dot1) {
                         dot0.className = 'slide-dot-0 w-4 h-2 rounded-full bg-black transition-all shadow-sm focus:outline-none';
