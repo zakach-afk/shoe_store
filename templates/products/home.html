@@ -174,7 +174,7 @@
 </section>
 {% endif %}
 
-<!-- 3. SECTION: FORMALS -->
+<!-- 2. SECTION: FORMALS -->
 {% if formals_products %}
 
 <section class="max-w-7xl mx-auto px-4 pt-6 pb-14 text-center border-b border-gray-200">
@@ -424,21 +424,21 @@
 </section>
 {% endif %}
 
-<!-- 5. SECTION: SANDALS -->
-{% if sandals_products %}
+<!-- 5. SECTION: LORO PIANA -->
+{% if loro_piana_products %}
 <section class="max-w-7xl mx-auto px-4 pt-6 pb-14 text-center border-b border-gray-200">
     <h2 class="text-3xl md:text-5xl font-serif font-normal text-gray-900 uppercase tracking-[0.2em] mb-4">
-        SANDALS
+        LORO PIANA
     </h2>
     <div class="mb-10">
-        <a href="/category/sandals/" class="shiny-btn inline-block px-10 py-2.5 text-xs font-medium uppercase tracking-[0.25em] text-gray-800 border border-gray-300 hover:border-black transition bg-white shadow-sm">
+        <a href="/category/loro-piana/" class="shiny-btn inline-block px-10 py-2.5 text-xs font-medium uppercase tracking-[0.25em] text-gray-800 border border-gray-300 hover:border-black transition bg-white shadow-sm">
             VIEW ALL
         </a>
     </div>
 
     <!-- Product Grid (Mobile 1.5 slider, Desktop 4-column grid) -->
     <div class="flex md:grid overflow-x-auto md:overflow-visible gap-3.5 md:gap-6 pb-4 md:pb-0 px-4 md:px-0 -mx-4 md:mx-0 no-scrollbar md:grid-cols-4 snap-x snap-mandatory" style="-webkit-overflow-scrolling: touch;">
-        {% for product in sandals_products %}
+        {% for product in loro_piana_products %}
         <div onclick="openQuickViewModal('{{ product.name|escapejs }}', '{{ product.active_price }}', '{{ product.regular_price }}', '{% if product.main_image %}{{ product.main_image.image.url }}{% endif %}', '{{ product.secondary_image_url }}')" class="shrink-0 w-[58vw] sm:w-[45vw] md:w-auto snap-start group flex flex-col justify-between text-left cursor-pointer">
             <div class="relative overflow-hidden rounded-2xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center border border-gray-100/80 product-slide-card">
                 <!-- Badges -->
@@ -455,10 +455,10 @@
                     <img src="{{ product.main_image.image.url }}" alt="{{ product.name }}" class="slide-img-1 w-full h-full object-cover object-center transition-all duration-500 rounded-2xl {% if product.secondary_image_url %}absolute inset-0 opacity-100 scale-100{% endif %}">
                     
                     {% if product.secondary_image_url %}
-                    <!-- Yellow Medicated Insole / Secondary Photo (Slide 1) -->
+                    <!-- Secondary Photo (Slide 1) -->
                     <img src="{{ product.secondary_image_url }}" alt="Medicated Inner Sole" class="slide-img-2 w-full h-full object-contain p-4 bg-[#f8f8f8] transition-all duration-500 rounded-2xl absolute inset-0 opacity-0 scale-95 pointer-events-none">
                     
-                    <!-- Two Navigation Dots Indicator at the Bottom -->
+                    <!-- Navigation Dots -->
                     <div class="absolute bottom-2.5 left-0 right-0 flex items-center justify-center z-20" onclick="event.stopPropagation()">
                         <div class="bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-full shadow-md flex items-center space-x-1.5 border border-gray-200">
                             <button type="button" onclick="cardDotClick(event, this, 0)" class="slide-dot-0 w-4 h-2 rounded-full bg-black transition-all shadow-sm focus:outline-none" title="Shoe Photo"></button>

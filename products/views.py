@@ -11,6 +11,7 @@ def home(request):
     formals_products = Product.objects.filter(category__slug='formals', is_active=True).prefetch_related('images')[:8]
     casuals_products = Product.objects.filter(category__slug='casuals', is_active=True).prefetch_related('images')[:8]
     chelsea_products = Product.objects.filter(category__slug='chelsea', is_active=True).prefetch_related('images')[:8]
+    loro_piana_products = Product.objects.filter(Q(category__slug='loro-piana') | Q(name__icontains='Loro Piana'), is_active=True).prefetch_related('images')[:8]
     sandals_products = Product.objects.filter(category__slug='sandals', is_active=True).prefetch_related('images')[:8]
     skechers_products = Product.objects.filter(category__slug='skechers', is_active=True).prefetch_related('images')[:8]
     slippers_products = Product.objects.filter(category__slug='slippers', is_active=True).prefetch_related('images')[:8]
@@ -22,6 +23,7 @@ def home(request):
         'formals_products': formals_products,
         'casuals_products': casuals_products,
         'chelsea_products': chelsea_products,
+        'loro_piana_products': loro_piana_products,
         'sandals_products': sandals_products,
         'skechers_products': skechers_products,
         'slippers_products': slippers_products,
