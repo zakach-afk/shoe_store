@@ -2,6 +2,9 @@
 from urllib.parse import quote
 from django.contrib import admin
 from django.utils.html import format_html
+from django.shortcuts import redirect, get_object_or_404
+from django.contrib import messages
+from django.urls import path
 from unfold.admin import ModelAdmin, TabularInline
 from unfold.decorators import display
 from .models import Category, Product, ProductImage, ProductSize, Order, OrderItem, ContactMessage
@@ -67,13 +70,13 @@ class ProductAdmin(ModelAdmin):
             return format_html(
                 '<div class="flex items-center space-x-3">'
                 '<img src="{}" class="w-12 h-12 object-cover rounded-xl border border-gray-200 shadow-sm" alt="{}" />'
-                '<div><strong class="text-gray-900 block text-xs font-bold uppercase">{}</strong>'
+                '<div><strong class="text-gray-900 dark:text-gray-100 block text-xs font-bold uppercase">{}</strong>'
                 '<span class="text-[10px] text-gray-500 font-mono">ID: #{}</span></div>'
                 '</div>',
                 first_img.image.url, obj.name, obj.name, obj.id
             )
         return format_html(
-            '<div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center text-gray-400 text-xs font-bold border">NO IMG</div>'
+            '<div class="w-12 h-12 bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center text-gray-400 text-xs font-bold border">NO IMG</div>'
         )
 
     @display(description="Pricing (PKR)")
@@ -84,7 +87,7 @@ class ProductAdmin(ModelAdmin):
                 '<span class="text-xs text-gray-400 line-through">Rs. {:,.2f}</span></div>',
                 obj.sale_price, obj.regular_price
             )
-        return format_html('<span class="font-bold text-gray-900 text-sm">Rs. {:,.2f}</span>', obj.regular_price)
+        return format_html('<span class="font-bold text-gray-900 dark:text-gray-100 text-sm">Rs. {:,.2f}</span>', obj.regular_price)
 
     @display(description="Featured", boolean=True)
     def is_featured_badge(self, obj):
@@ -115,24 +118,77 @@ class ProductAdmin(ModelAdmin):
 class OrderItemInline(TabularInline):
     model = OrderItem
     extra = 0
-    fields = ('item_preview', 'product', 'size', 'quantity', 'price', 'line_total')
-    readonly_fields = ('item_preview', 'product', 'size', 'quantity', 'price', 'line_total')
+    fields = ('item_preview', 'product_display', 'size_badge', 'quantity_badge', 'price_display', 'line_total')
+    readonly_fields = ('item_preview', 'product_display', 'size_badge', 'quantity_badge', 'price_display', 'line_total')
 
-    @display(description="Item")
+    @display(description="Product Photo")
     def item_preview(self, obj):
-        if obj.product:
+        img_url = ""
+        if obj.product_image_url:
+            img_url = obj.product_image_url
+        elif obj.product:
             first_img = obj.product.images.first()
             if first_img and first_img.image:
-                return format_html(
-                    '<img src="{}" class="w-12 h-12 object-cover rounded-xl border shadow-sm" alt="{}" />',
-                    first_img.image.url, obj.product.name
-                )
-        return format_html('<div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center text-[10px] text-gray-400 font-bold border">NO IMG</div>')
+                img_url = first_img.image.url
+        
+        # Fallback search if still missing
+        if not img_url:
+            name = obj.product_name or (obj.product.name if obj.product else "")
+            clean = re.sub(r'^\d+\s*x\s*', '', name)
+            clean = re.sub(r'\s*\(Size.*?\)', '', clean).strip()
+            if clean:
+                p = Product.objects.filter(name__icontains=clean).first()
+                if p:
+                    f = p.images.first()
+                    if f and f.image:
+                        img_url = f.image.url
+
+        if img_url:
+            return format_html(
+                '<a href="{}" target="_blank">'
+                '<img src="{}" class="w-16 h-16 object-cover rounded-xl border border-gray-200 dark:border-gray-700 shadow-md hover:scale-105 transition transform" alt="Product" />'
+                '</a>',
+                img_url, img_url
+            )
+        return format_html('<div class="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center text-[10px] text-gray-400 font-bold border">NO IMG</div>')
+
+    @display(description="Product Name")
+    def product_display(self, obj):
+        name = obj.product_name or (obj.product.name if obj.product else "Footwear Item")
+        if obj.product:
+            return format_html(
+                '<div class="flex flex-col">'
+                '<a href="/admin/products/product/{}/change/" class="font-bold text-blue-600 hover:underline text-xs uppercase">{}</a>'
+                '<span class="text-[10px] text-gray-400 font-mono">Product ID: #{}</span>'
+                '</div>',
+                obj.product.id, name, obj.product.id
+            )
+        return format_html('<strong class="text-gray-900 dark:text-gray-100 text-xs uppercase">{}</strong>', name)
+
+    @display(description="Size & Variant")
+    def size_badge(self, obj):
+        return format_html(
+            '<span class="inline-flex items-center px-3 py-1 rounded-lg text-xs font-bold bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700">'
+            '{}</span>',
+            obj.size
+        )
+
+    @display(description="Qty")
+    def quantity_badge(self, obj):
+        return format_html(
+            '<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-black bg-blue-100 text-blue-800">'
+            '{}x</span>',
+            obj.quantity
+        )
+
+    @display(description="Unit Price")
+    def price_display(self, obj):
+        return format_html('<span class="text-xs text-gray-600 dark:text-gray-400 font-semibold">Rs. {:,.2f}</span>', obj.price)
 
     @display(description="Subtotal")
     def line_total(self, obj):
         sub = obj.price * obj.quantity
-        return format_html('<span class="font-bold text-gray-900">Rs. {:,.2f}</span>', sub)
+        return format_html('<span class="font-black text-gray-900 dark:text-gray-100 text-sm">Rs. {:,.2f}</span>', sub)
 
 
 @admin.register(Order)
@@ -150,20 +206,33 @@ class OrderAdmin(ModelAdmin):
     list_filter = ('status', 'created_at', 'city')
     search_fields = ('id', 'full_name', 'phone_number', 'city', 'shipping_address')
     inlines = [OrderItemInline]
-    readonly_fields = ('created_at', 'customer_quick_actions', 'order_summary_header')
+    readonly_fields = ('created_at', 'customer_quick_actions', 'status_quick_changer', 'order_summary_header')
 
     fieldsets = (
-        ("Customer & Shipping Information", {
-            "fields": ("customer_quick_actions", "full_name", "phone_number", "city", "shipping_address"),
-            "classes": ["tab"],
+        ("Order Status & 1-Click Action", {
+            "fields": ("status_quick_changer", "status", "order_summary_header"),
         }),
-        ("Order Financials & Lifecycle Status", {
-            "fields": ("order_summary_header", "status", "total_amount", "created_at"),
-            "classes": ["tab"],
+        ("Customer & Delivery Details", {
+            "fields": ("customer_quick_actions", "full_name", "phone_number", "city", "shipping_address", "total_amount", "created_at"),
         }),
     )
 
     actions = ['mark_dispatched', 'mark_delivered', 'mark_cancelled', 'mark_pending']
+
+    def get_urls(self):
+        urls = super().get_urls()
+        custom_urls = [
+            path('<int:order_id>/set-status/<str:new_status>/', self.admin_site.admin_view(self.set_order_status), name='order_set_status'),
+        ]
+        return custom_urls + urls
+
+    def set_order_status(self, request, order_id, new_status):
+        order = get_object_or_404(Order, pk=order_id)
+        if new_status in ['Pending', 'Dispatched', 'Delivered', 'Cancelled']:
+            order.status = new_status
+            order.save()
+            messages.success(request, f"✨ Order #SL-{order.id:06d} status changed to '{new_status}' successfully!")
+        return redirect(request.META.get('HTTP_REFERER', f'/admin/products/order/{order_id}/change/'))
 
     @display(description="Order ID")
     def order_id_badge(self, obj):
@@ -179,7 +248,7 @@ class OrderAdmin(ModelAdmin):
     def customer_info(self, obj):
         return format_html(
             '<div class="flex flex-col">'
-            '<strong class="text-gray-900 font-bold text-xs uppercase">{}</strong>'
+            '<strong class="text-gray-900 dark:text-gray-100 font-bold text-xs uppercase">{}</strong>'
             '<span class="text-xs text-gray-500 font-mono">📞 {}</span>'
             '</div>',
             obj.full_name, obj.phone_number
@@ -196,7 +265,7 @@ class OrderAdmin(ModelAdmin):
         wa_msg = quote(f"Hello {obj.full_name}, this is SOLO Footwear regarding your Order #SL-{obj.id:06d} (Total: Rs. {obj.total_amount:,.2f}). We are processing your parcel for delivery!")
         return format_html(
             '<a href="https://wa.me/{}?text={}" target="_blank" class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold shadow transition" title="Open WhatsApp Chat">'
-            '<span>💬 Chat</span>'
+            '<span>💬 WhatsApp</span>'
             '</a>',
             clean_phone, wa_msg
         )
@@ -208,10 +277,10 @@ class OrderAdmin(ModelAdmin):
             return format_html('<span class="text-gray-400 text-xs">No items</span>')
         first_item = items[0]
         extra_count = len(items) - 1
-        name = first_item.product.name if first_item.product else "Item"
-        extra_badge = f' <span class="bg-gray-200 text-gray-700 text-[10px] font-bold px-1.5 py-0.5 rounded">+{extra_count} more</span>' if extra_count > 0 else ''
+        name = first_item.product_name or (first_item.product.name if first_item.product else "Footwear Item")
+        extra_badge = f' <span class="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 text-[10px] font-bold px-1.5 py-0.5 rounded">+{extra_count} more</span>' if extra_count > 0 else ''
         return format_html(
-            '<div class="text-xs text-gray-800 font-medium truncate max-w-[200px]">'
+            '<div class="text-xs text-gray-800 dark:text-gray-200 font-medium truncate max-w-[200px]">'
             '<strong>{}x</strong> {} ({}){}'
             '</div>',
             first_item.quantity, name, first_item.size, format_html(extra_badge)
@@ -220,7 +289,7 @@ class OrderAdmin(ModelAdmin):
     @display(description="Total Amount")
     def formatted_total(self, obj):
         return format_html(
-            '<span class="font-extrabold text-blue-700 text-sm">Rs. {:,.2f}</span>',
+            '<span class="font-extrabold text-blue-700 dark:text-blue-400 text-sm">Rs. {:,.2f}</span>',
             obj.total_amount
         )
 
@@ -239,6 +308,32 @@ class OrderAdmin(ModelAdmin):
             style, obj.status
         )
 
+    @display(description="⚡ 1-Click Status Changer")
+    def status_quick_changer(self, obj):
+        if not obj.id:
+            return ""
+        cur = obj.status
+        p_class = "bg-amber-500 text-white ring-2 ring-amber-300 font-black shadow" if cur == 'Pending' else "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-amber-100"
+        d_class = "bg-blue-600 text-white ring-2 ring-blue-300 font-black shadow" if cur == 'Dispatched' else "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-blue-100"
+        dl_class = "bg-emerald-600 text-white ring-2 ring-emerald-300 font-black shadow" if cur == 'Delivered' else "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-emerald-100"
+        c_class = "bg-rose-600 text-white ring-2 ring-rose-300 font-black shadow" if cur == 'Cancelled' else "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-rose-100"
+
+        return format_html(
+            '<div class="flex flex-wrap items-center gap-3 p-4 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl my-2 shadow-sm">'
+            '<span class="text-xs font-bold text-gray-600 dark:text-gray-400 uppercase tracking-wider">Click to Switch Status Instantly:</span>'
+            '<div class="flex items-center space-x-2">'
+            '<a href="/admin/products/order/{}/set-status/Pending/" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition {}">⏳ Pending</a>'
+            '<a href="/admin/products/order/{}/set-status/Dispatched/" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition {}">🚚 Mark Dispatched</a>'
+            '<a href="/admin/products/order/{}/set-status/Delivered/" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition {}">✅ Mark Delivered</a>'
+            '<a href="/admin/products/order/{}/set-status/Cancelled/" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition {}">❌ Cancel Order</a>'
+            '</div>'
+            '</div>',
+            obj.id, p_class,
+            obj.id, d_class,
+            obj.id, dl_class,
+            obj.id, c_class
+        )
+
     @display(description="⚡ Quick Customer Contact")
     def customer_quick_actions(self, obj):
         if not obj.id:
@@ -253,7 +348,7 @@ class OrderAdmin(ModelAdmin):
         wa_url = f"https://wa.me/{clean_phone}?text={wa_msg}"
         
         return format_html(
-            '<div class="flex flex-wrap items-center gap-3 p-3 bg-slate-50 border border-slate-200 rounded-xl my-2">'
+            '<div class="flex flex-wrap items-center gap-3 p-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl my-2">'
             '<a href="{}" target="_blank" class="inline-flex items-center space-x-2 bg-[#25D366] hover:bg-[#20bd5a] text-white px-4 py-2 rounded-xl text-xs font-bold shadow transition">'
             '<span>💬 Chat with Customer on WhatsApp</span>'
             '</a>'
@@ -270,14 +365,14 @@ class OrderAdmin(ModelAdmin):
         if not obj.id:
             return ""
         return format_html(
-            '<div class="p-3 bg-blue-50 border border-blue-200 rounded-xl my-2 flex items-center justify-between">'
+            '<div class="p-4 bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 rounded-2xl my-2 flex items-center justify-between shadow-sm">'
             '<div>'
-            '<span class="text-xs text-blue-900 font-bold uppercase tracking-wider block">Order Reference</span>'
-            '<strong class="text-base text-blue-900 font-mono">#SL-{:06d}</strong>'
+            '<span class="text-[11px] text-blue-900 dark:text-blue-300 font-bold uppercase tracking-wider block">Order Reference</span>'
+            '<strong class="text-base text-blue-900 dark:text-blue-100 font-mono">#SL-{:06d}</strong>'
             '</div>'
             '<div class="text-right">'
-            '<span class="text-xs text-blue-900 font-bold uppercase tracking-wider block">Total Payable</span>'
-            '<strong class="text-xl text-blue-700 font-black">Rs. {:,.2f}</strong>'
+            '<span class="text-[11px] text-blue-900 dark:text-blue-300 font-bold uppercase tracking-wider block">Total Payable</span>'
+            '<strong class="text-2xl text-blue-700 dark:text-blue-400 font-black">Rs. {:,.2f}</strong>'
             '</div>'
             '</div>',
             obj.id, obj.total_amount
@@ -346,7 +441,7 @@ class ContactMessageAdmin(ModelAdmin):
             clean_phone = '92' + clean_phone
         wa_msg = quote(f"Hello {obj.name}, thank you for contacting SOLO Footwear. Regarding your message: '{obj.comment}'")
         return format_html(
-            '<div class="flex items-center space-x-3 p-3 bg-slate-50 border rounded-xl my-2">'
+            '<div class="flex items-center space-x-3 p-3 bg-slate-50 dark:bg-slate-900 border rounded-xl my-2">'
             '<a href="https://wa.me/{}?text={}" target="_blank" class="inline-flex items-center space-x-2 bg-[#25D366] text-white px-4 py-2 rounded-xl text-xs font-bold shadow hover:bg-[#20bd5a] transition">'
             '<span>💬 Send Reply via WhatsApp</span>'
             '</a>'

@@ -131,14 +131,16 @@ class Order(models.Model):
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True)
+    product_name = models.CharField(max_length=255, default="", blank=True)
+    product_image_url = models.CharField(max_length=500, default="", blank=True)
     size = models.CharField(max_length=50)
     quantity = models.PositiveIntegerField(default=1)
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
-        product_name = self.product.name if self.product else "Deleted Product"
-        return f"{self.quantity}x {product_name} (Size {self.size})"
+        name = self.product_name or (self.product.name if self.product else "Footwear Item")
+        return f"{self.quantity}x {name} (Size {self.size})"
 
 
 class ContactMessage(models.Model):

@@ -211,6 +211,7 @@ def api_place_order(request):
                     'name': item.get('name', 'Footwear Item'),
                     'size': item.get('size', '7/40'),
                     'color': item.get('color', 'Black'),
+                    'image': item.get('image', ''),
                     'qty': qty,
                     'price': price,
                 })
@@ -225,20 +226,45 @@ def api_place_order(request):
                 status='Pending'
             )
             
-            # Create OrderItems
+            # Create OrderItems with smart product matching & persistent image URLs
             for item in parsed_items:
-                product_name = item['name']
+                raw_name = str(item['name']).strip()
+                # Clean name: strip "1x ", "(Size 9/42 (Tan / Camel))"
+                clean_name = re.sub(r'^\d+\s*x\s*', '', raw_name, flags=re.IGNORECASE)
+                clean_name = re.sub(r'\s*\(Size.*?\)', '', clean_name, flags=re.IGNORECASE).strip()
+                
                 size = item['size']
                 color = item['color']
                 qty = item['qty']
                 price = item['price']
+                image_url = str(item.get('image', '')).strip()
                 
-                matched_product = Product.objects.filter(name__icontains=product_name).first()
+                # Smart product match
+                matched_product = None
+                if clean_name:
+                    matched_product = Product.objects.filter(name__iexact=clean_name).first()
+                    if not matched_product:
+                        matched_product = Product.objects.filter(name__icontains=clean_name).first()
+                    if not matched_product:
+                        tokens = [t for t in clean_name.split() if len(t) > 2]
+                        for t in tokens:
+                            matched_product = Product.objects.filter(name__icontains=t).first()
+                            if matched_product:
+                                break
+                                
+                if matched_product and not image_url:
+                    first_img = matched_product.images.first()
+                    if first_img and first_img.image:
+                        image_url = first_img.image.url
+                        
+                display_name = clean_name or (matched_product.name if matched_product else raw_name)
                 
                 OrderItem.objects.create(
                     order=order,
                     product=matched_product,
-                    size=f"{size} ({color})" if color else f"{size}",
+                    product_name=display_name,
+                    product_image_url=image_url,
+                    size=f"{size} ({color})" if color and color not in str(size) else f"{size}",
                     quantity=qty,
                     price=price
                 )
