@@ -144,6 +144,15 @@ def refund_policy(request):
     return render(request, 'products/refund_policy.html', context)
 
 
+def terms_of_service(request):
+    categories = Category.objects.all().order_by('order', 'name')
+    context = {
+        'categories': categories,
+    }
+    return render(request, 'products/terms_of_service.html', context)
+
+
+
 
 
 
