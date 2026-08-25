@@ -92,19 +92,24 @@
             </div>
         </div>
         {% empty %}
-        <div class="col-span-full text-center py-20 px-6 bg-gradient-to-b from-white to-gray-50 rounded-3xl shadow-sm border border-gray-200/80 my-6 max-w-2xl mx-auto">
-            <div class="inline-block bg-brandYellow/30 text-soloPurple px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest mb-4 border border-brandYellow/40">
-                ✨ EXCLUSIVE NEW DROPS ARRIVING SOON
+        <div class="col-span-full text-center py-20 px-6 bg-white rounded-3xl shadow-sm border border-gray-200 my-6 max-w-2xl mx-auto">
+            <div class="inline-block bg-brandYellow/30 text-gray-900 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-4 border border-brandYellow/40">
+                ✨ EXCLUSIVE NEW DESIGNS ARRIVING SOON
             </div>
-            <h2 class="text-4xl md:text-5xl font-serif font-extrabold text-gray-900 uppercase tracking-[0.15em] mb-4">
+            <h2 class="text-4xl md:text-5xl font-serif font-light text-gray-900 uppercase tracking-[0.2em] mb-4">
                 COMING SOON
             </h2>
             <p class="text-sm md:text-base text-gray-600 max-w-md mx-auto font-light leading-relaxed mb-8">
-                Our handcrafted luxury <span class="font-bold text-gray-900">{{ current_category.name }}</span> collection is currently under production by master artisans. Stay tuned!
+                Our handcrafted <span class="font-bold text-gray-900">{{ current_category.name }}</span> collection is currently in production. Stay tuned for new arrivals!
             </p>
-            <a href="/" class="shiny-btn inline-block bg-brandBlue text-brandYellow font-extrabold px-9 py-4 rounded-xl uppercase tracking-widest text-xs shadow-xl hover:bg-soloPurple transition">
-                EXPLORE OTHER COLLECTIONS
-            </a>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+                <a href="/" class="shiny-btn inline-block bg-black hover:bg-neutral-800 text-white font-medium px-8 py-3.5 rounded-xl uppercase tracking-widest text-xs shadow-md transition">
+                    Explore Other Collections
+                </a>
+                <a href="https://wa.me/923192255100?text=Hi%20SOLO%20Footwear,%20please%20notify%20me%20when%20{{ current_category.name|urlencode }}%20are%20in%20stock!" target="_blank" class="inline-flex items-center space-x-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold px-6 py-3.5 rounded-xl uppercase tracking-wider text-xs shadow-md transition">
+                    <span>💬 Notify Me on WhatsApp</span>
+                </a>
+            </div>
         </div>
         {% endfor %}
     </div>

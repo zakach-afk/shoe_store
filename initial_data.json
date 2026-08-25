@@ -91,7 +91,7 @@
     "regular_price": "3500.00",
     "sale_price": "3000.00",
     "is_featured": true,
-    "is_active": true,
+    "is_active": false,
     "created_at": "2026-08-13T18:18:43.269Z",
     "updated_at": "2026-08-13T18:18:43.269Z"
   }
@@ -107,7 +107,7 @@
     "regular_price": "3800.00",
     "sale_price": "3200.00",
     "is_featured": true,
-    "is_active": true,
+    "is_active": false,
     "created_at": "2026-08-14T11:39:05.161Z",
     "updated_at": "2026-08-14T11:39:05.161Z"
   }
@@ -123,7 +123,7 @@
     "regular_price": "4600.00",
     "sale_price": "3999.00",
     "is_featured": true,
-    "is_active": true,
+    "is_active": false,
     "created_at": "2026-08-14T11:39:05.226Z",
     "updated_at": "2026-08-14T11:39:05.226Z"
   }
@@ -139,7 +139,7 @@
     "regular_price": "4200.00",
     "sale_price": "3500.00",
     "is_featured": false,
-    "is_active": true,
+    "is_active": false,
     "created_at": "2026-08-14T11:39:05.293Z",
     "updated_at": "2026-08-14T11:39:05.293Z"
   }
@@ -155,7 +155,7 @@
     "regular_price": "3500.00",
     "sale_price": null,
     "is_featured": false,
-    "is_active": true,
+    "is_active": false,
     "created_at": "2026-08-14T11:39:05.361Z",
     "updated_at": "2026-08-14T11:39:05.361Z"
   }
@@ -267,7 +267,7 @@
     "regular_price": "11000.00",
     "sale_price": "7700.00",
     "is_featured": true,
-    "is_active": true,
+    "is_active": false,
     "created_at": "2026-08-14T11:42:30.859Z",
     "updated_at": "2026-08-14T11:42:30.859Z"
   }
@@ -283,7 +283,7 @@
     "regular_price": "8000.00",
     "sale_price": "4000.00",
     "is_featured": true,
-    "is_active": true,
+    "is_active": false,
     "created_at": "2026-08-14T11:42:30.883Z",
     "updated_at": "2026-08-14T11:42:30.884Z"
   }
@@ -299,7 +299,7 @@
     "regular_price": "6000.00",
     "sale_price": "4200.00",
     "is_featured": true,
-    "is_active": true,
+    "is_active": false,
     "created_at": "2026-08-14T11:42:30.903Z",
     "updated_at": "2026-08-14T11:42:30.903Z"
   }
@@ -315,7 +315,7 @@
     "regular_price": "8000.00",
     "sale_price": "3500.00",
     "is_featured": true,
-    "is_active": true,
+    "is_active": false,
     "created_at": "2026-08-14T11:42:30.924Z",
     "updated_at": "2026-08-14T11:42:30.924Z"
   }
@@ -14235,6 +14235,17 @@
     "size": "7/40 (Black)",
     "quantity": 1,
     "price": "4000.00"
+  }
+},
+{
+  "model": "products.contactmessage",
+  "pk": 1,
+  "fields": {
+    "name": "test",
+    "email": "zakach6867@gmail.com",
+    "phone": "03000000000",
+    "comment": "test sms",
+    "created_at": "2026-08-25T14:33:06.953Z"
   }
 }
 ]
