@@ -559,74 +559,28 @@
                     </form>
                 </div>
 
-                <!-- Customer Reviews Live Grid (Matching Screenshot Exactly) -->
+                <!-- Customer Reviews Live Grid (Real Reviews Only) -->
                 <div id="qvReviewsListContainer" class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
-                    <!-- Sample & Live Reviews -->
+                    {% for rev in recent_reviews %}
                     <div class="bg-gray-50/90 border border-gray-100 rounded-2xl p-4 flex flex-col justify-between space-y-3 shadow-sm hover:shadow transition">
                         <div>
-                            <div class="text-amber-400 text-xs tracking-wider mb-2">★★★★★</div>
-                            <p class="text-xs text-gray-700 leading-relaxed italic">"Quality bohat acha hai, exactly jaisa photo mein dikhaya tha. Size guide follow kiya aur perfect fit aaya."</p>
+                            <div class="text-amber-400 text-xs tracking-wider mb-2">
+                                {% if rev.rating == 5 %}★★★★★{% elif rev.rating == 4 %}★★★★☆{% elif rev.rating == 3 %}★★★☆☆{% elif rev.rating == 2 %}★★☆☆☆{% else %}★☆☆☆☆{% endif %}
+                            </div>
+                            <p class="text-xs text-gray-700 leading-relaxed italic">"{{ rev.comment }}"</p>
                         </div>
                         <div class="pt-2 border-t border-gray-200/60 flex items-center justify-between text-[11px]">
-                            <span class="font-bold text-gray-800">— Ahmed R., Lahore</span>
+                            <span class="font-bold text-gray-800">— {{ rev.customer_name }}, {{ rev.city }}</span>
                             <span class="text-emerald-700 font-extrabold text-[10px] bg-emerald-50 px-1.5 py-0.5 rounded">✔ Verified Buyer</span>
                         </div>
                     </div>
-
-                    <div class="bg-gray-50/90 border border-gray-100 rounded-2xl p-4 flex flex-col justify-between space-y-3 shadow-sm hover:shadow transition">
-                        <div>
-                            <div class="text-amber-400 text-xs tracking-wider mb-2">★★★★★</div>
-                            <p class="text-xs text-gray-700 leading-relaxed italic">"Delivery within 3 days. COD option made it easy to trust. Leather feels premium for the price."</p>
-                        </div>
-                        <div class="pt-2 border-t border-gray-200/60 flex items-center justify-between text-[11px]">
-                            <span class="font-bold text-gray-800">— Bilal K., Karachi</span>
-                            <span class="text-emerald-700 font-extrabold text-[10px] bg-emerald-50 px-1.5 py-0.5 rounded">✔ Verified Buyer</span>
-                        </div>
+                    {% empty %}
+                    <div id="noReviewsPlaceholder" class="col-span-full py-8 text-center bg-gray-50/60 rounded-2xl border border-dashed border-gray-200 space-y-2">
+                        <div class="text-2xl">🌟</div>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-gray-800">No Customer Reviews Yet</h4>
+                        <p class="text-xs text-gray-500 max-w-sm mx-auto">Be the first verified customer to share your experience with this shoe!</p>
                     </div>
-
-                    <div class="bg-gray-50/90 border border-gray-100 rounded-2xl p-4 flex flex-col justify-between space-y-3 shadow-sm hover:shadow transition">
-                        <div>
-                            <div class="text-amber-400 text-xs tracking-wider mb-2">★★★★★</div>
-                            <p class="text-xs text-gray-700 leading-relaxed italic">"Comfortable for daily wear. Slightly tight at first but broke in after a day. Great value overall."</p>
-                        </div>
-                        <div class="pt-2 border-t border-gray-200/60 flex items-center justify-between text-[11px]">
-                            <span class="font-bold text-gray-800">— Usman T., Islamabad</span>
-                            <span class="text-emerald-700 font-extrabold text-[10px] bg-emerald-50 px-1.5 py-0.5 rounded">✔ Verified Buyer</span>
-                        </div>
-                    </div>
-
-                    <div class="bg-gray-50/90 border border-gray-100 rounded-2xl p-4 flex flex-col justify-between space-y-3 shadow-sm hover:shadow transition">
-                        <div>
-                            <div class="text-amber-400 text-xs tracking-wider mb-2">★★★★★</div>
-                            <p class="text-xs text-gray-700 leading-relaxed italic">"Bohat acha product hai, leather ka touch zabardast hai. Bilkul wese hi tha jaisa order kiya tha."</p>
-                        </div>
-                        <div class="pt-2 border-t border-gray-200/60 flex items-center justify-between text-[11px]">
-                            <span class="font-bold text-gray-800">— M. Farhan, Faisalabad</span>
-                            <span class="text-emerald-700 font-extrabold text-[10px] bg-emerald-50 px-1.5 py-0.5 rounded">✔ Verified Buyer</span>
-                        </div>
-                    </div>
-
-                    <div class="bg-gray-50/90 border border-gray-100 rounded-2xl p-4 flex flex-col justify-between space-y-3 shadow-sm hover:shadow transition">
-                        <div>
-                            <div class="text-amber-400 text-xs tracking-wider mb-2">★★★★★</div>
-                            <p class="text-xs text-gray-700 leading-relaxed italic">"Pehli baar order kiya tha, COD ki wajah se trust hua. Packaging bhi neat thi aur shoe pure leather hai."</p>
-                        </div>
-                        <div class="pt-2 border-t border-gray-200/60 flex items-center justify-between text-[11px]">
-                            <span class="font-bold text-gray-800">— Daniyal S., Rawalpindi</span>
-                            <span class="text-emerald-700 font-extrabold text-[10px] bg-emerald-50 px-1.5 py-0.5 rounded">✔ Verified Buyer</span>
-                        </div>
-                    </div>
-
-                    <div class="bg-gray-50/90 border border-gray-100 rounded-2xl p-4 flex flex-col justify-between space-y-3 shadow-sm hover:shadow transition">
-                        <div>
-                            <div class="text-amber-400 text-xs tracking-wider mb-2">★★★★★</div>
-                            <p class="text-xs text-gray-700 leading-relaxed italic">"Bought for office wear and daily use. Got so many compliments. Medicated inner sole is very soft."</p>
-                        </div>
-                        <div class="pt-2 border-t border-gray-200/60 flex items-center justify-between text-[11px]">
-                            <span class="font-bold text-gray-800">— Tariq M., Multan</span>
-                            <span class="text-emerald-700 font-extrabold text-[10px] bg-emerald-50 px-1.5 py-0.5 rounded">✔ Verified Buyer</span>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -1126,6 +1080,9 @@
                 if (data.success && data.review) {
                     const rev = data.review;
                     const container = document.getElementById('qvReviewsListContainer');
+                    const placeholder = document.getElementById('noReviewsPlaceholder');
+                    if (placeholder) placeholder.remove();
+
                     if (container) {
                         const starsStr = '★'.repeat(rev.rating) + '☆'.repeat(5 - rev.rating);
                         const newReviewCard = document.createElement('div');

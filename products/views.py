@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
-from .models import Product, Category
+from .models import Product, Category, ProductReview, Order, OrderItem, ContactMessage
 
 
 def home(request):
