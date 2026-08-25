@@ -1,6 +1,6 @@
 from django.db import migrations
 
-def clear_fake_reviews_and_cleanup_category(apps, schema_editor):
+def clear_all_fake_and_test_reviews(apps, schema_editor):
     Category = apps.get_model('products', 'Category')
     Product = apps.get_model('products', 'Product')
     ProductReview = apps.get_model('products', 'ProductReview')
@@ -10,8 +10,8 @@ def clear_fake_reviews_and_cleanup_category(apps, schema_editor):
         Product.objects.filter(category__slug='loro-piana').update(category=casuals_cat)
     Category.objects.filter(slug='loro-piana').delete()
     
-    # Remove fake seeded reviews
-    ProductReview.objects.filter(customer_name__in=['Muhammad Usman', 'Hamza Tariq', 'Zubair Ahmed', 'Khurram Shahzad', 'Farhan Malik']).delete()
+    # Clear all test/fake reviews so only 100% genuine customer reviews will be stored
+    ProductReview.objects.all().delete()
 
 class Migration(migrations.Migration):
 
@@ -20,5 +20,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(clear_fake_reviews_and_cleanup_category, migrations.RunPython.noop),
+        migrations.RunPython(clear_all_fake_and_test_reviews, migrations.RunPython.noop),
     ]
