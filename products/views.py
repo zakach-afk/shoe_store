@@ -73,6 +73,15 @@ def contact(request):
     return render(request, 'products/contact.html', context)
 
 
+def order_cancellation(request):
+    categories = Category.objects.all().order_by('order', 'name')
+    context = {
+        'categories': categories,
+    }
+    return render(request, 'products/order_cancellation.html', context)
+
+
+
 
 
 

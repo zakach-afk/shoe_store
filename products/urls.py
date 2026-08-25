@@ -12,6 +12,8 @@ urlpatterns = [
     path('pages/faqs/', views.faqs, name='faqs_alt'),
     path('contact/', views.contact, name='contact'),
     path('pages/contact/', views.contact, name='contact_alt'),
+    path('order-cancellation/', views.order_cancellation, name='order_cancellation'),
+    path('pages/order-cancellation/', views.order_cancellation, name='order_cancellation_alt'),
     path('api/place-order/', views.api_place_order, name='api_place_order'),
     path('category/<slug:slug>/', views.category_detail, name='category_detail'),
 ]
