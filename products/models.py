@@ -156,4 +156,24 @@ class ContactMessage(models.Model):
         verbose_name_plural = "Contact Messages"
 
     def __str__(self):
-        return f"Message from {self.name} ({self.email})"
+        return f"Message from {self.name} ({self.email})"
+
+
+class ProductReview(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews', null=True, blank=True)
+    product_name = models.CharField(max_length=255, blank=True, help_text="Product name for reference")
+    customer_name = models.CharField(max_length=150)
+    city = models.CharField(max_length=100, blank=True, default="Verified Customer")
+    rating = models.PositiveSmallIntegerField(default=5, help_text="Rating from 1 to 5 stars")
+    comment = models.TextField()
+    is_verified_purchase = models.BooleanField(default=True)
+    is_approved = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = "Customer Review"
+        verbose_name_plural = "Customer Reviews"
+
+    def __str__(self):
+        return f"{self.customer_name} ({self.rating}★) - {self.comment[:30]}"

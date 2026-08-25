@@ -26,5 +26,7 @@ urlpatterns = [
     path('pages/terms-of-service/', views.terms_of_service, name='terms_of_service_alt'),
     path('terms/', views.terms_of_service, name='terms'),
     path('api/place-order/', views.api_place_order, name='api_place_order'),
+    path('api/submit-review/', views.api_submit_review, name='api_submit_review'),
+    path('api/reviews/', views.api_get_reviews, name='api_get_reviews'),
     path('category/<slug:slug>/', views.category_detail, name='category_detail'),
 ]

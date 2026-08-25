@@ -282,9 +282,91 @@ def api_place_order(request):
                 'order_id': f"SL-{order.id:06d}",
                 'message': 'Order placed successfully!'
             })
+            
         except Exception as e:
-            logger.exception("Error creating order")
-            print(f"[ORDER ERROR] {str(e)}")
-            return JsonResponse({'success': False, 'error': str(e)}, status=500)
+            print(f"[ORDER ERROR] Exception occurred while placing order: {str(e)}")
+            return JsonResponse({
+                'success': False,
+                'error': f'Failed to process order: {str(e)}'
+            }, status=500)
             
     return JsonResponse({'success': False, 'error': 'Invalid request method.'}, status=405)
+
+
+@csrf_exempt
+def api_submit_review(request):
+    if request.method == 'POST':
+        try:
+            try:
+                data = json.loads(request.body.decode('utf-8'))
+            except (ValueError, TypeError):
+                data = request.POST
+                
+            customer_name = str(data.get('name', '')).strip()
+            city = str(data.get('city', 'Verified Customer')).strip()
+            comment = str(data.get('comment', '')).strip()
+            product_name = str(data.get('product_name', '')).strip()
+            
+            try:
+                rating = int(data.get('rating', 5))
+                if rating < 1 or rating > 5:
+                    rating = 5
+            except (ValueError, TypeError):
+                rating = 5
+                
+            if not customer_name or not comment:
+                return JsonResponse({'success': False, 'error': 'Please enter your name and review.'}, status=400)
+                
+            matched_product = None
+            if product_name:
+                matched_product = Product.objects.filter(name__icontains=product_name).first()
+                
+            review = ProductReview.objects.create(
+                product=matched_product,
+                product_name=product_name or (matched_product.name if matched_product else "SOLO Footwear Customer"),
+                customer_name=customer_name,
+                city=city or "Verified Customer",
+                rating=rating,
+                comment=comment,
+                is_verified_purchase=True,
+                is_approved=True
+            )
+            
+            return JsonResponse({
+                'success': True,
+                'review': {
+                    'id': review.id,
+                    'name': review.customer_name,
+                    'city': review.city,
+                    'rating': review.rating,
+                    'comment': review.comment,
+                    'date': review.created_at.strftime('%d %b %Y'),
+                    'verified': review.is_verified_purchase
+                }
+            })
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)}, status=500)
+    return JsonResponse({'success': False, 'error': 'Invalid request method.'}, status=405)
+
+
+def api_get_reviews(request):
+    product_name = request.GET.get('product_name', '').strip()
+    reviews = ProductReview.objects.filter(is_approved=True).order_by('-created_at')
+    
+    if product_name:
+        p_reviews = reviews.filter(Q(product__name__icontains=product_name) | Q(product_name__icontains=product_name))
+        if p_reviews.exists():
+            reviews = p_reviews
+            
+    reviews_list = []
+    for r in reviews[:20]:
+        reviews_list.append({
+            'id': r.id,
+            'name': r.customer_name,
+            'city': r.city,
+            'rating': r.rating,
+            'comment': r.comment,
+            'date': r.created_at.strftime('%d %b %Y'),
+            'verified': r.is_verified_purchase
+        })
+    return JsonResponse({'success': True, 'reviews': reviews_list, 'count': len(reviews_list)})

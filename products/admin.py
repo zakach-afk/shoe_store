@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.urls import path
 from unfold.admin import ModelAdmin, TabularInline
 from unfold.decorators import display
-from .models import Category, Product, ProductImage, ProductSize, Order, OrderItem, ContactMessage
+from .models import Category, Product, ProductImage, ProductSize, Order, OrderItem, ContactMessage, ProductReview
 
 # Admin Control Center Branding
 admin.site.site_header = "SOLO FOOTWEAR Control Center"
@@ -478,3 +478,24 @@ class ContactMessageAdmin(ModelAdmin):
             '</div>',
             clean_phone, wa_msg, str(obj.phone)
         )
+
+
+@admin.register(ProductReview)
+class ProductReviewAdmin(ModelAdmin):
+    list_display = ('customer_name', 'city', 'stars_display', 'product_name', 'comment_short', 'is_verified_badge', 'is_approved', 'created_at')
+    list_filter = ('rating', 'is_approved', 'is_verified_purchase', 'created_at')
+    search_fields = ('customer_name', 'city', 'comment', 'product_name')
+    list_editable = ('is_approved',)
+    
+    @display(description="Rating")
+    def stars_display(self, obj):
+        stars = "★" * obj.rating + "☆" * (5 - obj.rating)
+        return format_html('<span class="text-amber-500 font-bold tracking-wider text-sm">{}</span>', stars)
+
+    @display(description="Review Snippet")
+    def comment_short(self, obj):
+        return obj.comment[:60] + '...' if len(obj.comment) > 60 else obj.comment
+
+    @display(description="Verified", boolean=True)
+    def is_verified_badge(self, obj):
+        return obj.is_verified_purchase

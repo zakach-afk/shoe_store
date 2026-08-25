@@ -413,6 +413,123 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Recommended Products Strip inside Product Modal -->
+            {% if all_recommended_products %}
+            <div class="border-t border-gray-200 p-5 md:p-6 bg-[#fbfbfb]">
+                <div class="flex items-center justify-between mb-3">
+                    <h4 class="text-xs font-black text-gray-900 uppercase tracking-widest flex items-center space-x-1.5">
+                        <span class="text-amber-500">✨</span>
+                        <span>RECOMMENDED FOR YOU</span>
+                    </h4>
+                    <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Swipe &rarr;</span>
+                </div>
+                <div class="flex overflow-x-auto gap-3 pb-2 -mx-5 md:-mx-6 px-5 md:px-6 no-scrollbar snap-x snap-mandatory" style="-webkit-overflow-scrolling: touch;">
+                    {% for rec in all_recommended_products %}
+                    <div onclick="openQuickViewModal('{{ rec.name|escapejs }}', '{{ rec.active_price }}', '{{ rec.regular_price }}', '{% if rec.main_image %}{{ rec.main_image.image.url }}{% endif %}', '{{ rec.secondary_image_url }}')" class="shrink-0 w-28 md:w-32 bg-white rounded-xl p-2 border border-gray-200 hover:border-black transition cursor-pointer shadow-sm group">
+                        <div class="aspect-square w-full rounded-lg overflow-hidden bg-gray-50 mb-1.5 flex items-center justify-center border border-gray-100">
+                            {% if rec.main_image %}
+                                <img src="{{ rec.main_image.image.url }}" alt="{{ rec.name }}" class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-300">
+                            {% else %}
+                                <span class="text-[9px] text-gray-400 font-bold">Shoe</span>
+                            {% endif %}
+                        </div>
+                        <p class="text-[11px] font-bold text-gray-900 truncate uppercase">{{ rec.name }}</p>
+                        <p class="text-[11px] font-extrabold text-soloPurple mt-0.5">Rs. {{ rec.active_price }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Customer Reviews & Real-Time Review Section -->
+            <div class="border-t border-gray-200 p-5 md:p-6 bg-white space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-3 border-b border-gray-100">
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <div class="flex text-amber-400 text-sm tracking-widest">
+                                ★★★★★
+                            </div>
+                            <span class="text-xs font-black text-gray-900">4.9 / 5.0</span>
+                            <span class="text-[10px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded font-extrabold">✔ 100% Verified Reviews</span>
+                        </div>
+                        <p class="text-[11px] text-gray-500 mt-0.5">Real customer feedback for handcrafted pure leather footwear.</p>
+                    </div>
+
+                    <button type="button" onclick="toggleReviewFormModal()" class="inline-flex items-center justify-center space-x-1.5 px-4 py-2 rounded-xl bg-black hover:bg-neutral-800 text-white text-xs font-bold uppercase tracking-wider transition shadow-sm">
+                        <span>✍️ Write a Review</span>
+                    </button>
+                </div>
+
+                <!-- Write Review Form (Instant Real-Time) -->
+                <div id="modalReviewForm" class="hidden bg-gray-50 border border-gray-200 rounded-2xl p-4 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <h4 class="text-xs font-black text-gray-900 uppercase tracking-wider">Leave Your Real-Time Review</h4>
+                        <button type="button" onclick="toggleReviewFormModal()" class="text-gray-400 hover:text-black text-xs font-bold">&times; Close</button>
+                    </div>
+
+                    <form id="qvReviewSubmitForm" onsubmit="submitCustomerReviewAjax(event)" class="space-y-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-[11px] font-bold text-gray-700 uppercase mb-1">Your Name *</label>
+                                <input type="text" id="revInputName" required placeholder="e.g. Waris Ali" class="w-full text-xs p-2.5 rounded-xl border border-gray-300 focus:border-black focus:ring-black">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold text-gray-700 uppercase mb-1">City</label>
+                                <input type="text" id="revInputCity" placeholder="e.g. Lahore, Karachi, Islamabad" class="w-full text-xs p-2.5 rounded-xl border border-gray-300 focus:border-black focus:ring-black">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] font-bold text-gray-700 uppercase mb-1">Rating *</label>
+                            <div class="flex items-center space-x-1" id="starPickerContainer">
+                                <button type="button" onclick="setStarRating(1)" class="star-pick text-2xl text-amber-400 focus:outline-none">★</button>
+                                <button type="button" onclick="setStarRating(2)" class="star-pick text-2xl text-amber-400 focus:outline-none">★</button>
+                                <button type="button" onclick="setStarRating(3)" class="star-pick text-2xl text-amber-400 focus:outline-none">★</button>
+                                <button type="button" onclick="setStarRating(4)" class="star-pick text-2xl text-amber-400 focus:outline-none">★</button>
+                                <button type="button" onclick="setStarRating(5)" class="star-pick text-2xl text-amber-400 focus:outline-none">★</button>
+                                <span id="starRatingLabel" class="text-xs font-bold text-gray-700 ml-2">5 Stars (Excellent)</span>
+                            </div>
+                            <input type="hidden" id="revInputRating" value="5">
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] font-bold text-gray-700 uppercase mb-1">Your Review *</label>
+                            <textarea id="revInputComment" required rows="2" placeholder="Tell us about the leather quality, fit, and comfort..." class="w-full text-xs p-2.5 rounded-xl border border-gray-300 focus:border-black focus:ring-black"></textarea>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-1">
+                            <span id="reviewStatusMsg" class="text-xs text-emerald-600 font-bold hidden"></span>
+                            <button type="submit" id="submitReviewBtn" class="px-6 py-2.5 bg-black hover:bg-neutral-800 text-white text-xs font-extrabold uppercase tracking-widest rounded-xl transition shadow">
+                                Post Review Now
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Customer Reviews Live Feed -->
+                <div class="space-y-2.5">
+                    <h5 class="text-[11px] font-extrabold text-gray-400 uppercase tracking-widest">Customer Reviews</h5>
+                    <div id="qvReviewsListContainer" class="space-y-2.5 max-h-56 overflow-y-auto pr-1">
+                        {% for rev in recent_reviews %}
+                        <div class="bg-gray-50/90 border border-gray-100 rounded-xl p-3 space-y-1">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-xs font-bold text-gray-900">{{ rev.customer_name }}</span>
+                                    <span class="text-[10px] text-gray-400">({{ rev.city }})</span>
+                                    <span class="inline-flex items-center text-[9px] font-extrabold text-emerald-600 bg-emerald-50 px-1.5 py-0.2 rounded">✔ Verified</span>
+                                </div>
+                                <span class="text-[10px] text-gray-400">{{ rev.created_at|date:"d M Y" }}</span>
+                            </div>
+                            <div class="flex text-amber-400 text-xs tracking-wider">
+                                {% if rev.rating == 5 %}★★★★★{% elif rev.rating == 4 %}★★★★☆{% elif rev.rating == 3 %}★★★☆☆{% elif rev.rating == 2 %}★★☆☆☆{% else %}★☆☆☆☆{% endif %}
+                            </div>
+                            <p class="text-xs text-gray-700 leading-relaxed">{{ rev.comment }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -825,6 +942,134 @@
                 currentQvQty -= 1;
                 document.getElementById('qvQty').textContent = currentQvQty;
             }
+        }
+
+        // --- Real-time Customer Reviews System ---
+        function toggleReviewFormModal() {
+            const form = document.getElementById('modalReviewForm');
+            if (form) {
+                form.classList.toggle('hidden');
+                if (!form.classList.contains('hidden')) {
+                    document.getElementById('revInputName')?.focus();
+                }
+            }
+        }
+
+        let selectedReviewRating = 5;
+        const ratingLabels = {
+            1: '1 Star (Needs Improvement)',
+            2: '2 Stars (Fair)',
+            3: '3 Stars (Average)',
+            4: '4 Stars (Very Good)',
+            5: '5 Stars (Excellent / Highly Recommended)'
+        };
+
+        function setStarRating(num) {
+            selectedReviewRating = num;
+            const input = document.getElementById('revInputRating');
+            if (input) input.value = num;
+            const label = document.getElementById('starRatingLabel');
+            if (label && ratingLabels[num]) label.textContent = ratingLabels[num];
+
+            const starBtns = document.querySelectorAll('.star-pick');
+            starBtns.forEach((btn, idx) => {
+                if (idx < num) {
+                    btn.classList.add('text-amber-400');
+                    btn.classList.remove('text-gray-300');
+                } else {
+                    btn.classList.add('text-gray-300');
+                    btn.classList.remove('text-amber-400');
+                }
+            });
+        }
+
+        function submitCustomerReviewAjax(e) {
+            e.preventDefault();
+            const name = document.getElementById('revInputName')?.value.trim();
+            const city = document.getElementById('revInputCity')?.value.trim() || 'Verified Customer';
+            const comment = document.getElementById('revInputComment')?.value.trim();
+            const rating = parseInt(document.getElementById('revInputRating')?.value || '5', 10);
+            const prodName = document.getElementById('qvProductName')?.textContent.trim() || 'SOLO Footwear';
+            const statusMsg = document.getElementById('reviewStatusMsg');
+            const submitBtn = document.getElementById('submitReviewBtn');
+
+            if (!name || !comment) {
+                alert('Please enter both your name and review message.');
+                return;
+            }
+
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Posting...';
+            }
+
+            fetch('/api/submit-review/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: JSON.stringify({
+                    name: name,
+                    city: city,
+                    comment: comment,
+                    rating: rating,
+                    product_name: prodName
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Post Review Now';
+                }
+
+                if (data.success && data.review) {
+                    const rev = data.review;
+                    const container = document.getElementById('qvReviewsListContainer');
+                    if (container) {
+                        const starsStr = '★'.repeat(rev.rating) + '☆'.repeat(5 - rev.rating);
+                        const newReviewCard = document.createElement('div');
+                        newReviewCard.className = 'bg-emerald-50/80 border border-emerald-300 rounded-xl p-3 space-y-1 transition-all duration-500 animate-pulse';
+                        newReviewCard.innerHTML = `
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-xs font-bold text-gray-900">${rev.name}</span>
+                                    <span class="text-[10px] text-gray-500">(${rev.city})</span>
+                                    <span class="inline-flex items-center text-[9px] font-extrabold text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded">✔ Just Posted</span>
+                                </div>
+                                <span class="text-[10px] text-gray-400">Today</span>
+                            </div>
+                            <div class="flex text-amber-500 text-xs tracking-wider">
+                                ${starsStr}
+                            </div>
+                            <p class="text-xs text-gray-800 leading-relaxed font-medium">${rev.comment}</p>
+                        `;
+                        container.insertBefore(newReviewCard, container.firstChild);
+                        setTimeout(() => newReviewCard.classList.remove('animate-pulse'), 2000);
+                    }
+
+                    // Reset Form
+                    document.getElementById('qvReviewSubmitForm')?.reset();
+                    setStarRating(5);
+                    if (statusMsg) {
+                        statusMsg.textContent = '✔ Review posted in real time!';
+                        statusMsg.classList.remove('hidden');
+                        setTimeout(() => statusMsg.classList.add('hidden'), 4000);
+                    }
+                    toggleReviewFormModal();
+                } else {
+                    alert(data.error || 'Failed to post review. Please try again.');
+                }
+            })
+            .catch(err => {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Post Review Now';
+                }
+                console.error('Review submit error:', err);
+                alert('An error occurred while posting your review.');
+            });
         }
 
         // --- Shopping Cart Engine ---
