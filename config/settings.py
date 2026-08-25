@@ -160,6 +160,11 @@ UNFOLD = {
                         "link": lambda request: "/admin/products/order/",
                     },
                     {
+                        "title": "Customer Inquiries",
+                        "icon": "mail",
+                        "link": lambda request: "/admin/products/contactmessage/",
+                    },
+                    {
                         "title": "Shoe Products",
                         "icon": "inventory_2",
                         "link": lambda request: "/admin/products/product/",
