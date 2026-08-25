@@ -53,6 +53,15 @@ def size_guide(request):
     return render(request, 'products/size_guide.html', context)
 
 
+def faqs(request):
+    categories = Category.objects.all().order_by('order', 'name')
+    context = {
+        'categories': categories,
+    }
+    return render(request, 'products/faqs.html', context)
+
+
+
 
 import json
 from django.http import JsonResponse
