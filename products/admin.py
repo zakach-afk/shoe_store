@@ -267,23 +267,27 @@ class OrderAdmin(ModelAdmin):
 
     @display(description="Customer")
     def customer_info(self, obj):
+        name = str(obj.full_name or "Guest Customer")
+        phone = str(obj.phone_number or "No Phone")
         return format_html(
             '<div class="flex flex-col">'
             '<strong class="text-gray-900 dark:text-gray-100 font-bold text-xs uppercase">{}</strong>'
             '<span class="text-xs text-gray-500 font-mono">📞 {}</span>'
             '</div>',
-            str(obj.full_name), str(obj.phone_number)
+            name, phone
         )
 
     @display(description="WhatsApp Action")
     def whatsapp_direct_action(self, obj):
-        clean_phone = re.sub(r'\D', '', str(obj.phone_number))
+        clean_phone = re.sub(r'\D', '', str(obj.phone_number or ''))
         if clean_phone.startswith('0'):
             clean_phone = '92' + clean_phone[1:]
         elif not clean_phone.startswith('92'):
             clean_phone = '92' + clean_phone
         
-        wa_msg = quote(f"Hello {obj.full_name}, this is SOLO Footwear regarding your Order #SL-{obj.id:06d} (Total: Rs. {float(obj.total_amount):,.2f}). We are processing your parcel for delivery!")
+        name = str(obj.full_name or "Customer")
+        total = float(obj.total_amount or 0)
+        wa_msg = quote(f"Hello {name}, this is SOLO Footwear regarding your Order #SL-{obj.id:06d} (Total: Rs. {total:,.2f}). We are processing your parcel for delivery!")
         return format_html(
             '<a href="https://wa.me/{}?text={}" target="_blank" class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold shadow transition" title="Open WhatsApp Chat">'
             '<span>💬 WhatsApp</span>'
@@ -310,7 +314,8 @@ class OrderAdmin(ModelAdmin):
 
     @display(description="Total Amount")
     def formatted_total(self, obj):
-        total_str = f"Rs. {float(obj.total_amount):,.2f}"
+        total = float(obj.total_amount or 0)
+        total_str = f"Rs. {total:,.2f}"
         return format_html(
             '<span class="font-extrabold text-blue-700 dark:text-blue-400 text-sm">{}</span>',
             total_str
@@ -328,14 +333,14 @@ class OrderAdmin(ModelAdmin):
         return format_html(
             '<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-black shadow-sm {}">'
             '{}</span>',
-            style, str(obj.status)
+            style, str(obj.status or "Pending")
         )
 
     @display(description="⚡ 1-Click Status Changer")
     def status_quick_changer(self, obj):
         if not obj.id:
             return ""
-        cur = obj.status
+        cur = obj.status or 'Pending'
         p_class = "bg-amber-500 text-white ring-2 ring-amber-300 font-black shadow" if cur == 'Pending' else "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-amber-100"
         d_class = "bg-blue-600 text-white ring-2 ring-blue-300 font-black shadow" if cur == 'Dispatched' else "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-blue-100"
         dl_class = "bg-emerald-600 text-white ring-2 ring-emerald-300 font-black shadow" if cur == 'Delivered' else "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-emerald-100"
@@ -362,13 +367,15 @@ class OrderAdmin(ModelAdmin):
     def customer_quick_actions(self, obj):
         if not obj.id:
             return "Save order first."
-        clean_phone = re.sub(r'\D', '', str(obj.phone_number))
+        clean_phone = re.sub(r'\D', '', str(obj.phone_number or ''))
         if clean_phone.startswith('0'):
             clean_phone = '92' + clean_phone[1:]
         elif not clean_phone.startswith('92'):
             clean_phone = '92' + clean_phone
         
-        wa_msg = quote(f"Hello {obj.full_name}, this is SOLO Footwear regarding your Order #SL-{obj.id:06d} for Rs. {float(obj.total_amount):,.2f}. How can we assist you?")
+        name = str(obj.full_name or "Customer")
+        total = float(obj.total_amount or 0)
+        wa_msg = quote(f"Hello {name}, this is SOLO Footwear regarding your Order #SL-{obj.id:06d} for Rs. {total:,.2f}. How can we assist you?")
         wa_url = f"https://wa.me/{clean_phone}?text={wa_msg}"
         
         return format_html(
@@ -381,7 +388,7 @@ class OrderAdmin(ModelAdmin):
             '</a>'
             '<span class="text-xs text-gray-500 font-medium">Payment Mode: <strong>Cash on Delivery (Open Parcel)</strong></span>'
             '</div>',
-            wa_url, str(obj.phone_number)
+            wa_url, str(obj.phone_number or '')
         )
 
     @display(description="Order Financial Summary")
@@ -389,7 +396,8 @@ class OrderAdmin(ModelAdmin):
         if not obj.id:
             return ""
         order_ref_str = f"#SL-{obj.id:06d}"
-        total_str = f"Rs. {float(obj.total_amount):,.2f}"
+        total = float(obj.total_amount or 0)
+        total_str = f"Rs. {total:,.2f}"
         return format_html(
             '<div class="p-4 bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 rounded-2xl my-2 flex items-center justify-between shadow-sm">'
             '<div>'
