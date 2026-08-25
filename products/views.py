@@ -128,6 +128,15 @@ def shoe_care_tips(request):
     return render(request, 'products/shoe_care_tips.html', context)
 
 
+def shipping_policy(request):
+    categories = Category.objects.all().order_by('order', 'name')
+    context = {
+        'categories': categories,
+    }
+    return render(request, 'products/shipping_policy.html', context)
+
+
+
 
 
 

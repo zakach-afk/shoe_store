@@ -1,0 +1,22 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Shipping Policy | SOLO FOOTWEAR{% endblock %}
+
+{% block content %}
+<section class="max-w-4xl mx-auto px-4 py-12 md:py-16 text-left">
+    <!-- Header Title -->
+    <h1 class="text-3xl md:text-5xl font-serif font-light tracking-[0.15em] text-gray-900 mb-8 md:mb-12">
+        Shipping policy
+    </h1>
+
+    <div class="space-y-6 text-gray-700 text-sm md:text-base leading-relaxed">
+        <ul class="list-disc list-inside space-y-3.5 pl-1">
+            <li><strong>Free Shipping</strong> on all orders above Rs.2,000.</li>
+            <li>Rs.200 will be additionally charged for orders valued at Rs.1,999 or below.</li>
+            <li>The delivery time will be <strong>03-05 working days</strong>.</li>
+            <li>The parcel will be sent through a registered courier company (TCS, Call Courier, or Post-Ex).</li>
+        </ul>
+    </div>
+</section>
+{% endblock %}
