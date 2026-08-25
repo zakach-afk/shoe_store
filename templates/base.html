@@ -652,6 +652,7 @@
         const qvRegularPrice = document.getElementById('qvRegularPrice');
         let currentQvQty = 1;
         let selectedQvSize = '7/40';
+        let selectedQvColor = 'Black';
 
         let currentQvPrimaryUrl = '';
         let currentQvSecondaryUrl = '/media/products/medicated_inner_sole.png';
@@ -667,6 +668,17 @@
                 qvRegularPrice.classList.add('hidden');
             }
             
+            // Auto-detect default matching color from shoe name
+            const lowerName = (name || '').toLowerCase();
+            let defaultColor = 'Black';
+            if (lowerName.includes('dark brown') || lowerName.includes('brown') || lowerName.includes('espresso') || lowerName.includes('cognac') || lowerName.includes('chocolate')) {
+                defaultColor = 'Dark Brown';
+            } else if (lowerName.includes('tan') || lowerName.includes('camel') || lowerName.includes('honey') || lowerName.includes('mustard') || lowerName.includes('beige')) {
+                defaultColor = 'Tan / Camel';
+            }
+            selectedQvColor = defaultColor;
+            selectedQvSize = '7/40';
+
             // Check if Medicated shoe (exclude insole accessory itself)
             const isMedicatedShoe = (name.toLowerCase().includes('medicated') || (name.toLowerCase().includes('comfort') && name.toLowerCase().includes('loafer'))) && !name.toLowerCase().includes('inner sole') && !name.toLowerCase().includes('foam') && parsePkrPrice(activePrice) > 2000;
             
@@ -706,6 +718,38 @@
             if (firstThumb) {
                 firstThumb.classList.remove('border', 'border-gray-300');
                 firstThumb.classList.add('border-2', 'border-black');
+            }
+
+            // Pre-select & highlight default Size (7/40)
+            document.querySelectorAll('.qv-size-btn').forEach(b => {
+                if (b.textContent.trim() === '7/40') {
+                    b.classList.remove('border', 'border-gray-300', 'text-gray-700', 'font-medium');
+                    b.classList.add('bg-black', 'text-white', 'font-bold', 'shadow-sm');
+                } else {
+                    b.classList.remove('bg-black', 'text-white', 'font-bold', 'shadow-sm');
+                    b.classList.add('border', 'border-gray-300', 'text-gray-700', 'font-medium');
+                }
+            });
+            if (document.getElementById('qvSelectedSizeText')) {
+                document.getElementById('qvSelectedSizeText').textContent = '7/40';
+            }
+
+            // Pre-select & highlight default Color (matching product or Black)
+            document.querySelectorAll('.qv-color-btn').forEach(b => {
+                const txt = b.textContent.trim().toLowerCase();
+                const isMatch = (defaultColor === 'Dark Brown' && txt.includes('brown')) ||
+                                (defaultColor === 'Tan / Camel' && (txt.includes('tan') || txt.includes('camel'))) ||
+                                (defaultColor === 'Black' && txt.includes('black'));
+                if (isMatch) {
+                    b.classList.remove('border', 'border-gray-300', 'text-gray-700', 'font-medium');
+                    b.classList.add('bg-black', 'text-white', 'font-bold', 'shadow-sm');
+                } else {
+                    b.classList.remove('bg-black', 'text-white', 'font-bold', 'shadow-sm');
+                    b.classList.add('border', 'border-gray-300', 'text-gray-700', 'font-medium');
+                }
+            });
+            if (document.getElementById('qvSelectedColorText')) {
+                document.getElementById('qvSelectedColorText').textContent = defaultColor;
             }
 
             currentQvQty = 1;
@@ -917,18 +961,24 @@
         }
 
         function submitQvAddToCart() {
-            const name = qvProductName.textContent.trim();
-            const price = qvActivePrice.textContent.trim();
-            const image = qvProductImage.src;
-            addToCart(name, price, '', image, selectedQvSize, selectedQvColor, currentQvQty);
+            const name = qvProductName ? qvProductName.textContent.trim() : 'Footwear Item';
+            const price = qvActivePrice ? qvActivePrice.textContent.trim() : '0';
+            const image = qvProductImage ? qvProductImage.src : '';
+            const size = selectedQvSize || '7/40';
+            const color = selectedQvColor || 'Black';
+            const qty = currentQvQty || 1;
+            addToCart(name, price, '', image, size, color, qty);
             closeQuickViewModal();
         }
 
         function submitQvBuyNow() {
-            const name = qvProductName.textContent.trim();
-            const price = qvActivePrice.textContent.trim();
-            const image = qvProductImage.src;
-            addToCart(name, price, '', image, selectedQvSize, selectedQvColor, currentQvQty);
+            const name = qvProductName ? qvProductName.textContent.trim() : 'Footwear Item';
+            const price = qvActivePrice ? qvActivePrice.textContent.trim() : '0';
+            const image = qvProductImage ? qvProductImage.src : '';
+            const size = selectedQvSize || '7/40';
+            const color = selectedQvColor || 'Black';
+            const qty = currentQvQty || 1;
+            addToCart(name, price, '', image, size, color, qty);
             closeQuickViewModal();
             window.location.href = '/checkout/';
         }
