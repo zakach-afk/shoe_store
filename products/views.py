@@ -7,10 +7,13 @@ def home(request):
     categories = Category.objects.all().order_by('order', 'name')
     products = Product.objects.filter(is_active=True).prefetch_related('images')
     
-    peshawari_products = Product.objects.filter(category__slug='peshawari-chappals', is_active=True).prefetch_related('images')[:4]
-    formals_products = Product.objects.filter(category__slug='formals', is_active=True).prefetch_related('images')[:4]
-    casuals_products = Product.objects.filter(category__slug='casuals', is_active=True).prefetch_related('images')[:4]
-    chelsea_products = Product.objects.filter(category__slug='chelsea', is_active=True).prefetch_related('images')[:4]
+    peshawari_products = Product.objects.filter(category__slug='peshawari-chappals', is_active=True).prefetch_related('images')[:8]
+    formals_products = Product.objects.filter(category__slug='formals', is_active=True).prefetch_related('images')[:8]
+    casuals_products = Product.objects.filter(category__slug='casuals', is_active=True).prefetch_related('images')[:8]
+    chelsea_products = Product.objects.filter(category__slug='chelsea', is_active=True).prefetch_related('images')[:8]
+    sandals_products = Product.objects.filter(category__slug='sandals', is_active=True).prefetch_related('images')[:8]
+    skechers_products = Product.objects.filter(category__slug='skechers', is_active=True).prefetch_related('images')[:8]
+    slippers_products = Product.objects.filter(category__slug='slippers', is_active=True).prefetch_related('images')[:8]
     
     context = {
         'categories': categories,
@@ -19,6 +22,9 @@ def home(request):
         'formals_products': formals_products,
         'casuals_products': casuals_products,
         'chelsea_products': chelsea_products,
+        'sandals_products': sandals_products,
+        'skechers_products': skechers_products,
+        'slippers_products': slippers_products,
     }
     return render(request, 'products/home.html', context)
 
