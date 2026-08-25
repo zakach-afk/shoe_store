@@ -2721,6 +2721,1599 @@
   }
 },
 {
+  "model": "products.productimage",
+  "pk": 34,
+  "fields": {
+    "product": 34,
+    "image": "products/lifestyle_brown_peshawari.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 35,
+  "fields": {
+    "product": 35,
+    "image": "products/lifestyle_black_woven_peshawari.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 36,
+  "fields": {
+    "product": 36,
+    "image": "products/lifestyle_brown_woven_peshawari.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 37,
+  "fields": {
+    "product": 37,
+    "image": "products/lifestyle_plain_black_peshawari.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 38,
+  "fields": {
+    "product": 33,
+    "image": "products/lifestyle_brown_peshawari.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 39,
+  "fields": {
+    "product": 32,
+    "image": "products/lifestyle_black_woven_peshawari.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 40,
+  "fields": {
+    "product": 31,
+    "image": "products/lifestyle_brown_woven_peshawari.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 45,
+  "fields": {
+    "product": 26,
+    "image": "products/lifestyle_plain_black_peshawari.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 46,
+  "fields": {
+    "product": 25,
+    "image": "products/lifestyle_brown_peshawari.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 47,
+  "fields": {
+    "product": 24,
+    "image": "products/lifestyle_black_woven_peshawari.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 62,
+  "fields": {
+    "product": 9,
+    "image": "products/lifestyle_brown_peshawari.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 63,
+  "fields": {
+    "product": 8,
+    "image": "products/lifestyle_black_woven_peshawari.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 64,
+  "fields": {
+    "product": 7,
+    "image": "products/lifestyle_brown_woven_peshawari.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 65,
+  "fields": {
+    "product": 6,
+    "image": "products/lifestyle_plain_black_peshawari.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 70,
+  "fields": {
+    "product": 1,
+    "image": "products/lifestyle_brown_peshawari.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 85,
+  "fields": {
+    "product": 52,
+    "image": "products/skechers_walkaroo_navy_grey.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 86,
+  "fields": {
+    "product": 53,
+    "image": "products/skechers_walkaroo_light_grey.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 87,
+  "fields": {
+    "product": 54,
+    "image": "products/skechers_walkaroo_charcoal_grey.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 88,
+  "fields": {
+    "product": 55,
+    "image": "products/skechers_gowalk_collection_set.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 89,
+  "fields": {
+    "product": 56,
+    "image": "products/skechers_walkaroo_jet_black.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 90,
+  "fields": {
+    "product": 57,
+    "image": "products/skechers_mz02_navy_orange.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 91,
+  "fields": {
+    "product": 58,
+    "image": "products/skechers_lcs_stealth_black.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 92,
+  "fields": {
+    "product": 59,
+    "image": "products/skechers_mz02_master_set.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 93,
+  "fields": {
+    "product": 60,
+    "image": "products/skechers_performance_royal_navy.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 94,
+  "fields": {
+    "product": 61,
+    "image": "products/skechers_walkaroo_speckled_black.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 95,
+  "fields": {
+    "product": 62,
+    "image": "products/skechers_mz04_master_banner.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 96,
+  "fields": {
+    "product": 63,
+    "image": "products/skechers_skx_slate_grey.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 97,
+  "fields": {
+    "product": 64,
+    "image": "products/skechers_red_line_charcoal.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 98,
+  "fields": {
+    "product": 65,
+    "image": "products/skechers_skx_midnight_black.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 99,
+  "fields": {
+    "product": 66,
+    "image": "products/skechers_skx_royal_navy.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 100,
+  "fields": {
+    "product": 67,
+    "image": "products/skechers_mz06_collection_set.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 101,
+  "fields": {
+    "product": 68,
+    "image": "products/casual_v2_olive_suede_loafer.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 102,
+  "fields": {
+    "product": 69,
+    "image": "products/casual_v2_black_suede_loafer.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 103,
+  "fields": {
+    "product": 70,
+    "image": "products/casual_v2_espresso_suede_loafer.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 104,
+  "fields": {
+    "product": 71,
+    "image": "products/casual_v2_camel_suede_loafer.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 105,
+  "fields": {
+    "product": 72,
+    "image": "products/casual_v2_slate_grey_loafer.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 106,
+  "fields": {
+    "product": 73,
+    "image": "products/casual_fisherman_black_sandal.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 107,
+  "fields": {
+    "product": 74,
+    "image": "products/casual_textured_chocolate_sandal.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 108,
+  "fields": {
+    "product": 75,
+    "image": "products/casual_chestnut_brown_sandal.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 109,
+  "fields": {
+    "product": 76,
+    "image": "products/casual_espresso_slipon_sandal.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 110,
+  "fields": {
+    "product": 77,
+    "image": "products/casual_embossed_dark_brown_sandal.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 111,
+  "fields": {
+    "product": 78,
+    "image": "products/casual_midnight_black_woven_sandal.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 112,
+  "fields": {
+    "product": 79,
+    "image": "products/casual_h_buckle_chocolate_sandal.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 113,
+  "fields": {
+    "product": 80,
+    "image": "products/casual_obsidian_black_fisherman.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 114,
+  "fields": {
+    "product": 81,
+    "image": "products/casual_crest_black_gladiator.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 115,
+  "fields": {
+    "product": 82,
+    "image": "products/casual_cognac_brown_traditional_sandal.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 116,
+  "fields": {
+    "product": 83,
+    "image": "products/casual_black_leather_woven_sandal_v3.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 117,
+  "fields": {
+    "product": 84,
+    "image": "products/casual_buckled_black_fisherman.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 118,
+  "fields": {
+    "product": 85,
+    "image": "products/casual_jet_black_open_woven_sandal.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 119,
+  "fields": {
+    "product": 86,
+    "image": "products/casual_obsidian_black_closed_toe.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 120,
+  "fields": {
+    "product": 87,
+    "image": "products/casual_classic_strapped_black_sandal.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 121,
+  "fields": {
+    "product": 88,
+    "image": "products/casual_dark_chocolate_handstitched_sandal.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 122,
+  "fields": {
+    "product": 89,
+    "image": "products/casual_midnight_black_h_buckle_sandal.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 123,
+  "fields": {
+    "product": 90,
+    "image": "products/casual_snake_embossed_black_sandal.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 124,
+  "fields": {
+    "product": 91,
+    "image": "products/casual_deep_espresso_closed_toe_v3.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 125,
+  "fields": {
+    "product": 92,
+    "image": "products/casual_dark_brown_woven_fisherman_v3.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 126,
+  "fields": {
+    "product": 93,
+    "image": "products/casual_dark_brown_cross_stitched.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 127,
+  "fields": {
+    "product": 94,
+    "image": "products/casual_midnight_black_h_buckle_v4.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 128,
+  "fields": {
+    "product": 95,
+    "image": "products/casual_black_textured_closed_toe_v4.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 129,
+  "fields": {
+    "product": 96,
+    "image": "products/casual_cognac_brown_snake_embossed.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 130,
+  "fields": {
+    "product": 97,
+    "image": "products/casual_classic_black_strapped_v4.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 131,
+  "fields": {
+    "product": 98,
+    "image": "products/casual_black_leather_woven_v5.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 132,
+  "fields": {
+    "product": 99,
+    "image": "products/casual_h_buckle_chocolate_v5.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 133,
+  "fields": {
+    "product": 100,
+    "image": "products/casual_handstitched_black_sandal_v5.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 134,
+  "fields": {
+    "product": 101,
+    "image": "products/casual_cognac_brown_woven_v5.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 135,
+  "fields": {
+    "product": 102,
+    "image": "products/casual_dark_espresso_closed_toe_v5.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 136,
+  "fields": {
+    "product": 103,
+    "image": "products/casual_jet_black_woven_fisherman_v6.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 137,
+  "fields": {
+    "product": 104,
+    "image": "products/casual_cognac_suede_tassel_loafer.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 138,
+  "fields": {
+    "product": 105,
+    "image": "products/casual_espresso_suede_buckle_loafer.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 139,
+  "fields": {
+    "product": 106,
+    "image": "products/casual_camel_suede_gold_buckle_loafer.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 140,
+  "fields": {
+    "product": 107,
+    "image": "products/casual_black_suede_tassel_loafer.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 141,
+  "fields": {
+    "product": 108,
+    "image": "products/casual_sand_beige_suede_tassel_loafer.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 142,
+  "fields": {
+    "product": 109,
+    "image": "products/casual_olive_suede_tassel_loafer_v2.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 143,
+  "fields": {
+    "product": 110,
+    "image": "products/casual_midnight_black_suede_tassel_v2.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 144,
+  "fields": {
+    "product": 111,
+    "image": "products/casual_tan_suede_gold_buckle_v2.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 145,
+  "fields": {
+    "product": 112,
+    "image": "products/casual_espresso_suede_gold_bar_v2.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 146,
+  "fields": {
+    "product": 113,
+    "image": "products/casual_olive_suede_gold_bar_v2.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 147,
+  "fields": {
+    "product": 114,
+    "image": "products/formal_jet_black_woven_loafer.png",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 148,
+  "fields": {
+    "product": 115,
+    "image": "products/formal_dark_brown_woven_gold_buckle.png",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 149,
+  "fields": {
+    "product": 116,
+    "image": "products/formal_cognac_brown_woven_loafer.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 150,
+  "fields": {
+    "product": 117,
+    "image": "products/formal_espresso_woven_monk_loafer.png",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 151,
+  "fields": {
+    "product": 118,
+    "image": "products/formal_dark_espresso_woven_loafer.png",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 152,
+  "fields": {
+    "product": 119,
+    "image": "products/formal_black_lv_crest_loafer.png",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 153,
+  "fields": {
+    "product": 120,
+    "image": "products/formal_cognac_lv_crest_loafer.png",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 154,
+  "fields": {
+    "product": 121,
+    "image": "products/formal_black_woven_gold_horsebit.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 157,
+  "fields": {
+    "product": 124,
+    "image": "products/formal_hand_burnished_espresso_v3.png",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 158,
+  "fields": {
+    "product": 125,
+    "image": "products/formal_deep_espresso_dress_loafer_v3.png",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 159,
+  "fields": {
+    "product": 126,
+    "image": "products/formal_jet_black_woven_metallic_buckle.png",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 160,
+  "fields": {
+    "product": 127,
+    "image": "products/formal_dark_brown_woven_bar_loafer.png",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 161,
+  "fields": {
+    "product": 128,
+    "image": "products/formal_dark_brown_woven_executive_loafer.png",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 162,
+  "fields": {
+    "product": 129,
+    "image": "products/formal_hand_burnished_espresso_v4.png",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 163,
+  "fields": {
+    "product": 130,
+    "image": "products/formal_black_woven_horsebit_v4.png",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 164,
+  "fields": {
+    "product": 131,
+    "image": "products/formal_cognac_brown_woven_v4.png",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 165,
+  "fields": {
+    "product": 132,
+    "image": "products/formal_dark_espresso_ombre_v4.png",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 166,
+  "fields": {
+    "product": 133,
+    "image": "products/formal_jet_black_lv_crest_v4.png",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 167,
+  "fields": {
+    "product": 134,
+    "image": "products/formal_dark_espresso_woven_buckle_v5.png",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 168,
+  "fields": {
+    "product": 135,
+    "image": "products/formal_jet_black_woven_saddle_v5.png",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 169,
+  "fields": {
+    "product": 136,
+    "image": "products/casual_loro_piana_021_dark_brown.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 170,
+  "fields": {
+    "product": 137,
+    "image": "products/casual_loro_piana_021_jet_black.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 171,
+  "fields": {
+    "product": 138,
+    "image": "products/casual_loro_piana_021_olive_green.png",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 172,
+  "fields": {
+    "product": 139,
+    "image": "products/casual_loro_piana_021_camel_tan.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 173,
+  "fields": {
+    "product": 140,
+    "image": "products/casual_loro_piana_021_slate_grey.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 174,
+  "fields": {
+    "product": 141,
+    "image": "products/casual_loro_piana_030_camel_tan.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 175,
+  "fields": {
+    "product": 142,
+    "image": "products/casual_loro_piana_030_midnight_black.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 176,
+  "fields": {
+    "product": 143,
+    "image": "products/casual_loro_piana_030_olive_green.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 177,
+  "fields": {
+    "product": 144,
+    "image": "products/casual_loro_piana_030_dark_espresso.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 178,
+  "fields": {
+    "product": 145,
+    "image": "products/casual_loro_piana_030_khaki_taupe.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 179,
+  "fields": {
+    "product": 146,
+    "image": "products/casual_loro_piana_031_taupe_grey.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 180,
+  "fields": {
+    "product": 147,
+    "image": "products/casual_loro_piana_031_tan_cognac.png",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 181,
+  "fields": {
+    "product": 148,
+    "image": "products/casual_loro_piana_031_dark_espresso.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 182,
+  "fields": {
+    "product": 149,
+    "image": "products/casual_loro_piana_031_olive_sage.png",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 183,
+  "fields": {
+    "product": 150,
+    "image": "products/casual_loro_piana_031_taupe_grey_v2.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 184,
+  "fields": {
+    "product": 151,
+    "image": "products/casual_loro_piana_032_navy_blue.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 185,
+  "fields": {
+    "product": 152,
+    "image": "products/casual_loro_piana_032_dark_charcoal.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 186,
+  "fields": {
+    "product": 153,
+    "image": "products/casual_loro_piana_032_olive_green.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 187,
+  "fields": {
+    "product": 154,
+    "image": "products/casual_loro_piana_032_cognac_tan.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 188,
+  "fields": {
+    "product": 155,
+    "image": "products/casual_loro_piana_032_mushroom_taupe.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 189,
+  "fields": {
+    "product": 156,
+    "image": "products/casual_loro_piana_029_dark_espresso.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 190,
+  "fields": {
+    "product": 157,
+    "image": "products/casual_loro_piana_029_cognac_tan.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 191,
+  "fields": {
+    "product": 158,
+    "image": "products/casual_loro_piana_029_midnight_black.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 192,
+  "fields": {
+    "product": 159,
+    "image": "products/casual_loro_piana_029_sand_beige.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 193,
+  "fields": {
+    "product": 160,
+    "image": "products/casual_loro_piana_029_olive_green.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 194,
+  "fields": {
+    "product": 161,
+    "image": "products/formal_jet_black_comfort_derby.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 195,
+  "fields": {
+    "product": 162,
+    "image": "products/formal_dark_espresso_burnished_derby.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 196,
+  "fields": {
+    "product": 163,
+    "image": "products/formal_cognac_tan_burnished_derby.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 197,
+  "fields": {
+    "product": 164,
+    "image": "products/formal_valentino_jet_black_captoe_oxford.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 198,
+  "fields": {
+    "product": 165,
+    "image": "products/formal_valentino_cognac_brown_captoe_oxford.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 199,
+  "fields": {
+    "product": 166,
+    "image": "products/formal_valentino_dark_espresso_captoe_oxford.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 200,
+  "fields": {
+    "product": 167,
+    "image": "products/formal_burnished_mahogany_gored_derby.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 201,
+  "fields": {
+    "product": 168,
+    "image": "products/formal_deep_chestnut_gored_derby.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 202,
+  "fields": {
+    "product": 169,
+    "image": "products/formal_high_gloss_black_gored_derby.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 214,
+  "fields": {
+    "product": 181,
+    "image": "products/casual_jet_black_woven_fisherman_v6.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 215,
+  "fields": {
+    "product": 182,
+    "image": "products/casual_dark_espresso_closed_toe_v5.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 216,
+  "fields": {
+    "product": 183,
+    "image": "products/casual_cognac_brown_woven_v5.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 217,
+  "fields": {
+    "product": 184,
+    "image": "products/casual_handstitched_black_sandal_v5.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 218,
+  "fields": {
+    "product": 185,
+    "image": "products/casual_h_buckle_chocolate_v5.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 219,
+  "fields": {
+    "product": 186,
+    "image": "products/casual_black_leather_woven_v5.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 220,
+  "fields": {
+    "product": 187,
+    "image": "products/casual_classic_black_strapped_v4.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 221,
+  "fields": {
+    "product": 188,
+    "image": "products/casual_loro_piana_029_olive_green.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 222,
+  "fields": {
+    "product": 189,
+    "image": "products/casual_loro_piana_029_sand_beige.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 223,
+  "fields": {
+    "product": 190,
+    "image": "products/casual_loro_piana_029_midnight_black.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 224,
+  "fields": {
+    "product": 191,
+    "image": "products/casual_loro_piana_029_cognac_tan.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 225,
+  "fields": {
+    "product": 192,
+    "image": "products/casual_loro_piana_029_dark_espresso.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 226,
+  "fields": {
+    "product": 193,
+    "image": "products/casual_loro_piana_032_mushroom_taupe.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 227,
+  "fields": {
+    "product": 194,
+    "image": "products/casual_loro_piana_032_cognac_tan.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 228,
+  "fields": {
+    "product": 195,
+    "image": "products/casual_loro_piana_032_olive_green.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 229,
+  "fields": {
+    "product": 196,
+    "image": "products/chelsea_cognac_brown_classic.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 230,
+  "fields": {
+    "product": 197,
+    "image": "products/chelsea_tan_brown_buckling_strap.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 231,
+  "fields": {
+    "product": 198,
+    "image": "products/chelsea_dark_espresso_burnished_strap.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 232,
+  "fields": {
+    "product": 199,
+    "image": "products/chelsea_jet_black_textured_strap.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 233,
+  "fields": {
+    "product": 200,
+    "image": "products/chelsea_jet_black_smooth_classic.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 234,
+  "fields": {
+    "product": 201,
+    "image": "products/chelsea_honey_tan_classic.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 237,
+  "fields": {
+    "product": 203,
+    "image": "products/casual_medicated_all_black.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 238,
+  "fields": {
+    "product": 203,
+    "image": "products/medicated_inner_sole.png",
+    "is_primary": false
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 239,
+  "fields": {
+    "product": 204,
+    "image": "products/casual_medicated_cognac_brown.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 240,
+  "fields": {
+    "product": 204,
+    "image": "products/medicated_inner_sole.png",
+    "is_primary": false
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 241,
+  "fields": {
+    "product": 205,
+    "image": "products/casual_medicated_black_crest.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 242,
+  "fields": {
+    "product": 205,
+    "image": "products/medicated_inner_sole.png",
+    "is_primary": false
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 243,
+  "fields": {
+    "product": 206,
+    "image": "products/casual_medicated_brown_solo_tag.png",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 244,
+  "fields": {
+    "product": 206,
+    "image": "products/medicated_inner_sole.png",
+    "is_primary": false
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 245,
+  "fields": {
+    "product": 207,
+    "image": "products/casual_medicated_brown_perforated.png",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 246,
+  "fields": {
+    "product": 207,
+    "image": "products/medicated_inner_sole.png",
+    "is_primary": false
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 247,
+  "fields": {
+    "product": 208,
+    "image": "products/casual_medicated_black_perforated.png",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 248,
+  "fields": {
+    "product": 208,
+    "image": "products/medicated_inner_sole.png",
+    "is_primary": false
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 249,
+  "fields": {
+    "product": 209,
+    "image": "products/casual_medicated_tan_perforated.jpg",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 250,
+  "fields": {
+    "product": 209,
+    "image": "products/medicated_inner_sole.png",
+    "is_primary": false
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 251,
+  "fields": {
+    "product": 210,
+    "image": "products/casual_medicated_dark_espresso_tag.png",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 252,
+  "fields": {
+    "product": 210,
+    "image": "products/medicated_inner_sole.png",
+    "is_primary": false
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 253,
+  "fields": {
+    "product": 211,
+    "image": "products/casual_medicated_cognac_perforated_tag.png",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 254,
+  "fields": {
+    "product": 211,
+    "image": "products/medicated_inner_sole.png",
+    "is_primary": false
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 255,
+  "fields": {
+    "product": 212,
+    "image": "products/casual_medicated_dark_brown_chino.png",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 256,
+  "fields": {
+    "product": 212,
+    "image": "products/medicated_inner_sole.png",
+    "is_primary": false
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 257,
+  "fields": {
+    "product": 213,
+    "image": "products/casual_medicated_cognac_crest.png",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 258,
+  "fields": {
+    "product": 213,
+    "image": "products/medicated_inner_sole.png",
+    "is_primary": false
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 259,
+  "fields": {
+    "product": 214,
+    "image": "products/casual_medicated_tan_stitch_tag.png",
+    "is_primary": true
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 260,
+  "fields": {
+    "product": 214,
+    "image": "products/medicated_inner_sole.png",
+    "is_primary": false
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 261,
+  "fields": {
+    "product": 215,
+    "image": "products/medicated_insole_accessory.png",
+    "is_primary": true
+  }
+},
+{
   "model": "products.productsize",
   "pk": 25,
   "fields": {
@@ -12618,1634 +14211,6 @@
     "product": 215,
     "size": "10/43 - 11/44",
     "stock": 50
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 34,
-  "fields": {
-    "product": 34,
-    "image": "products/lifestyle_brown_peshawari.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 35,
-  "fields": {
-    "product": 35,
-    "image": "products/lifestyle_black_woven_peshawari.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 36,
-  "fields": {
-    "product": 36,
-    "image": "products/lifestyle_brown_woven_peshawari.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 37,
-  "fields": {
-    "product": 37,
-    "image": "products/lifestyle_plain_black_peshawari.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 38,
-  "fields": {
-    "product": 33,
-    "image": "products/lifestyle_brown_peshawari.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 39,
-  "fields": {
-    "product": 32,
-    "image": "products/lifestyle_black_woven_peshawari.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 40,
-  "fields": {
-    "product": 31,
-    "image": "products/lifestyle_brown_woven_peshawari.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 45,
-  "fields": {
-    "product": 26,
-    "image": "products/lifestyle_plain_black_peshawari.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 46,
-  "fields": {
-    "product": 25,
-    "image": "products/lifestyle_brown_peshawari.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 47,
-  "fields": {
-    "product": 24,
-    "image": "products/lifestyle_black_woven_peshawari.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 62,
-  "fields": {
-    "product": 9,
-    "image": "products/lifestyle_brown_peshawari.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 63,
-  "fields": {
-    "product": 8,
-    "image": "products/lifestyle_black_woven_peshawari.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 64,
-  "fields": {
-    "product": 7,
-    "image": "products/lifestyle_brown_woven_peshawari.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 65,
-  "fields": {
-    "product": 6,
-    "image": "products/lifestyle_plain_black_peshawari.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 70,
-  "fields": {
-    "product": 1,
-    "image": "products/lifestyle_brown_peshawari.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 85,
-  "fields": {
-    "product": 52,
-    "image": "products/skechers_walkaroo_navy_grey.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 86,
-  "fields": {
-    "product": 53,
-    "image": "products/skechers_walkaroo_light_grey.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 87,
-  "fields": {
-    "product": 54,
-    "image": "products/skechers_walkaroo_charcoal_grey.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 88,
-  "fields": {
-    "product": 55,
-    "image": "products/skechers_gowalk_collection_set.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 89,
-  "fields": {
-    "product": 56,
-    "image": "products/skechers_walkaroo_jet_black.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 90,
-  "fields": {
-    "product": 57,
-    "image": "products/skechers_mz02_navy_orange.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 91,
-  "fields": {
-    "product": 58,
-    "image": "products/skechers_lcs_stealth_black.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 92,
-  "fields": {
-    "product": 59,
-    "image": "products/skechers_mz02_master_set.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 93,
-  "fields": {
-    "product": 60,
-    "image": "products/skechers_performance_royal_navy.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 94,
-  "fields": {
-    "product": 61,
-    "image": "products/skechers_walkaroo_speckled_black.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 95,
-  "fields": {
-    "product": 62,
-    "image": "products/skechers_mz04_master_banner.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 96,
-  "fields": {
-    "product": 63,
-    "image": "products/skechers_skx_slate_grey.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 97,
-  "fields": {
-    "product": 64,
-    "image": "products/skechers_red_line_charcoal.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 98,
-  "fields": {
-    "product": 65,
-    "image": "products/skechers_skx_midnight_black.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 99,
-  "fields": {
-    "product": 66,
-    "image": "products/skechers_skx_royal_navy.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 100,
-  "fields": {
-    "product": 67,
-    "image": "products/skechers_mz06_collection_set.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 101,
-  "fields": {
-    "product": 68,
-    "image": "products/casual_v2_olive_suede_loafer.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 102,
-  "fields": {
-    "product": 69,
-    "image": "products/casual_v2_black_suede_loafer.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 103,
-  "fields": {
-    "product": 70,
-    "image": "products/casual_v2_espresso_suede_loafer.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 104,
-  "fields": {
-    "product": 71,
-    "image": "products/casual_v2_camel_suede_loafer.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 105,
-  "fields": {
-    "product": 72,
-    "image": "products/casual_v2_slate_grey_loafer.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 106,
-  "fields": {
-    "product": 73,
-    "image": "products/casual_fisherman_black_sandal.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 107,
-  "fields": {
-    "product": 74,
-    "image": "products/casual_textured_chocolate_sandal.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 108,
-  "fields": {
-    "product": 75,
-    "image": "products/casual_chestnut_brown_sandal.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 109,
-  "fields": {
-    "product": 76,
-    "image": "products/casual_espresso_slipon_sandal.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 110,
-  "fields": {
-    "product": 77,
-    "image": "products/casual_embossed_dark_brown_sandal.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 111,
-  "fields": {
-    "product": 78,
-    "image": "products/casual_midnight_black_woven_sandal.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 112,
-  "fields": {
-    "product": 79,
-    "image": "products/casual_h_buckle_chocolate_sandal.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 113,
-  "fields": {
-    "product": 80,
-    "image": "products/casual_obsidian_black_fisherman.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 114,
-  "fields": {
-    "product": 81,
-    "image": "products/casual_crest_black_gladiator.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 115,
-  "fields": {
-    "product": 82,
-    "image": "products/casual_cognac_brown_traditional_sandal.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 116,
-  "fields": {
-    "product": 83,
-    "image": "products/casual_black_leather_woven_sandal_v3.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 117,
-  "fields": {
-    "product": 84,
-    "image": "products/casual_buckled_black_fisherman.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 118,
-  "fields": {
-    "product": 85,
-    "image": "products/casual_jet_black_open_woven_sandal.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 119,
-  "fields": {
-    "product": 86,
-    "image": "products/casual_obsidian_black_closed_toe.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 120,
-  "fields": {
-    "product": 87,
-    "image": "products/casual_classic_strapped_black_sandal.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 121,
-  "fields": {
-    "product": 88,
-    "image": "products/casual_dark_chocolate_handstitched_sandal.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 122,
-  "fields": {
-    "product": 89,
-    "image": "products/casual_midnight_black_h_buckle_sandal.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 123,
-  "fields": {
-    "product": 90,
-    "image": "products/casual_snake_embossed_black_sandal.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 124,
-  "fields": {
-    "product": 91,
-    "image": "products/casual_deep_espresso_closed_toe_v3.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 125,
-  "fields": {
-    "product": 92,
-    "image": "products/casual_dark_brown_woven_fisherman_v3.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 126,
-  "fields": {
-    "product": 93,
-    "image": "products/casual_dark_brown_cross_stitched.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 127,
-  "fields": {
-    "product": 94,
-    "image": "products/casual_midnight_black_h_buckle_v4.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 128,
-  "fields": {
-    "product": 95,
-    "image": "products/casual_black_textured_closed_toe_v4.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 129,
-  "fields": {
-    "product": 96,
-    "image": "products/casual_cognac_brown_snake_embossed.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 130,
-  "fields": {
-    "product": 97,
-    "image": "products/casual_classic_black_strapped_v4.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 131,
-  "fields": {
-    "product": 98,
-    "image": "products/casual_black_leather_woven_v5.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 132,
-  "fields": {
-    "product": 99,
-    "image": "products/casual_h_buckle_chocolate_v5.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 133,
-  "fields": {
-    "product": 100,
-    "image": "products/casual_handstitched_black_sandal_v5.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 134,
-  "fields": {
-    "product": 101,
-    "image": "products/casual_cognac_brown_woven_v5.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 135,
-  "fields": {
-    "product": 102,
-    "image": "products/casual_dark_espresso_closed_toe_v5.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 136,
-  "fields": {
-    "product": 103,
-    "image": "products/casual_jet_black_woven_fisherman_v6.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 137,
-  "fields": {
-    "product": 104,
-    "image": "products/casual_cognac_suede_tassel_loafer.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 138,
-  "fields": {
-    "product": 105,
-    "image": "products/casual_espresso_suede_buckle_loafer.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 139,
-  "fields": {
-    "product": 106,
-    "image": "products/casual_camel_suede_gold_buckle_loafer.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 140,
-  "fields": {
-    "product": 107,
-    "image": "products/casual_black_suede_tassel_loafer.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 141,
-  "fields": {
-    "product": 108,
-    "image": "products/casual_sand_beige_suede_tassel_loafer.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 142,
-  "fields": {
-    "product": 109,
-    "image": "products/casual_olive_suede_tassel_loafer_v2.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 143,
-  "fields": {
-    "product": 110,
-    "image": "products/casual_midnight_black_suede_tassel_v2.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 144,
-  "fields": {
-    "product": 111,
-    "image": "products/casual_tan_suede_gold_buckle_v2.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 145,
-  "fields": {
-    "product": 112,
-    "image": "products/casual_espresso_suede_gold_bar_v2.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 146,
-  "fields": {
-    "product": 113,
-    "image": "products/casual_olive_suede_gold_bar_v2.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 147,
-  "fields": {
-    "product": 114,
-    "image": "products/formal_jet_black_woven_loafer.png",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 148,
-  "fields": {
-    "product": 115,
-    "image": "products/formal_dark_brown_woven_gold_buckle.png",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 149,
-  "fields": {
-    "product": 116,
-    "image": "products/formal_cognac_brown_woven_loafer.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 150,
-  "fields": {
-    "product": 117,
-    "image": "products/formal_espresso_woven_monk_loafer.png",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 151,
-  "fields": {
-    "product": 118,
-    "image": "products/formal_dark_espresso_woven_loafer.png",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 152,
-  "fields": {
-    "product": 119,
-    "image": "products/formal_black_lv_crest_loafer.png",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 153,
-  "fields": {
-    "product": 120,
-    "image": "products/formal_cognac_lv_crest_loafer.png",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 154,
-  "fields": {
-    "product": 121,
-    "image": "products/formal_black_woven_gold_horsebit.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 157,
-  "fields": {
-    "product": 124,
-    "image": "products/formal_hand_burnished_espresso_v3.png",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 158,
-  "fields": {
-    "product": 125,
-    "image": "products/formal_deep_espresso_dress_loafer_v3.png",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 159,
-  "fields": {
-    "product": 126,
-    "image": "products/formal_jet_black_woven_metallic_buckle.png",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 160,
-  "fields": {
-    "product": 127,
-    "image": "products/formal_dark_brown_woven_bar_loafer.png",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 161,
-  "fields": {
-    "product": 128,
-    "image": "products/formal_dark_brown_woven_executive_loafer.png",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 162,
-  "fields": {
-    "product": 129,
-    "image": "products/formal_hand_burnished_espresso_v4.png",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 163,
-  "fields": {
-    "product": 130,
-    "image": "products/formal_black_woven_horsebit_v4.png",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 164,
-  "fields": {
-    "product": 131,
-    "image": "products/formal_cognac_brown_woven_v4.png",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 165,
-  "fields": {
-    "product": 132,
-    "image": "products/formal_dark_espresso_ombre_v4.png",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 166,
-  "fields": {
-    "product": 133,
-    "image": "products/formal_jet_black_lv_crest_v4.png",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 167,
-  "fields": {
-    "product": 134,
-    "image": "products/formal_dark_espresso_woven_buckle_v5.png",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 168,
-  "fields": {
-    "product": 135,
-    "image": "products/formal_jet_black_woven_saddle_v5.png",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 169,
-  "fields": {
-    "product": 136,
-    "image": "products/casual_loro_piana_021_dark_brown.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 170,
-  "fields": {
-    "product": 137,
-    "image": "products/casual_loro_piana_021_jet_black.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 171,
-  "fields": {
-    "product": 138,
-    "image": "products/casual_loro_piana_021_olive_green.png",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 172,
-  "fields": {
-    "product": 139,
-    "image": "products/casual_loro_piana_021_camel_tan.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 173,
-  "fields": {
-    "product": 140,
-    "image": "products/casual_loro_piana_021_slate_grey.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 174,
-  "fields": {
-    "product": 141,
-    "image": "products/casual_loro_piana_030_camel_tan.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 175,
-  "fields": {
-    "product": 142,
-    "image": "products/casual_loro_piana_030_midnight_black.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 176,
-  "fields": {
-    "product": 143,
-    "image": "products/casual_loro_piana_030_olive_green.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 177,
-  "fields": {
-    "product": 144,
-    "image": "products/casual_loro_piana_030_dark_espresso.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 178,
-  "fields": {
-    "product": 145,
-    "image": "products/casual_loro_piana_030_khaki_taupe.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 179,
-  "fields": {
-    "product": 146,
-    "image": "products/casual_loro_piana_031_taupe_grey.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 180,
-  "fields": {
-    "product": 147,
-    "image": "products/casual_loro_piana_031_tan_cognac.png",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 181,
-  "fields": {
-    "product": 148,
-    "image": "products/casual_loro_piana_031_dark_espresso.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 182,
-  "fields": {
-    "product": 149,
-    "image": "products/casual_loro_piana_031_olive_sage.png",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 183,
-  "fields": {
-    "product": 150,
-    "image": "products/casual_loro_piana_031_taupe_grey_v2.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 184,
-  "fields": {
-    "product": 151,
-    "image": "products/casual_loro_piana_032_navy_blue.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 185,
-  "fields": {
-    "product": 152,
-    "image": "products/casual_loro_piana_032_dark_charcoal.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 186,
-  "fields": {
-    "product": 153,
-    "image": "products/casual_loro_piana_032_olive_green.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 187,
-  "fields": {
-    "product": 154,
-    "image": "products/casual_loro_piana_032_cognac_tan.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 188,
-  "fields": {
-    "product": 155,
-    "image": "products/casual_loro_piana_032_mushroom_taupe.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 189,
-  "fields": {
-    "product": 156,
-    "image": "products/casual_loro_piana_029_dark_espresso.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 190,
-  "fields": {
-    "product": 157,
-    "image": "products/casual_loro_piana_029_cognac_tan.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 191,
-  "fields": {
-    "product": 158,
-    "image": "products/casual_loro_piana_029_midnight_black.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 192,
-  "fields": {
-    "product": 159,
-    "image": "products/casual_loro_piana_029_sand_beige.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 193,
-  "fields": {
-    "product": 160,
-    "image": "products/casual_loro_piana_029_olive_green.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 194,
-  "fields": {
-    "product": 161,
-    "image": "products/formal_jet_black_comfort_derby.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 195,
-  "fields": {
-    "product": 162,
-    "image": "products/formal_dark_espresso_burnished_derby.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 196,
-  "fields": {
-    "product": 163,
-    "image": "products/formal_cognac_tan_burnished_derby.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 197,
-  "fields": {
-    "product": 164,
-    "image": "products/formal_valentino_jet_black_captoe_oxford.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 198,
-  "fields": {
-    "product": 165,
-    "image": "products/formal_valentino_cognac_brown_captoe_oxford.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 199,
-  "fields": {
-    "product": 166,
-    "image": "products/formal_valentino_dark_espresso_captoe_oxford.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 200,
-  "fields": {
-    "product": 167,
-    "image": "products/formal_burnished_mahogany_gored_derby.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 201,
-  "fields": {
-    "product": 168,
-    "image": "products/formal_deep_chestnut_gored_derby.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 202,
-  "fields": {
-    "product": 169,
-    "image": "products/formal_high_gloss_black_gored_derby.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 214,
-  "fields": {
-    "product": 181,
-    "image": "products/casual_jet_black_woven_fisherman_v6.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 215,
-  "fields": {
-    "product": 182,
-    "image": "products/casual_dark_espresso_closed_toe_v5.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 216,
-  "fields": {
-    "product": 183,
-    "image": "products/casual_cognac_brown_woven_v5.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 217,
-  "fields": {
-    "product": 184,
-    "image": "products/casual_handstitched_black_sandal_v5.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 218,
-  "fields": {
-    "product": 185,
-    "image": "products/casual_h_buckle_chocolate_v5.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 219,
-  "fields": {
-    "product": 186,
-    "image": "products/casual_black_leather_woven_v5.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 220,
-  "fields": {
-    "product": 187,
-    "image": "products/casual_classic_black_strapped_v4.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 221,
-  "fields": {
-    "product": 188,
-    "image": "products/casual_loro_piana_029_olive_green.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 222,
-  "fields": {
-    "product": 189,
-    "image": "products/casual_loro_piana_029_sand_beige.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 223,
-  "fields": {
-    "product": 190,
-    "image": "products/casual_loro_piana_029_midnight_black.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 224,
-  "fields": {
-    "product": 191,
-    "image": "products/casual_loro_piana_029_cognac_tan.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 225,
-  "fields": {
-    "product": 192,
-    "image": "products/casual_loro_piana_029_dark_espresso.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 226,
-  "fields": {
-    "product": 193,
-    "image": "products/casual_loro_piana_032_mushroom_taupe.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 227,
-  "fields": {
-    "product": 194,
-    "image": "products/casual_loro_piana_032_cognac_tan.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 228,
-  "fields": {
-    "product": 195,
-    "image": "products/casual_loro_piana_032_olive_green.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 229,
-  "fields": {
-    "product": 196,
-    "image": "products/chelsea_cognac_brown_classic.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 230,
-  "fields": {
-    "product": 197,
-    "image": "products/chelsea_tan_brown_buckling_strap.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 231,
-  "fields": {
-    "product": 198,
-    "image": "products/chelsea_dark_espresso_burnished_strap.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 232,
-  "fields": {
-    "product": 199,
-    "image": "products/chelsea_jet_black_textured_strap.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 233,
-  "fields": {
-    "product": 200,
-    "image": "products/chelsea_jet_black_smooth_classic.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 234,
-  "fields": {
-    "product": 201,
-    "image": "products/chelsea_honey_tan_classic.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 237,
-  "fields": {
-    "product": 203,
-    "image": "products/casual_medicated_all_black.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 238,
-  "fields": {
-    "product": 203,
-    "image": "products/medicated_inner_sole.png",
-    "is_primary": false
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 239,
-  "fields": {
-    "product": 204,
-    "image": "products/casual_medicated_cognac_brown.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 240,
-  "fields": {
-    "product": 204,
-    "image": "products/medicated_inner_sole.png",
-    "is_primary": false
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 241,
-  "fields": {
-    "product": 205,
-    "image": "products/casual_medicated_black_crest.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 242,
-  "fields": {
-    "product": 205,
-    "image": "products/medicated_inner_sole.png",
-    "is_primary": false
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 243,
-  "fields": {
-    "product": 206,
-    "image": "products/casual_medicated_brown_solo_tag.png",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 244,
-  "fields": {
-    "product": 206,
-    "image": "products/medicated_inner_sole.png",
-    "is_primary": false
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 245,
-  "fields": {
-    "product": 207,
-    "image": "products/casual_medicated_brown_perforated.png",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 246,
-  "fields": {
-    "product": 207,
-    "image": "products/medicated_inner_sole.png",
-    "is_primary": false
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 247,
-  "fields": {
-    "product": 208,
-    "image": "products/casual_medicated_black_perforated.png",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 248,
-  "fields": {
-    "product": 208,
-    "image": "products/medicated_inner_sole.png",
-    "is_primary": false
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 249,
-  "fields": {
-    "product": 209,
-    "image": "products/casual_medicated_tan_perforated.jpg",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 250,
-  "fields": {
-    "product": 209,
-    "image": "products/medicated_inner_sole.png",
-    "is_primary": false
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 251,
-  "fields": {
-    "product": 210,
-    "image": "products/casual_medicated_dark_espresso_tag.png",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 252,
-  "fields": {
-    "product": 210,
-    "image": "products/medicated_inner_sole.png",
-    "is_primary": false
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 253,
-  "fields": {
-    "product": 211,
-    "image": "products/casual_medicated_cognac_perforated_tag.png",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 254,
-  "fields": {
-    "product": 211,
-    "image": "products/medicated_inner_sole.png",
-    "is_primary": false
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 255,
-  "fields": {
-    "product": 212,
-    "image": "products/casual_medicated_dark_brown_chino.png",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 256,
-  "fields": {
-    "product": 212,
-    "image": "products/medicated_inner_sole.png",
-    "is_primary": false
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 257,
-  "fields": {
-    "product": 213,
-    "image": "products/casual_medicated_cognac_crest.png",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 258,
-  "fields": {
-    "product": 213,
-    "image": "products/medicated_inner_sole.png",
-    "is_primary": false
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 259,
-  "fields": {
-    "product": 214,
-    "image": "products/casual_medicated_tan_stitch_tag.png",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 260,
-  "fields": {
-    "product": 214,
-    "image": "products/medicated_inner_sole.png",
-    "is_primary": false
-  }
-},
-{
-  "model": "products.productimage",
-  "pk": 261,
-  "fields": {
-    "product": 215,
-    "image": "products/medicated_insole_accessory.png",
-    "is_primary": true
-  }
-},
-{
-  "model": "products.order",
-  "pk": 1,
-  "fields": {
-    "full_name": "Client Test User",
-    "phone_number": "03203939044",
-    "city": "Lahore",
-    "shipping_address": "House 123, Street 4, Gulberg III, Lahore",
-    "total_amount": "4000.00",
-    "status": "Pending",
-    "created_at": "2026-08-15T08:50:14.155Z"
-  }
-},
-{
-  "model": "products.orderitem",
-  "pk": 1,
-  "fields": {
-    "order": 1,
-    "product": 35,
-    "size": "7/40 (Black)",
-    "quantity": 1,
-    "price": "4000.00"
-  }
-},
-{
-  "model": "products.contactmessage",
-  "pk": 1,
-  "fields": {
-    "name": "test",
-    "email": "zakach6867@gmail.com",
-    "phone": "03000000000",
-    "comment": "test sms",
-    "created_at": "2026-08-25T14:33:06.953Z"
   }
 }
 ]

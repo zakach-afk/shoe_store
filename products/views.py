@@ -161,9 +161,26 @@ def terms_of_service(request):
 
 
 import json
+import re
+import logging
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from .models import Order, OrderItem
+from .models import Order, OrderItem, Product
+
+logger = logging.getLogger(__name__)
+
+def _clean_price_val(val):
+    if isinstance(val, (int, float)):
+        return float(val)
+    if isinstance(val, str):
+        val_clean = re.sub(r'^[^\d]*', '', val)
+        val_clean = val_clean.replace(',', '')
+        val_clean = re.sub(r'[^\d.]', '', val_clean)
+        try:
+            return float(val_clean) if val_clean else 0.0
+        except ValueError:
+            return 0.0
+    return 0.0
 
 @csrf_exempt
 def api_place_order(request):
@@ -177,13 +194,26 @@ def api_place_order(request):
             items_data = data.get('items', [])
             
             if not full_name or not phone_number or not shipping_address or not items_data:
-                return JsonResponse({'success': False, 'error': 'Please fill in all required delivery fields.'}, status=400)
+                return JsonResponse({'success': False, 'error': 'Please fill in all required delivery fields and add items.'}, status=400)
             
-            total_amount = 0
+            total_amount = 0.0
+            parsed_items = []
             for item in items_data:
-                price = float(item.get('price', 0))
-                qty = int(item.get('qty', 1))
+                price = _clean_price_val(item.get('price', 0))
+                try:
+                    qty = int(item.get('qty', 1))
+                except (ValueError, TypeError):
+                    qty = 1
+                if qty < 1:
+                    qty = 1
                 total_amount += (price * qty)
+                parsed_items.append({
+                    'name': item.get('name', 'Footwear Item'),
+                    'size': item.get('size', '7/40'),
+                    'color': item.get('color', 'Black'),
+                    'qty': qty,
+                    'price': price,
+                })
                 
             # Create Order in DB
             order = Order.objects.create(
@@ -196,12 +226,12 @@ def api_place_order(request):
             )
             
             # Create OrderItems
-            for item in items_data:
-                product_name = item.get('name', '')
-                size = item.get('size', '7/40')
-                color = item.get('color', 'Black')
-                qty = int(item.get('qty', 1))
-                price = float(item.get('price', 0))
+            for item in parsed_items:
+                product_name = item['name']
+                size = item['size']
+                color = item['color']
+                qty = item['qty']
+                price = item['price']
                 
                 matched_product = Product.objects.filter(name__icontains=product_name).first()
                 
@@ -212,13 +242,17 @@ def api_place_order(request):
                     quantity=qty,
                     price=price
                 )
-                
+            
+            print(f"[ORDER PLACED] Order #{order.id} for {full_name} ({phone_number}) - Total: Rs. {total_amount}")
+            
             return JsonResponse({
                 'success': True,
                 'order_id': f"SL-{order.id:06d}",
                 'message': 'Order placed successfully!'
             })
         except Exception as e:
+            logger.exception("Error creating order")
+            print(f"[ORDER ERROR] {str(e)}")
             return JsonResponse({'success': False, 'error': str(e)}, status=500)
             
     return JsonResponse({'success': False, 'error': 'Invalid request method.'}, status=405)

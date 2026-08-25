@@ -276,6 +276,13 @@
             return;
         }
 
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        const origBtnText = submitBtn ? submitBtn.innerHTML : '';
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Placing order...';
+        }
+
         const firstName = document.getElementById('chkFirstName').value.trim();
         const lastName = document.getElementById('chkLastName').value.trim();
         const fullName = (firstName + ' ' + lastName).trim();
@@ -314,10 +321,18 @@
                 if (typeof updateCartBadge === 'function') updateCartBadge();
             } else {
                 alert('Error placing order: ' + (resData.error || 'Please try again.'));
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = origBtnText;
+                }
             }
         } catch (err) {
-            alert('Order placed! Thank you for shopping with SOLO FOOTWEAR.');
-            localStorage.removeItem('soloCart');
+            console.error('Checkout error:', err);
+            alert('Could not submit order. Please check your internet connection and try again.');
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = origBtnText;
+            }
         }
     }
 
