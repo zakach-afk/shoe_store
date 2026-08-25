@@ -224,25 +224,21 @@
         </nav>
 
         {% if drawer_featured_products %}
-        <div class="animate-mobile-featured">
-            <hr class="my-6 border-gray-200" />
-            <div class="space-y-3">
-                <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400">Featured Collections</h3>
-                <div class="grid grid-cols-2 gap-3">
-                    {% for product in drawer_featured_products %}
-                    <div onclick="openQuickViewModal('{{ product.name|escapejs }}', '{{ product.active_price }}', '{{ product.regular_price }}', '{% if product.main_image %}{{ product.main_image.image.url }}{% endif %}')" class="group block bg-gray-50 border border-gray-100 rounded-lg p-2 hover:border-soloPurple/30 transition cursor-pointer">
-                        <div class="aspect-square w-full overflow-hidden rounded-md bg-white p-1 mb-2 border border-gray-100">
-                            {% if product.main_image %}
-                                <img src="{{ product.main_image.image.url }}" alt="{{ product.name }}" class="h-full w-full object-contain group-hover:scale-105 transition duration-300">
-                            {% else %}
-                                <div class="h-full w-full flex items-center justify-center text-[10px] text-gray-400">No Image</div>
-                            {% endif %}
-                        </div>
-                        <p class="text-xs font-bold text-gray-900 truncate">{{ product.name }}</p>
-                        <p class="text-xs text-soloPurple font-semibold mt-0.5">Rs. {{ product.active_price }}</p>
+        <div class="animate-mobile-featured pt-6 border-t border-gray-100">
+            <div class="flex overflow-x-auto gap-3 pb-3 -mx-6 px-6 no-scrollbar snap-x snap-mandatory" style="-webkit-overflow-scrolling: touch;">
+                {% for product in drawer_featured_products %}
+                <div onclick="openQuickViewModal('{{ product.name|escapejs }}', '{{ product.active_price }}', '{{ product.regular_price }}', '{% if product.main_image %}{{ product.main_image.image.url }}{% endif %}')" class="shrink-0 w-36 snap-start group block cursor-pointer">
+                    <div class="aspect-[3/4] w-full overflow-hidden rounded-xl bg-[#f8f8f8] mb-2 border border-gray-100/80">
+                        {% if product.main_image %}
+                            <img src="{{ product.main_image.image.url }}" alt="{{ product.name }}" class="h-full w-full object-cover object-center group-hover:scale-105 transition duration-300">
+                        {% else %}
+                            <div class="h-full w-full flex items-center justify-center text-[10px] text-gray-400 font-bold">No Image</div>
+                        {% endif %}
                     </div>
-                    {% endfor %}
+                    <p class="text-xs font-semibold text-gray-900 uppercase tracking-tight truncate">{{ product.name }}</p>
+                    <p class="text-xs font-bold text-gray-900 mt-0.5">Rs. {{ product.active_price }}</p>
                 </div>
+                {% endfor %}
             </div>
         </div>
         {% endif %}
