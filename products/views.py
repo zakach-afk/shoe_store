@@ -4,7 +4,7 @@ from .models import Product, Category
 
 
 def home(request):
-    categories = Category.objects.all().order_by('order', 'name')
+    categories = Category.objects.exclude(slug='loro-piana').order_by('order', 'name')
     products = Product.objects.filter(is_active=True).prefetch_related('images')
     
     peshawari_products = Product.objects.filter(category__slug='peshawari-chappals', is_active=True).prefetch_related('images')[:8]
@@ -32,13 +32,9 @@ def home(request):
 
 
 def category_detail(request, slug):
-    categories = Category.objects.all().order_by('order', 'name')
-    if slug == 'loro-piana':
-        category, _ = Category.objects.get_or_create(slug='loro-piana', defaults={'name': 'Loro Piana', 'order': 3})
-        products = Product.objects.filter(Q(category=category) | Q(name__icontains='Loro Piana'), is_active=True).prefetch_related('images')
-    else:
-        category = get_object_or_404(Category, slug=slug)
-        products = Product.objects.filter(category=category, is_active=True).prefetch_related('images')
+    categories = Category.objects.exclude(slug='loro-piana').order_by('order', 'name')
+    category = get_object_or_404(Category, slug=slug)
+    products = Product.objects.filter(category=category, is_active=True).prefetch_related('images')
         
     context = {
         'categories': categories,
