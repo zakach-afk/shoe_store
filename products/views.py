@@ -61,6 +61,19 @@ def faqs(request):
     return render(request, 'products/faqs.html', context)
 
 
+def contact(request):
+    categories = Category.objects.all().order_by('order', 'name')
+    success_msg = False
+    if request.method == 'POST':
+        success_msg = True
+    context = {
+        'categories': categories,
+        'success_msg': success_msg,
+    }
+    return render(request, 'products/contact.html', context)
+
+
+
 
 
 import json
