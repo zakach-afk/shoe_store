@@ -1,4 +1,4 @@
-﻿{% extends 'base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block title %}Size Guide | SOLO FOOTWEAR{% endblock %}
@@ -13,17 +13,6 @@
     <!-- Size Chart Graphic Container (Matching Reference) -->
     <div class="max-w-3xl mx-auto bg-white p-2 md:p-6 rounded-2xl shadow-md border border-gray-200">
         <img src="{% static 'images/size_chart.png' %}" alt="Size Chart - US and EURO Size Conversion Guide" class="w-full h-auto object-contain mx-auto rounded-lg">
-    </div>
-
-    <!-- Sizing Help Callout -->
-    <div class="max-w-2xl mx-auto mt-10 p-6 bg-slate-50 border border-gray-200 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 text-left shadow-sm">
-        <div>
-            <h3 class="text-sm font-bold text-gray-900">Need help choosing your shoe size?</h3>
-            <p class="text-xs text-gray-500 mt-0.5">Contact our sizing specialists on WhatsApp for personalized fit recommendations.</p>
-        </div>
-        <a href="https://wa.me/923192255100?text=Hi%20SOLO%20Footwear,%20I%20need%20help%20with%20shoe%20sizing" target="_blank" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs uppercase tracking-wider transition shadow whitespace-nowrap">
-            WhatsApp 03192255100
-        </a>
     </div>
 </section>
 {% endblock %}
