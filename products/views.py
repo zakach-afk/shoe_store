@@ -33,9 +33,12 @@ def home(request):
 
 def category_detail(request, slug):
     categories = Category.objects.all().order_by('order', 'name')
-    category = get_object_or_404(Category, slug=slug)
-    
-    products = Product.objects.filter(category=category, is_active=True).prefetch_related('images')
+    if slug == 'loro-piana':
+        category, _ = Category.objects.get_or_create(slug='loro-piana', defaults={'name': 'Loro Piana', 'order': 3})
+        products = Product.objects.filter(Q(category=category) | Q(name__icontains='Loro Piana'), is_active=True).prefetch_related('images')
+    else:
+        category = get_object_or_404(Category, slug=slug)
+        products = Product.objects.filter(category=category, is_active=True).prefetch_related('images')
         
     context = {
         'categories': categories,
