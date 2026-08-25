@@ -139,3 +139,19 @@ class OrderItem(models.Model):
     def __str__(self):
         product_name = self.product.name if self.product else "Deleted Product"
         return f"{self.quantity}x {product_name} (Size {self.size})"
+
+
+class ContactMessage(models.Model):
+    name = models.CharField(max_length=150)
+    email = models.EmailField()
+    phone = models.CharField(max_length=50, blank=True)
+    comment = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = "Contact Message"
+        verbose_name_plural = "Contact Messages"
+
+    def __str__(self):
+        return f"Message from {self.name} ({self.email})"

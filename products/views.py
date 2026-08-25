@@ -61,16 +61,55 @@ def faqs(request):
     return render(request, 'products/faqs.html', context)
 
 
+import urllib.parse
+from django.core.mail import send_mail
+from .models import ContactMessage
+
+
 def contact(request):
     categories = Category.objects.all().order_by('order', 'name')
     success_msg = False
+    whatsapp_url = ""
+    
     if request.method == 'POST':
-        success_msg = True
+        name = request.POST.get('name', '').strip()
+        email = request.POST.get('email', '').strip()
+        phone = request.POST.get('phone', '').strip()
+        comment = request.POST.get('comment', '').strip()
+        
+        if name and email and comment:
+            # 1. Save to Database for Admin review
+            ContactMessage.objects.create(
+                name=name,
+                email=email,
+                phone=phone,
+                comment=comment
+            )
+            
+            # 2. Try sending email notification to store email
+            try:
+                send_mail(
+                    subject=f"New Contact Message from {name} - SOLO Footwear",
+                    message=f"Name: {name}\nEmail: {email}\nPhone: {phone}\n\nMessage:\n{comment}",
+                    from_email=None,
+                    recipient_list=['warisali942015@gmail.com'],
+                    fail_silently=True,
+                )
+            except Exception:
+                pass
+            
+            # 3. Format WhatsApp direct link for instant forwarding
+            wa_text = f"Hi SOLO Footwear,\n\n*New Website Inquiry*\n*Name:* {name}\n*Email:* {email}\n*Phone:* {phone}\n*Message:*\n{comment}"
+            whatsapp_url = f"https://wa.me/923192255100?text={urllib.parse.quote(wa_text)}"
+            success_msg = True
+
     context = {
         'categories': categories,
         'success_msg': success_msg,
+        'whatsapp_url': whatsapp_url,
     }
     return render(request, 'products/contact.html', context)
+
 
 
 def order_cancellation(request):

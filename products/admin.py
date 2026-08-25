@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 from unfold.admin import ModelAdmin, TabularInline
 from unfold.decorators import display
-from .models import Category, Product, ProductImage, ProductSize, Order, OrderItem
+from .models import Category, Product, ProductImage, ProductSize, Order, OrderItem, ContactMessage
 
 # Customize Admin Dashboard Branding
 admin.site.site_header = "SOLO FOOTWEAR Admin"
@@ -117,3 +117,15 @@ class OrderAdmin(ModelAdmin):
             '{}</span>',
             style, obj.status
         )
+
+
+@admin.register(ContactMessage)
+class ContactMessageAdmin(ModelAdmin):
+    list_display = ('name', 'email', 'phone', 'comment_short', 'created_at')
+    list_filter = ('created_at',)
+    search_fields = ('name', 'email', 'phone', 'comment')
+    readonly_fields = ('name', 'email', 'phone', 'comment', 'created_at')
+
+    @display(description="Message Preview")
+    def comment_short(self, obj):
+        return obj.comment[:80] + '...' if len(obj.comment) > 80 else obj.comment
