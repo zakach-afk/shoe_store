@@ -1,5 +1,7 @@
+import urllib.parse
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
+from django.core.mail import send_mail
 from .models import Product, Category, ProductReview, Order, OrderItem, ContactMessage
 
 
@@ -278,6 +280,40 @@ def api_place_order(request):
             
             print(f"[ORDER PLACED] Order #{order.id} for {full_name} ({phone_number}) - Total: Rs. {total_amount}")
             
+            # Instant Order Email Notification to Store Owner (warisali942015@gmail.com)
+            try:
+                items_summary = "\n".join([
+                    f"- {item['name']} | Size: {item['size']} ({item['color']}) | Qty: {item['qty']} | Price: Rs. {item['price']:,.2f}"
+                    for item in parsed_items
+                ])
+                
+                clean_phone = re.sub(r'[^0-9]', '', phone_number)
+                wa_msg = f"Hi {full_name}, this is SOLO Footwear confirming your Order #SL-{order.id:06d} for Rs. {total_amount:,.2f}."
+                wa_link = f"https://wa.me/{clean_phone}?text={urllib.parse.quote(wa_msg)}"
+
+                order_email_body = (
+                    f"🛒 NEW ORDER RECEIVED ON SOLO FOOTWEAR!\n\n"
+                    f"Order ID: SL-{order.id:06d}\n"
+                    f"Customer Name: {full_name}\n"
+                    f"Phone Number: {phone_number}\n"
+                    f"City: {city}\n"
+                    f"Shipping Address: {shipping_address}\n\n"
+                    f"ITEMS ORDERED:\n"
+                    f"{items_summary}\n\n"
+                    f"TOTAL AMOUNT: Rs. {total_amount:,.2f}\n\n"
+                    f"📲 Click to Confirm Order on WhatsApp:\n{wa_link}"
+                )
+                
+                send_mail(
+                    subject=f"🛒 NEW ORDER SL-{order.id:06d} from {full_name} ({city})",
+                    message=order_email_body,
+                    from_email=None,
+                    recipient_list=['warisali942015@gmail.com'],
+                    fail_silently=True,
+                )
+            except Exception as email_err:
+                logger.error(f"Failed to send order email: {email_err}")
+
             return JsonResponse({
                 'success': True,
                 'order_id': f"SL-{order.id:06d}",
