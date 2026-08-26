@@ -355,12 +355,24 @@ def api_get_reviews(request):
     reviews = ProductReview.objects.filter(is_approved=True).order_by('-created_at')
     
     if product_name:
-        p_reviews = reviews.filter(Q(product__name__icontains=product_name) | Q(product_name__icontains=product_name))
-        if p_reviews.exists():
-            reviews = p_reviews
+        exact_reviews = reviews.filter(
+            Q(product__name__iexact=product_name) |
+            Q(product_name__iexact=product_name)
+        )
+        if exact_reviews.exists():
+            reviews = exact_reviews
+        else:
+            reviews = reviews.filter(
+                Q(product__name__icontains=product_name) |
+                Q(product_name__icontains=product_name)
+            )
+    else:
+        reviews = reviews.none()
             
     reviews_list = []
-    for r in reviews[:20]:
+    total_rating = 0
+    for r in reviews[:30]:
+        total_rating += r.rating
         reviews_list.append({
             'id': r.id,
             'name': r.customer_name,
@@ -370,4 +382,11 @@ def api_get_reviews(request):
             'date': r.created_at.strftime('%d %b %Y'),
             'verified': r.is_verified_purchase
         })
-    return JsonResponse({'success': True, 'reviews': reviews_list, 'count': len(reviews_list)})
+    count = len(reviews_list)
+    avg_rating = round(total_rating / count, 1) if count > 0 else 0
+    return JsonResponse({
+        'success': True,
+        'reviews': reviews_list,
+        'count': count,
+        'avg_rating': avg_rating
+    })
