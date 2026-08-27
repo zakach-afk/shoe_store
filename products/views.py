@@ -190,6 +190,7 @@ def terms_of_service(request):
 
 
 
+import os
 import json
 import re
 import logging
@@ -210,7 +211,72 @@ def _clean_price_val(val):
             return float(val_clean) if val_clean else 0.0
         except ValueError:
             return 0.0
-    return 0.0
+def send_direct_whatsapp_order_alert(order_id, full_name, phone_number, city, shipping_address, total_amount, items_summary):
+    owner_phone = "923088406867"
+    message = (
+        f"🚨 *NEW ORDER PLACED ON SOLO FOOTWEAR!*\n\n"
+        f"📋 *Order ID:* SL-{order_id:06d}\n"
+        f"👤 *Customer:* {full_name}\n"
+        f"📞 *Phone:* {phone_number}\n"
+        f"📍 *City:* {city}\n"
+        f"🏠 *Address:* {shipping_address}\n\n"
+        f"📦 *Items:* \n{items_summary}\n\n"
+        f"💰 *Total:* Rs. {total_amount:,.2f}"
+    )
+
+    # 1. CallMeBot WhatsApp API Gateway
+    callmebot_key = os.environ.get('CALLMEBOT_API_KEY', '')
+    if callmebot_key:
+        try:
+            import urllib.request, urllib.parse
+            url = f"https://api.callmebot.com/whatsapp.php?phone={owner_phone}&text={urllib.parse.quote(message)}&apikey={callmebot_key}"
+            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+            urllib.request.urlopen(req, timeout=5)
+            print(f"[WHATSAPP SENT] CallMeBot WhatsApp alert sent to {owner_phone}")
+        except Exception as e:
+            logger.error(f"CallMeBot WhatsApp error: {e}")
+
+    # 2. UltraMsg WhatsApp Gateway
+    ultramsg_instance = os.environ.get('ULTRAMSG_INSTANCE_ID', '')
+    ultramsg_token = os.environ.get('ULTRAMSG_TOKEN', '')
+    if ultramsg_instance and ultramsg_token:
+        try:
+            import urllib.request, urllib.parse
+            url = f"https://api.ultramsg.com/{ultramsg_instance}/messages/chat"
+            payload = urllib.parse.urlencode({
+                'token': ultramsg_token,
+                'to': owner_phone,
+                'body': message
+            }).encode('utf-8')
+            req = urllib.request.Request(url, data=payload, headers={'Content-Type': 'application/x-www-form-urlencoded'})
+            urllib.request.urlopen(req, timeout=5)
+            print(f"[WHATSAPP SENT] UltraMsg WhatsApp alert sent to {owner_phone}")
+        except Exception as e:
+            logger.error(f"UltraMsg error: {e}")
+
+    # 3. Twilio WhatsApp Gateway
+    twilio_sid = os.environ.get('TWILIO_ACCOUNT_SID', '')
+    twilio_token = os.environ.get('TWILIO_AUTH_TOKEN', '')
+    twilio_phone = os.environ.get('TWILIO_WHATSAPP_NUMBER', 'whatsapp:+14155238886')
+    if twilio_sid and twilio_token:
+        try:
+            import urllib.request, urllib.parse, base64
+            auth_str = f"{twilio_sid}:{twilio_token}"
+            b64_auth = base64.b64encode(auth_str.encode()).decode()
+            url = f"https://api.twilio.com/2010-04-01/Accounts/{twilio_sid}/Messages.json"
+            payload = urllib.parse.urlencode({
+                'From': twilio_phone,
+                'To': f"whatsapp:+{owner_phone}",
+                'Body': message
+            }).encode('utf-8')
+            req = urllib.request.Request(url, data=payload, headers={
+                'Authorization': f'Basic {b64_auth}',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            })
+            urllib.request.urlopen(req, timeout=5)
+            print(f"[WHATSAPP SENT] Twilio WhatsApp alert sent to {owner_phone}")
+        except Exception as e:
+            logger.error(f"Twilio WhatsApp error: {e}")
 
 @csrf_exempt
 def api_place_order(request):
@@ -336,8 +402,19 @@ def api_place_order(request):
                     recipient_list=['zakach6867@gmail.com', 'warisali942015@gmail.com'],
                     fail_silently=True,
                 )
+                
+                # Direct Automated WhatsApp Alert Dispatcher to 03088406867
+                send_direct_whatsapp_order_alert(
+                    order_id=order.id,
+                    full_name=full_name,
+                    phone_number=phone_number,
+                    city=city,
+                    shipping_address=shipping_address,
+                    total_amount=total_amount,
+                    items_summary=items_summary
+                )
             except Exception as email_err:
-                logger.error(f"Failed to send order email: {email_err}")
+                logger.error(f"Failed to send order notifications: {email_err}")
 
             return JsonResponse({
                 'success': True,
