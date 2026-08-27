@@ -329,7 +329,7 @@ def api_place_order(request):
                     subject=f"🛒 NEW ORDER SL-{order.id:06d} from {full_name} ({city})",
                     message=order_email_body,
                     from_email=None,
-                    recipient_list=['warisali942015@gmail.com'],
+                    recipient_list=['zakach6867@gmail.com', 'warisali942015@gmail.com'],
                     fail_silently=True,
                 )
             except Exception as email_err:

@@ -219,22 +219,16 @@
                 RELATED PRODUCTS
             </h3>
             
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            <!-- Single Line Sliding Bar -->
+            <div class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 no-scrollbar">
                 {% for rel in related_products %}
-                <div class="group flex flex-col justify-between text-left cursor-pointer bg-white rounded-2xl p-2 border border-gray-100 hover:border-black transition shadow-sm">
-                    <div class="relative overflow-hidden rounded-xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center" onclick="openQuickViewModal('{{ rel.name|escapejs }}', '{{ rel.active_price }}', '{{ rel.regular_price }}', '{% if rel.main_image %}{{ rel.main_image.image.url }}{% endif %}', '{{ rel.secondary_image_url }}', '{{ rel.slug }}')">
+                <a href="/product/{{ rel.slug }}/" class="shrink-0 w-44 md:w-56 snap-start group flex flex-col justify-between text-left cursor-pointer bg-white rounded-2xl p-2.5 border border-gray-200 hover:border-black transition shadow-sm">
+                    <div class="relative overflow-hidden rounded-xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center">
                         {% if rel.main_image %}
                             <img src="{{ rel.main_image.image.url }}" alt="{{ rel.name }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                         {% else %}
                             <div class="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400 font-bold text-xs">NO IMAGE</div>
                         {% endif %}
-
-                        <!-- Quick Add Outline Button -->
-                        <div class="absolute bottom-2 left-2 right-2 z-10 opacity-0 group-hover:opacity-100 transition">
-                            <button type="button" class="w-full py-1.5 bg-white/90 text-gray-900 font-bold text-[10px] uppercase border border-gray-300 rounded shadow-sm hover:bg-black hover:text-white transition">
-                                QUICK ADD
-                            </button>
-                        </div>
                     </div>
 
                     <div class="text-center p-1">
@@ -245,7 +239,7 @@
                             <span class="font-black text-gray-900">Rs. {{ rel.active_price }}</span>
                         </div>
                     </div>
-                </div>
+                </a>
                 {% endfor %}
             </div>
         </div>
