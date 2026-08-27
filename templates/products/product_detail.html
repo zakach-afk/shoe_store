@@ -65,10 +65,7 @@
 
                     <!-- Price Display -->
                     <div class="flex items-baseline space-x-3 mb-6">
-                        {% if product.regular_price and product.regular_price > product.active_price %}
-                        <span class="text-lg text-gray-400 line-through font-medium">Rs.{{ product.regular_price }}</span>
-                        {% endif %}
-                        <span class="text-2xl md:text-3xl font-black text-red-600">Rs.{{ product.active_price }}</span>
+                        <span class="text-2xl md:text-3xl font-black text-red-600">Rs. {{ product.active_price }}</span>
                     </div>
 
                     <!-- Dual Size Selector Grid -->
@@ -258,10 +255,7 @@
                             {{ rel.name }}
                         </h4>
                         <div class="flex items-center justify-center space-x-2 text-xs">
-                            {% if rel.regular_price and rel.regular_price > rel.active_price %}
-                            <span class="text-gray-400 line-through">Rs.{{ rel.regular_price }}</span>
-                            {% endif %}
-                            <span class="font-black text-red-600">Rs.{{ rel.active_price }}</span>
+                            <span class="font-black text-red-600">Rs. {{ rel.active_price }}</span>
                         </div>
                     </div>
                 </div>
@@ -280,14 +274,6 @@
                 <p class="italic text-gray-500">Every step you take is a journey towards elegance.</p>
                 
                 <div class="space-y-2 pt-2">
-                    <p class="flex items-start space-x-2">
-                        <span>📍</span>
-                        <span><strong>1:</strong> Shop # 1300-B, People Colony, ChenOne Road, Faisalabad</span>
-                    </p>
-                    <p class="flex items-start space-x-2">
-                        <span>📍</span>
-                        <span><strong>2:</strong> Shop # 101, Green Avenue, 204 Chak Road, Near Babu Petroleum, Faisalabad</span>
-                    </p>
                     <p class="flex items-center space-x-2">
                         <span>📞</span>
                         <span><strong>Call:</strong> 0319 2255100</span>
