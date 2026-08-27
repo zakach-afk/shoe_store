@@ -79,26 +79,25 @@
                             </a>
                         </div>
                         <div id="detailSizeContainer" class="flex flex-wrap gap-2">
-                            <!-- Crossed out out of stock size -->
-                            <button type="button" class="px-3.5 py-2 text-xs rounded border border-gray-300 text-gray-400 font-medium relative opacity-60 cursor-not-allowed line-through" disabled title="Out of Stock">
+                            <button type="button" onclick="selectDetailSize(this)" class="detail-size-btn px-4 py-2 text-xs rounded border border-gray-300 text-gray-800 hover:border-black font-medium transition cursor-pointer">
                                 39/6
                             </button>
-                            <button type="button" onclick="selectDetailSize(this)" class="detail-size-btn px-4 py-2 text-xs rounded border border-black bg-black text-white font-bold transition shadow-sm">
+                            <button type="button" onclick="selectDetailSize(this)" class="detail-size-btn px-4 py-2 text-xs rounded border border-black bg-black text-white font-bold transition shadow-sm cursor-pointer">
                                 40/7
                             </button>
-                            <button type="button" onclick="selectDetailSize(this)" class="detail-size-btn px-4 py-2 text-xs rounded border border-gray-300 text-gray-800 hover:border-black font-medium transition">
+                            <button type="button" onclick="selectDetailSize(this)" class="detail-size-btn px-4 py-2 text-xs rounded border border-gray-300 text-gray-800 hover:border-black font-medium transition cursor-pointer">
                                 41/8
                             </button>
-                            <button type="button" onclick="selectDetailSize(this)" class="detail-size-btn px-4 py-2 text-xs rounded border border-gray-300 text-gray-800 hover:border-black font-medium transition">
+                            <button type="button" onclick="selectDetailSize(this)" class="detail-size-btn px-4 py-2 text-xs rounded border border-gray-300 text-gray-800 hover:border-black font-medium transition cursor-pointer">
                                 42/9
                             </button>
-                            <button type="button" onclick="selectDetailSize(this)" class="detail-size-btn px-4 py-2 text-xs rounded border border-gray-300 text-gray-800 hover:border-black font-medium transition">
+                            <button type="button" onclick="selectDetailSize(this)" class="detail-size-btn px-4 py-2 text-xs rounded border border-gray-300 text-gray-800 hover:border-black font-medium transition cursor-pointer">
                                 43/10
                             </button>
-                            <button type="button" onclick="selectDetailSize(this)" class="detail-size-btn px-4 py-2 text-xs rounded border border-gray-300 text-gray-800 hover:border-black font-medium transition">
+                            <button type="button" onclick="selectDetailSize(this)" class="detail-size-btn px-4 py-2 text-xs rounded border border-gray-300 text-gray-800 hover:border-black font-medium transition cursor-pointer">
                                 44/11
                             </button>
-                            <button type="button" onclick="selectDetailSize(this)" class="detail-size-btn px-4 py-2 text-xs rounded border border-gray-300 text-gray-800 hover:border-black font-medium transition">
+                            <button type="button" onclick="selectDetailSize(this)" class="detail-size-btn px-4 py-2 text-xs rounded border border-gray-300 text-gray-800 hover:border-black font-medium transition cursor-pointer">
                                 45/12
                             </button>
                         </div>
@@ -114,6 +113,12 @@
                         </div>
                     </div>
 
+                    <!-- Main Action Row -->
+                    <div class="my-6">
+                        <button type="button" onclick="submitDetailBuyNow('{{ product.name|escapejs }}', '{{ product.active_price }}', '{% if product.main_image %}{{ product.main_image.image.url }}{% endif %}')" class="w-full h-14 bg-neutral-900 hover:bg-black text-white font-extrabold text-xs md:text-sm uppercase tracking-widest rounded-xl transition shadow-xl flex items-center justify-center space-x-2 cursor-pointer active:scale-95">
+                            <span>⚡ BUY IT NOW — ORDER PLACE</span>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Collapsible Accordion 1: Description -->
@@ -332,6 +337,7 @@
     }
 
     function selectDetailSize(btn) {
+        if (!btn) return;
         document.querySelectorAll('.detail-size-btn').forEach(b => {
             b.classList.remove('bg-black', 'text-white', 'font-bold', 'border-black');
             b.classList.add('border-gray-300', 'text-gray-800', 'font-medium');
@@ -358,7 +364,42 @@
     function submitDetailBuyNow(name, price, img) {
         const itemSize = currentDetailSize || '40/7';
         const itemQty = currentDetailQty || 1;
-        addToCart(name, price, price, img, itemSize, 'Black', itemQty, true);
+
+        let cart = [];
+        try {
+            cart = JSON.parse(localStorage.getItem('soloCart')) || [];
+        } catch(e) {
+            cart = [];
+        }
+
+        let numPrice = 2999;
+        if (typeof price === 'number') {
+            numPrice = price;
+        } else if (price) {
+            let clean = String(price).replace(/Rs\.?/gi, '').replace(/PKR/gi, '').replace(/,/g, '').trim();
+            numPrice = parseFloat(clean) || 2999;
+        }
+
+        const existingIdx = cart.findIndex(i => i.name === name && i.size === itemSize);
+        if (existingIdx > -1) {
+            cart[existingIdx].qty += itemQty;
+        } else {
+            cart.push({
+                name: name,
+                price: numPrice,
+                image: img || '',
+                size: itemSize,
+                color: 'Black',
+                qty: itemQty
+            });
+        }
+
+        try {
+            localStorage.setItem('soloCart', JSON.stringify(cart));
+        } catch(e) {
+            console.error('LocalStorage save error:', e);
+        }
+
         window.location.href = '/checkout/';
     }
 
