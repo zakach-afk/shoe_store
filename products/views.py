@@ -46,6 +46,27 @@ def category_detail(request, slug):
     return render(request, 'products/category_detail.html', context)
 
 
+def product_detail(request, slug):
+    categories = Category.objects.exclude(slug='loro-piana').order_by('order', 'name')
+    product = get_object_or_404(Product, slug=slug)
+    
+    related_products = []
+    if product.category:
+        related_products = list(Product.objects.filter(category=product.category, is_active=True).exclude(id=product.id).prefetch_related('images')[:8])
+    if len(related_products) < 4:
+        extra = list(Product.objects.filter(is_active=True).exclude(id=product.id).prefetch_related('images')[:8])
+        for p in extra:
+            if p not in related_products and len(related_products) < 8:
+                related_products.append(p)
+                
+    context = {
+        'categories': categories,
+        'product': product,
+        'related_products': related_products,
+    }
+    return render(request, 'products/product_detail.html', context)
+
+
 def checkout(request):
     categories = Category.objects.all().order_by('order', 'name')
     context = {

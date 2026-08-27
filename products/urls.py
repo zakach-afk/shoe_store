@@ -29,4 +29,6 @@ urlpatterns = [
     path('api/submit-review/', views.api_submit_review, name='api_submit_review'),
     path('api/reviews/', views.api_get_reviews, name='api_get_reviews'),
     path('category/<slug:slug>/', views.category_detail, name='category_detail'),
+    path('product/<slug:slug>/', views.product_detail, name='product_detail'),
+    path('products/<slug:slug>/', views.product_detail, name='product_detail_alt'),
 ]

@@ -1,0 +1,554 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ product.name }} — SOLO Footwear{% endblock %}
+
+{% block content %}
+<div class="bg-white min-h-screen pb-24 md:pb-16">
+    <!-- Top Breadcrumb -->
+    <div class="max-w-7xl mx-auto px-4 py-4 text-xs text-gray-500 flex items-center space-x-2 border-b border-gray-100">
+        <a href="/" class="hover:text-black transition">Home</a>
+        <span>/</span>
+        <a href="{% if product.category %}/category/{{ product.category.slug }}/{% else %}/{% endif %}" class="hover:text-black transition">
+            {{ product.category.name|default:"Footwear" }}
+        </a>
+        <span>/</span>
+        <span class="text-gray-900 font-medium truncate">{{ product.name }}</span>
+    </div>
+
+    <!-- Main Product Detail View -->
+    <div class="max-w-7xl mx-auto px-4 pt-6 pb-12">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
+            
+            <!-- Left Column: Product Image & Gallery Thumbnails -->
+            <div class="md:col-span-6 space-y-4">
+                <div class="relative overflow-hidden rounded-2xl bg-[#f8f8f8] aspect-[3/4] flex items-center justify-center border border-gray-100 shadow-sm group">
+                    <!-- Sale Tag -->
+                    {% if product.regular_price and product.regular_price > product.active_price %}
+                    <span class="absolute top-4 left-4 z-20 bg-red-600 text-white text-xs font-black px-2.5 py-1 rounded uppercase tracking-wider shadow">
+                        -50%
+                    </span>
+                    {% endif %}
+
+                    {% if product.main_image %}
+                        <img id="detailMainImg" src="{{ product.main_image.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover object-center transition duration-500">
+                    {% else %}
+                        <div class="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400 font-bold text-sm">NO IMAGE AVAILABLE</div>
+                    {% endif %}
+                </div>
+
+                <!-- Gallery Thumbnails Row -->
+                <div class="flex items-center justify-center space-x-3 pt-1">
+                    {% if product.main_image %}
+                    <button type="button" onclick="switchDetailImg('{{ product.main_image.image.url }}', this)" class="detail-thumb-btn w-14 h-14 rounded-xl overflow-hidden border-2 border-black bg-gray-50 p-0.5 shadow-sm focus:outline-none transition">
+                        <img src="{{ product.main_image.image.url }}" class="w-full h-full object-cover rounded-lg">
+                    </button>
+                    {% endif %}
+
+                    {% if product.secondary_image_url %}
+                    <button type="button" onclick="switchDetailImg('{{ product.secondary_image_url }}', this)" class="detail-thumb-btn w-14 h-14 rounded-xl overflow-hidden border border-gray-300 bg-gray-50 p-0.5 shadow-sm focus:outline-none transition relative" title="Medicated Inner Sole / Alternate View">
+                        <img src="{{ product.secondary_image_url }}" class="w-full h-full object-contain rounded-lg p-1 bg-white">
+                        <span class="absolute -top-1 -right-1 bg-emerald-600 text-white text-[8px] font-extrabold px-1 rounded-full shadow">SOLE</span>
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Right Column: Product Info & Buy Action (Matching Puropelle Screenshot 1) -->
+            <div class="md:col-span-6 space-y-6">
+                <div>
+                    <!-- Product Title -->
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2 leading-tight uppercase tracking-wide">
+                        {{ product.name }}
+                    </h1>
+
+                    <!-- Scarcity Social Proof Tag -->
+                    <div class="flex items-center space-x-1.5 text-xs text-red-600 font-bold mb-3">
+                        <span class="text-sm">🔥</span>
+                        <span>8 sold in last 25 hours</span>
+                    </div>
+
+                    <!-- Intro Teaser Paragraph -->
+                    <p class="text-xs md:text-sm text-gray-600 leading-relaxed font-light mb-4">
+                        Looking for formal shoes for work, a wedding, graduation or other official event? SOLO brings its royal formal collection...
+                    </p>
+
+                    <!-- Meta Specs Table -->
+                    <div class="space-y-1.5 text-xs text-gray-600 border-t border-b border-gray-100 py-3 mb-4">
+                        <p><span class="font-bold text-gray-800">SKU:</span> SL-{{ product.id|stringformat:"06d" }}</p>
+                        <p><span class="font-bold text-gray-800">Availability:</span> <span class="text-emerald-600 font-bold">In stock</span></p>
+                        <p><span class="font-bold text-gray-800">Product type:</span> {{ product.category.name|default:"Loro-piana" }}</p>
+                    </div>
+
+                    <!-- Price Display -->
+                    <div class="flex items-baseline space-x-3 mb-3">
+                        {% if product.regular_price and product.regular_price > product.active_price %}
+                        <span class="text-lg text-gray-400 line-through font-medium">Rs.{{ product.regular_price }}</span>
+                        {% endif %}
+                        <span class="text-2xl md:text-3xl font-black text-red-600">Rs.{{ product.active_price }}</span>
+                    </div>
+
+                    <!-- Low Stock Progress Bar -->
+                    <div class="bg-red-50 border border-red-100 rounded-xl p-3 mb-6 space-y-2">
+                        <div class="flex justify-between items-center text-xs font-bold text-red-700">
+                            <span>Please hurry! Only 2 left in stock</span>
+                        </div>
+                        <div class="w-full h-1.5 bg-red-100 rounded-full overflow-hidden">
+                            <div class="w-1/4 h-full bg-emerald-500 rounded-full"></div>
+                        </div>
+                    </div>
+
+                    <!-- Dual Size Selector Grid -->
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="block text-xs font-bold text-gray-900 uppercase tracking-wider">
+                                Size: <span id="detailSelectedSizeText" class="font-bold text-black">40/7</span>
+                            </label>
+                            <a href="/size-guide/" target="_blank" class="text-[11px] text-gray-500 underline hover:text-black">
+                                📏 Size Chart
+                            </a>
+                        </div>
+                        <div id="detailSizeContainer" class="flex flex-wrap gap-2">
+                            <!-- Crossed out out of stock size -->
+                            <button type="button" class="px-3.5 py-2 text-xs rounded border border-gray-300 text-gray-400 font-medium relative opacity-60 cursor-not-allowed line-through" disabled title="Out of Stock">
+                                39/6
+                            </button>
+                            <button type="button" onclick="selectDetailSize(this)" class="detail-size-btn px-4 py-2 text-xs rounded border border-black bg-black text-white font-bold transition shadow-sm">
+                                40/7
+                            </button>
+                            <button type="button" onclick="selectDetailSize(this)" class="detail-size-btn px-4 py-2 text-xs rounded border border-gray-300 text-gray-800 hover:border-black font-medium transition">
+                                41/8
+                            </button>
+                            <button type="button" onclick="selectDetailSize(this)" class="detail-size-btn px-4 py-2 text-xs rounded border border-gray-300 text-gray-800 hover:border-black font-medium transition">
+                                42/9
+                            </button>
+                            <button type="button" onclick="selectDetailSize(this)" class="detail-size-btn px-4 py-2 text-xs rounded border border-gray-300 text-gray-800 hover:border-black font-medium transition">
+                                43/10
+                            </button>
+                            <button type="button" onclick="selectDetailSize(this)" class="detail-size-btn px-4 py-2 text-xs rounded border border-gray-300 text-gray-800 hover:border-black font-medium transition">
+                                44/11
+                            </button>
+                            <button type="button" onclick="selectDetailSize(this)" class="detail-size-btn px-4 py-2 text-xs rounded border border-gray-300 text-gray-800 hover:border-black font-medium transition">
+                                45/12
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Quantity Stepper -->
+                    <div class="mb-6 space-y-1.5">
+                        <label class="block text-xs font-bold text-gray-900 uppercase tracking-wider">Quantity:</label>
+                        <div class="inline-flex items-center border border-gray-300 rounded-lg overflow-hidden h-11 bg-white">
+                            <button type="button" onclick="decDetailQty()" class="px-3.5 py-2 text-gray-600 hover:text-black font-bold text-base">&minus;</button>
+                            <span id="detailQty" class="px-4 py-2 text-sm font-bold text-gray-900 min-w-[36px] text-center">1</span>
+                            <button type="button" onclick="incDetailQty()" class="px-3.5 py-2 text-gray-600 hover:text-black font-bold text-base">&plus;</button>
+                        </div>
+                    </div>
+
+                    <!-- Main Action Row -->
+                    <div class="flex items-center space-x-3 mb-4">
+                        <button type="button" onclick="submitDetailBuyNow('{{ product.name|escapejs }}', '{{ product.active_price }}', '{% if product.main_image %}{{ product.main_image.image.url }}{% endif %}')" class="flex-1 h-13 bg-neutral-900 hover:bg-black text-white font-extrabold text-xs uppercase tracking-widest rounded-lg transition shadow-lg flex items-center justify-center">
+                            BUY IT NOW
+                        </button>
+                        <button type="button" class="w-12 h-12 rounded-lg border border-gray-300 hover:border-black flex items-center justify-center text-gray-600 hover:text-red-600 transition" title="Add to Wishlist">
+                            ♡
+                        </button>
+                        <button type="button" class="w-12 h-12 rounded-lg border border-gray-300 hover:border-black flex items-center justify-center text-gray-600 hover:text-black transition" title="Share Product">
+                            ☍
+                        </button>
+                    </div>
+
+                    <!-- Live Viewer Counter Badge -->
+                    <div class="flex items-center space-x-2 text-xs text-gray-600 pt-2">
+                        <span class="text-sm">👁</span>
+                        <span>10 customers are viewing this product</span>
+                    </div>
+                </div>
+
+                <!-- Collapsible Accordion 1: Description (Matching Screenshot 2) -->
+                <div class="border-t border-gray-200 pt-4">
+                    <details class="group border-b border-gray-200 pb-4 cursor-pointer" open>
+                        <summary class="flex justify-between items-center font-bold text-gray-900 uppercase tracking-wider text-sm list-none">
+                            <span>Description</span>
+                            <span class="text-gray-500 group-open:rotate-45 transition transform text-lg font-light">+</span>
+                        </summary>
+                        <div class="mt-4 text-xs text-gray-700 space-y-3 leading-relaxed">
+                            <p>Looking for formal shoes for work, a wedding, graduation or other official event? SOLO brings its royal formal collection:</p>
+                            <ul class="space-y-1.5 font-normal list-none pl-1">
+                                <li>• <strong class="text-gray-900">Upper :</strong> imported Cow leather</li>
+                                <li>• <strong class="text-gray-900">Lining :</strong> Anti-Bacterial synthetic leather lining</li>
+                                <li>• <strong class="text-gray-900">Sole :</strong> Rubber sole</li>
+                                <li>• <strong class="text-gray-900">In Sole :</strong> Soft Jelly insole providing addition comfort at key pressure point of the foot.</li>
+                                <li>• <strong class="text-gray-900">Finish :</strong> Italian Spray</li>
+                                <li>• <strong class="text-gray-900">Made :</strong> Hand crafted</li>
+                                <li>• <strong class="text-gray-900">Colour :</strong> {{ product.name }}</li>
+                                <li>• <strong class="text-gray-900">Occasion :</strong> Casual, events, and Casual meetings and other</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <!-- Collapsible Accordion 2: Size Chart (Matching Screenshot 2) -->
+                    <details class="group border-b border-gray-200 py-4 cursor-pointer">
+                        <summary class="flex justify-between items-center font-bold text-gray-900 uppercase tracking-wider text-sm list-none">
+                            <span>Size Chart</span>
+                            <span class="text-gray-500 group-open:rotate-45 transition transform text-lg font-light">+</span>
+                        </summary>
+                        <div class="mt-4 text-xs text-gray-700">
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-center border border-gray-200">
+                                    <thead class="bg-gray-100 text-gray-900 font-bold uppercase">
+                                        <tr>
+                                            <th class="p-2 border border-gray-200">Pak / UK</th>
+                                            <th class="p-2 border border-gray-200">EU Size</th>
+                                            <th class="p-2 border border-gray-200">Foot Length (CM)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200">
+                                        <tr><td class="p-2 border">6</td><td class="p-2 border">39</td><td class="p-2 border">25.0 cm</td></tr>
+                                        <tr class="bg-gray-50/50"><td class="p-2 border">7</td><td class="p-2 border">40</td><td class="p-2 border">25.5 cm</td></tr>
+                                        <tr><td class="p-2 border">8</td><td class="p-2 border">41</td><td class="p-2 border">26.0 cm</td></tr>
+                                        <tr class="bg-gray-50/50"><td class="p-2 border">9</td><td class="p-2 border">42</td><td class="p-2 border">27.0 cm</td></tr>
+                                        <tr><td class="p-2 border">10</td><td class="p-2 border">43</td><td class="p-2 border">27.5 cm</td></tr>
+                                        <tr class="bg-gray-50/50"><td class="p-2 border">11</td><td class="p-2 border">44</td><td class="p-2 border">28.0 cm</td></tr>
+                                        <tr><td class="p-2 border">12</td><td class="p-2 border">45</td><td class="p-2 border">29.0 cm</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </div>
+
+        <!-- Customer Reviews Section (Matching Screenshot 2 & 3) -->
+        <div class="mt-14 border-t border-gray-200 pt-10 text-center space-y-6">
+            <h3 class="text-xl md:text-2xl font-bold text-gray-900 uppercase tracking-widest">
+                Customer Reviews
+            </h3>
+
+            <div class="flex flex-col items-center space-y-2">
+                <div class="flex text-amber-400 text-lg tracking-wider" id="detailStarsDisplay">
+                    ☆☆☆☆☆
+                </div>
+                <p id="detailAvgRatingText" class="text-xs text-gray-500">Be the first to write a review</p>
+                <button type="button" onclick="toggleDetailReviewForm()" class="mt-2 inline-block px-8 py-3 bg-black hover:bg-neutral-800 text-white text-xs font-bold uppercase tracking-widest rounded transition shadow-md">
+                    Write a review
+                </button>
+            </div>
+
+            <!-- Review Submission Form -->
+            <div id="detailReviewForm" class="hidden max-w-xl mx-auto bg-gray-50 border border-gray-200 rounded-2xl p-6 text-left space-y-4 shadow-inner">
+                <h4 class="text-xs font-bold text-gray-900 uppercase tracking-wider">Write your review for {{ product.name }}</h4>
+                <form onsubmit="submitDetailPageReview(event)" class="space-y-3">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <input type="text" id="dRevName" required placeholder="Your Name *" class="w-full text-xs p-3 rounded-xl border border-gray-300 focus:border-black focus:ring-black">
+                        <input type="text" id="dRevCity" placeholder="City (e.g. Lahore, Karachi)" class="w-full text-xs p-3 rounded-xl border border-gray-300 focus:border-black focus:ring-black">
+                    </div>
+                    <div class="flex items-center space-x-1" id="dStarPicker">
+                        <button type="button" onclick="setDStar(1)" class="d-star text-2xl text-amber-400 focus:outline-none">★</button>
+                        <button type="button" onclick="setDStar(2)" class="d-star text-2xl text-amber-400 focus:outline-none">★</button>
+                        <button type="button" onclick="setDStar(3)" class="d-star text-2xl text-amber-400 focus:outline-none">★</button>
+                        <button type="button" onclick="setDStar(4)" class="d-star text-2xl text-amber-400 focus:outline-none">★</button>
+                        <button type="button" onclick="setDStar(5)" class="d-star text-2xl text-amber-400 focus:outline-none">★</button>
+                    </div>
+                    <textarea id="dRevComment" required rows="3" placeholder="Tell us about the leather quality, fit, and comfort..." class="w-full text-xs p-3 rounded-xl border border-gray-300 focus:border-black focus:ring-black"></textarea>
+                    <button type="submit" class="px-6 py-2.5 bg-black text-white text-xs font-bold uppercase tracking-wider rounded-xl hover:bg-neutral-800 transition">
+                        Submit Review
+                    </button>
+                </form>
+            </div>
+
+            <!-- Customer Reviews Container -->
+            <div id="detailReviewsContainer" class="grid grid-cols-1 md:grid-cols-3 gap-4 text-left pt-4">
+                <div class="col-span-full py-6 text-center text-gray-400 text-xs">
+                    <span class="inline-block animate-spin mr-1">⏳</span> Loading customer reviews...
+                </div>
+            </div>
+        </div>
+
+        <!-- RELATED PRODUCTS Carousel / Grid (Matching Screenshot 3) -->
+        {% if related_products %}
+        <div class="mt-16 border-t border-gray-200 pt-12">
+            <h3 class="text-xl md:text-2xl font-bold text-gray-900 uppercase tracking-widest text-center mb-8">
+                RELATED PRODUCTS
+            </h3>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                {% for rel in related_products %}
+                <div class="group flex flex-col justify-between text-left cursor-pointer bg-white rounded-2xl p-2 border border-gray-100 hover:border-black transition shadow-sm">
+                    <div class="relative overflow-hidden rounded-xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center" onclick="openQuickViewModal('{{ rel.name|escapejs }}', '{{ rel.active_price }}', '{{ rel.regular_price }}', '{% if rel.main_image %}{{ rel.main_image.image.url }}{% endif %}', '{{ rel.secondary_image_url }}', '{{ rel.slug }}')">
+                        <span class="absolute top-2 left-2 z-10 bg-red-600 text-white text-[9px] font-black px-1.5 py-0.5 rounded shadow">-50%</span>
+                        {% if rel.main_image %}
+                            <img src="{{ rel.main_image.image.url }}" alt="{{ rel.name }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        {% else %}
+                            <div class="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400 font-bold text-xs">NO IMAGE</div>
+                        {% endif %}
+
+                        <!-- Quick Add Outline Button -->
+                        <div class="absolute bottom-2 left-2 right-2 z-10 opacity-0 group-hover:opacity-100 transition">
+                            <button type="button" class="w-full py-1.5 bg-white/90 text-gray-900 font-bold text-[10px] uppercase border border-gray-300 rounded shadow-sm hover:bg-black hover:text-white transition">
+                                QUICK ADD
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="text-center p-1">
+                        <h4 class="font-bold text-gray-900 text-xs uppercase tracking-wider mb-1 truncate group-hover:text-brandBlue transition">
+                            {{ rel.name }}
+                        </h4>
+                        <div class="flex items-center justify-center space-x-2 text-xs">
+                            {% if rel.regular_price and rel.regular_price > rel.active_price %}
+                            <span class="text-gray-400 line-through">Rs.{{ rel.regular_price }}</span>
+                            {% endif %}
+                            <span class="font-black text-red-600">Rs.{{ rel.active_price }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Brand Footer & Location Info (Matching Screenshot 4) -->
+    <footer class="bg-white border-t border-gray-200 mt-16 pt-12 pb-24 text-left">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-10">
+            <!-- Brand Info & Address -->
+            <div class="space-y-4 text-xs text-gray-700">
+                <h2 class="text-2xl font-serif font-black tracking-widest text-gray-900">SOLO</h2>
+                <p class="italic text-gray-500">Every step you take is a journey towards elegance.</p>
+                
+                <div class="space-y-2 pt-2">
+                    <p class="flex items-start space-x-2">
+                        <span>📍</span>
+                        <span><strong>1:</strong> Shop # 1300-B, People Colony, ChenOne Road, Faisalabad</span>
+                    </p>
+                    <p class="flex items-start space-x-2">
+                        <span>📍</span>
+                        <span><strong>2:</strong> Shop # 101, Green Avenue, 204 Chak Road, Near Babu Petroleum, Faisalabad</span>
+                    </p>
+                    <p class="flex items-center space-x-2">
+                        <span>📞</span>
+                        <span><strong>Call:</strong> 0319 2255100</span>
+                    </p>
+                    <p class="flex items-center space-x-2">
+                        <span>✉️</span>
+                        <span><strong>Email:</strong> warisali942015@gmail.com</span>
+                    </p>
+                </div>
+
+                <!-- Footer Accordions -->
+                <div class="pt-4 space-y-2">
+                    <details class="group border-b border-gray-200 pb-2 cursor-pointer">
+                        <summary class="flex justify-between items-center font-bold text-gray-900 uppercase tracking-wider text-xs list-none">
+                            <span>ASSISTANCE</span>
+                            <span class="group-open:rotate-45 transition text-base">+</span>
+                        </summary>
+                        <div class="mt-2 space-y-1 text-gray-600 pl-1">
+                            <p><a href="/size-guide/" class="hover:underline">Size Guide</a></p>
+                            <p><a href="/faqs/" class="hover:underline">FAQs</a></p>
+                            <p><a href="/contact/" class="hover:underline">Contact Us</a></p>
+                        </div>
+                    </details>
+
+                    <details class="group border-b border-gray-200 pb-2 cursor-pointer">
+                        <summary class="flex justify-between items-center font-bold text-gray-900 uppercase tracking-wider text-xs list-none">
+                            <span>POLICIES</span>
+                            <span class="group-open:rotate-45 transition text-base">+</span>
+                        </summary>
+                        <div class="mt-2 space-y-1 text-gray-600 pl-1">
+                            <p><a href="/shipping-policy/" class="hover:underline">Shipping Policy</a></p>
+                            <p><a href="/refund-policy/" class="hover:underline">Refund Policy</a></p>
+                            <p><a href="/terms-of-service/" class="hover:underline">Terms of Service</a></p>
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Newsletter Signup -->
+            <div class="space-y-4">
+                <h3 class="font-bold text-sm text-gray-900 uppercase tracking-widest">NEWSLETTER SIGN UP</h3>
+                <p class="text-xs text-gray-500">Sign up for exclusive updates & discounts</p>
+                
+                <form onsubmit="event.preventDefault(); alert('Thank you for subscribing to SOLO Newsletter!');" class="flex items-center space-x-2">
+                    <input type="email" required placeholder="enter email address" class="flex-1 bg-neutral-800 text-white text-xs px-4 py-3 rounded focus:outline-none">
+                    <button type="submit" class="bg-white border border-black text-black font-bold text-xs uppercase px-6 py-3 rounded hover:bg-black hover:text-white transition">
+                        SUBMIT
+                    </button>
+                </form>
+
+                <!-- Social Icons -->
+                <div class="flex items-center space-x-4 pt-4 text-gray-600 text-sm">
+                    <span class="hover:text-black cursor-pointer font-bold">f</span>
+                    <span class="hover:text-black cursor-pointer font-bold">📷</span>
+                    <span class="hover:text-black cursor-pointer font-bold">🎵</span>
+                    <span class="hover:text-black cursor-pointer font-bold">👻</span>
+                    <span class="hover:text-black cursor-pointer font-bold">▶</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Fixed Sticky Bottom Bar (Matching Screenshot 1, 3, 4) -->
+    <div class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-gray-200 p-3 flex items-center space-x-3 shadow-2xl">
+        <button type="button" class="w-10 h-10 rounded-lg border border-gray-300 flex items-center justify-center text-gray-600 hover:text-red-600 transition" title="Wishlist">
+            ♡
+        </button>
+        <button type="button" onclick="submitDetailBuyNow('{{ product.name|escapejs }}', '{{ product.active_price }}', '{% if product.main_image %}{{ product.main_image.image.url }}{% endif %}')" class="flex-1 h-11 bg-neutral-900 hover:bg-black text-white font-extrabold text-xs uppercase tracking-widest rounded-lg shadow-md transition">
+            BUY IT NOW
+        </button>
+        <a href="https://wa.me/923192255100?text=Hi%20SOLO%20Footwear,%20I%20am%20interested%20in%20{{ product.name|urlencode }}" target="_blank" class="w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xl shadow-lg hover:bg-emerald-600 transition" title="WhatsApp Chat">
+            💬
+        </a>
+    </div>
+</div>
+
+<script>
+    let currentDetailSize = '40/7';
+    let currentDetailQty = 1;
+    let detailRatingVal = 5;
+
+    function switchDetailImg(url, btn) {
+        const mainImg = document.getElementById('detailMainImg');
+        if (mainImg && url) mainImg.src = url;
+        document.querySelectorAll('.detail-thumb-btn').forEach(b => {
+            b.classList.remove('border-2', 'border-black');
+            b.classList.add('border', 'border-gray-300');
+        });
+        if (btn) {
+            btn.classList.remove('border', 'border-gray-300');
+            btn.classList.add('border-2', 'border-black');
+        }
+    }
+
+    function selectDetailSize(btn) {
+        document.querySelectorAll('.detail-size-btn').forEach(b => {
+            b.classList.remove('bg-black', 'text-white', 'font-bold', 'border-black');
+            b.classList.add('border-gray-300', 'text-gray-800', 'font-medium');
+        });
+        btn.classList.remove('border-gray-300', 'text-gray-800', 'font-medium');
+        btn.classList.add('bg-black', 'text-white', 'font-bold', 'border-black');
+        currentDetailSize = btn.textContent.trim();
+        const label = document.getElementById('detailSelectedSizeText');
+        if (label) label.textContent = currentDetailSize;
+    }
+
+    function incDetailQty() {
+        currentDetailQty += 1;
+        document.getElementById('detailQty').textContent = currentDetailQty;
+    }
+
+    function decDetailQty() {
+        if (currentDetailQty > 1) {
+            currentDetailQty -= 1;
+            document.getElementById('detailQty').textContent = currentDetailQty;
+        }
+    }
+
+    function submitDetailBuyNow(name, price, img) {
+        openQuickViewModal(name, price, price, img, '');
+    }
+
+    function toggleDetailReviewForm() {
+        const form = document.getElementById('detailReviewForm');
+        if (form) form.classList.toggle('hidden');
+    }
+
+    function setDStar(n) {
+        detailRatingVal = n;
+        document.querySelectorAll('.d-star').forEach((b, i) => {
+            if (i < n) {
+                b.classList.add('text-amber-400');
+                b.classList.remove('text-gray-300');
+            } else {
+                b.classList.add('text-gray-300');
+                b.classList.remove('text-amber-400');
+            }
+        });
+    }
+
+    function fetchDetailPageReviews() {
+        const container = document.getElementById('detailReviewsContainer');
+        const starsDisplay = document.getElementById('detailStarsDisplay');
+        const avgText = document.getElementById('detailAvgRatingText');
+        const prodName = "{{ product.name|escapejs }}";
+
+        fetch('/api/reviews/?product_name=' + encodeURIComponent(prodName))
+            .then(res => res.json())
+            .then(data => {
+                if (data.success && data.count > 0) {
+                    const avg = data.avg_rating || 5.0;
+                    const starsStr = avg >= 4.5 ? '★★★★★' : (avg >= 3.5 ? '★★★★☆' : (avg >= 2.5 ? '★★★☆☆' : '★★☆☆☆'));
+                    if (starsDisplay) starsDisplay.textContent = starsStr;
+                    if (avgText) avgText.textContent = `${avg} out of 5 based on ${data.count} review(s)`;
+
+                    if (container) {
+                        let html = '';
+                        data.reviews.forEach(r => {
+                            const rStars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+                            html += `
+                                <div class="bg-gray-50/90 border border-gray-100 rounded-2xl p-4 flex flex-col justify-between space-y-3 shadow-sm">
+                                    <div>
+                                        <div class="text-amber-400 text-xs tracking-wider mb-2">${rStars}</div>
+                                        <p class="text-xs text-gray-700 leading-relaxed italic">"${escapeHtml(r.comment)}"</p>
+                                    </div>
+                                    <div class="pt-2 border-t border-gray-200/60 flex items-center justify-between text-[11px]">
+                                        <span class="font-bold text-gray-800">— ${escapeHtml(r.name)}, ${escapeHtml(r.city)}</span>
+                                        <span class="text-emerald-700 font-extrabold text-[10px] bg-emerald-50 px-1.5 py-0.5 rounded">✔ Verified Buyer</span>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        container.innerHTML = html;
+                    }
+                } else {
+                    if (starsDisplay) starsDisplay.textContent = '☆☆☆☆☆';
+                    if (avgText) avgText.textContent = 'Be the first to write a review';
+                    if (container) {
+                        container.innerHTML = `
+                            <div class="col-span-full py-8 text-center bg-gray-50/60 rounded-2xl border border-dashed border-gray-200 space-y-2">
+                                <div class="text-2xl">🌟</div>
+                                <h4 class="text-xs font-bold uppercase tracking-wider text-gray-800">No Customer Reviews Yet</h4>
+                                <p class="text-xs text-gray-500 max-w-sm mx-auto">Be the first verified customer to share your experience with this shoe!</p>
+                            </div>
+                        `;
+                    }
+                }
+            })
+            .catch(err => {
+                console.error(err);
+            });
+    }
+
+    function submitDetailPageReview(e) {
+        e.preventDefault();
+        const name = document.getElementById('dRevName').value.trim();
+        const city = document.getElementById('dRevCity').value.trim() || 'Verified Customer';
+        const comment = document.getElementById('dRevComment').value.trim();
+        const prodName = "{{ product.name|escapejs }}";
+
+        fetch('/api/submit-review/', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                name: name,
+                city: city,
+                comment: comment,
+                rating: detailRatingVal,
+                product_name: prodName
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                alert('Thank you! Your review has been submitted.');
+                toggleDetailReviewForm();
+                fetchDetailPageReviews();
+            } else {
+                alert(data.error || 'Failed to submit review.');
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', fetchDetailPageReviews);
+</script>
+{% endblock %}

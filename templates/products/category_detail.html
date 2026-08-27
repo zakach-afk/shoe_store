@@ -58,7 +58,7 @@
              data-price="{{ product.active_price|stringformat:'.2f' }}" 
              data-medicated="{% if product.is_medicated %}1{% else %}0{% endif %}" 
              data-name="{{ product.name }}"
-             onclick="openQuickViewModal('{{ product.name|escapejs }}', '{{ product.active_price }}', '{{ product.regular_price }}', '{% if product.main_image %}{{ product.main_image.image.url }}{% endif %}', '{{ product.secondary_image_url }}')" 
+             onclick="window.location.href='/product/{{ product.slug }}/'" 
              class="group flex flex-col justify-between text-left cursor-pointer">
             <div class="relative overflow-hidden rounded-2xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center border border-gray-100/80 product-slide-card">
                 <!-- Badges (Stacked Top-Left to prevent mobile overlap) -->
