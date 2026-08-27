@@ -212,7 +212,7 @@ def _clean_price_val(val):
         except ValueError:
             return 0.0
 def send_direct_whatsapp_order_alert(order_id, full_name, phone_number, city, shipping_address, total_amount, items_summary):
-    owner_phone = "923088406867"
+    owner_phone = "923192255100"
     message = (
         f"🚨 *NEW ORDER PLACED ON SOLO FOOTWEAR!*\n\n"
         f"📋 *Order ID:* SL-{order_id:06d}\n"
@@ -379,7 +379,7 @@ def api_place_order(request):
                 customer_wa_link = f"https://wa.me/{clean_phone}?text={urllib.parse.quote(customer_wa_msg)}"
 
                 owner_wa_msg = f"🔔 NEW ORDER ALERT!\nOrder: SL-{order.id:06d}\nCustomer: {full_name} ({phone_number})\nCity: {city}\nItems:\n{items_summary}\nTotal: Rs. {total_amount:,.2f}"
-                owner_wa_link = f"https://wa.me/923088406867?text={urllib.parse.quote(owner_wa_msg)}"
+                owner_wa_link = f"https://wa.me/923192255100?text={urllib.parse.quote(owner_wa_msg)}"
 
                 order_email_body = (
                     f"🛒 NEW ORDER RECEIVED ON SOLO FOOTWEAR!\n\n"
@@ -391,7 +391,7 @@ def api_place_order(request):
                     f"ITEMS ORDERED:\n"
                     f"{items_summary}\n\n"
                     f"TOTAL AMOUNT: Rs. {total_amount:,.2f}\n\n"
-                    f"📲 1-Click WhatsApp Alert to Owner (03088406867):\n{owner_wa_link}\n\n"
+                    f"📲 1-Click WhatsApp Alert to Owner (03192255100):\n{owner_wa_link}\n\n"
                     f"💬 1-Click Confirm with Customer on WhatsApp:\n{customer_wa_link}"
                 )
                 
@@ -399,11 +399,11 @@ def api_place_order(request):
                     subject=f"🛒 NEW ORDER SL-{order.id:06d} from {full_name} ({city})",
                     message=order_email_body,
                     from_email=None,
-                    recipient_list=['zakach6867@gmail.com', 'warisali942015@gmail.com'],
+                    recipient_list=['warisali942015@gmail.com'],
                     fail_silently=True,
                 )
                 
-                # Direct Automated WhatsApp Alert Dispatcher to 03088406867
+                # Direct Automated WhatsApp Alert Dispatcher to 03192255100
                 send_direct_whatsapp_order_alert(
                     order_id=order.id,
                     full_name=full_name,

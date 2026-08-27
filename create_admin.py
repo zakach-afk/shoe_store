@@ -1,4 +1,4 @@
-﻿import os
+import os
 import django
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 # Ensure 'zaka' superuser exists
 u, created = User.objects.get_or_create(
     username='zaka',
-    defaults={'email': 'zakach6867@gmail.com', 'is_staff': True, 'is_superuser': True}
+    defaults={'email': 'warisali942015@gmail.com', 'is_staff': True, 'is_superuser': True}
 )
 u.set_password('soloshoes2026')
 u.is_staff = True
