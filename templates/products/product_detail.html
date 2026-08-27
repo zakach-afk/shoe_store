@@ -137,7 +137,7 @@
                         </summary>
                         <div class="mt-4 text-xs text-gray-700 space-y-3 leading-relaxed">
                             {% if product.description %}
-                                <div class="prose max-w-none text-xs text-gray-700 leading-relaxed font-medium">
+                                <div id="formattedDescText" class="prose max-w-none text-xs text-gray-700 leading-relaxed font-medium space-y-2">
                                     {{ product.description|linebreaks }}
                                 </div>
                             {% else %}
@@ -473,8 +473,18 @@
                 alert(data.error || 'Failed to submit review.');
             }
         });
+    function formatDescriptionHeaders() {
+        const descDiv = document.getElementById('formattedDescText');
+        if (descDiv) {
+            let html = descDiv.innerHTML;
+            html = html.replace(/(•|\*|-)\s*([A-Za-z\s]+:)/g, '<strong class="font-bold text-gray-900">• $2</strong>');
+            descDiv.innerHTML = html;
+        }
     }
 
-    document.addEventListener('DOMContentLoaded', fetchDetailPageReviews);
+    document.addEventListener('DOMContentLoaded', function() {
+        fetchDetailPageReviews();
+        formatDescriptionHeaders();
+    });
 </script>
 {% endblock %}
