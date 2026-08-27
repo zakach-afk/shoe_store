@@ -113,12 +113,6 @@
                         </div>
                     </div>
 
-                    <!-- Main Action Row -->
-                    <div class="my-6">
-                        <button type="button" onclick="submitDetailBuyNow('{{ product.name|escapejs }}', '{{ product.active_price }}', '{% if product.main_image %}{{ product.main_image.image.url }}{% endif %}')" class="w-full h-14 bg-neutral-900 hover:bg-black text-white font-extrabold text-xs md:text-sm uppercase tracking-widest rounded-xl transition shadow-xl flex items-center justify-center space-x-2 cursor-pointer active:scale-95">
-                            <span>⚡ BUY IT NOW — ORDER PLACE</span>
-                        </button>
-                    </div>
                 </div>
 
                 <!-- Collapsible Accordion 1: Description -->
@@ -502,6 +496,8 @@
                 alert(data.error || 'Failed to submit review.');
             }
         });
+    }
+
     function formatDescriptionHeaders() {
         const descDiv = document.getElementById('formattedDescText');
         if (descDiv) {
