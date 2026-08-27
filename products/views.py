@@ -309,8 +309,11 @@ def api_place_order(request):
                 ])
                 
                 clean_phone = re.sub(r'[^0-9]', '', phone_number)
-                wa_msg = f"Hi {full_name}, this is SOLO Footwear confirming your Order #SL-{order.id:06d} for Rs. {total_amount:,.2f}."
-                wa_link = f"https://wa.me/{clean_phone}?text={urllib.parse.quote(wa_msg)}"
+                customer_wa_msg = f"Hi {full_name}, this is SOLO Footwear confirming your Order #SL-{order.id:06d} for Rs. {total_amount:,.2f}."
+                customer_wa_link = f"https://wa.me/{clean_phone}?text={urllib.parse.quote(customer_wa_msg)}"
+
+                owner_wa_msg = f"🔔 NEW ORDER ALERT!\nOrder: SL-{order.id:06d}\nCustomer: {full_name} ({phone_number})\nCity: {city}\nItems:\n{items_summary}\nTotal: Rs. {total_amount:,.2f}"
+                owner_wa_link = f"https://wa.me/923088406867?text={urllib.parse.quote(owner_wa_msg)}"
 
                 order_email_body = (
                     f"🛒 NEW ORDER RECEIVED ON SOLO FOOTWEAR!\n\n"
@@ -322,7 +325,8 @@ def api_place_order(request):
                     f"ITEMS ORDERED:\n"
                     f"{items_summary}\n\n"
                     f"TOTAL AMOUNT: Rs. {total_amount:,.2f}\n\n"
-                    f"📲 Click to Confirm Order on WhatsApp:\n{wa_link}"
+                    f"📲 1-Click WhatsApp Alert to Owner (03088406867):\n{owner_wa_link}\n\n"
+                    f"💬 1-Click Confirm with Customer on WhatsApp:\n{customer_wa_link}"
                 )
                 
                 send_mail(
