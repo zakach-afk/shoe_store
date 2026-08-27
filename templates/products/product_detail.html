@@ -24,12 +24,6 @@
             <div class="md:col-span-6 space-y-4">
                 <div class="relative overflow-hidden rounded-2xl bg-[#f8f8f8] aspect-[3/4] flex items-center justify-center border border-gray-100 shadow-sm group">
                     <!-- Sale Tag -->
-                    {% if product.regular_price and product.regular_price > product.active_price %}
-                    <span class="absolute top-4 left-4 z-20 bg-red-600 text-white text-xs font-black px-2.5 py-1 rounded uppercase tracking-wider shadow">
-                        -50%
-                    </span>
-                    {% endif %}
-
                     {% if product.main_image %}
                         <img id="detailMainImg" src="{{ product.main_image.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover object-center transition duration-500">
                     {% else %}
@@ -54,48 +48,27 @@
                 </div>
             </div>
 
-            <!-- Right Column: Product Info & Buy Action (Matching Puropelle Screenshot 1) -->
+            <!-- Right Column: Product Info & Buy Action -->
             <div class="md:col-span-6 space-y-6">
                 <div>
                     <!-- Product Title -->
-                    <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2 leading-tight uppercase tracking-wide">
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4 leading-tight uppercase tracking-wide">
                         {{ product.name }}
                     </h1>
-
-                    <!-- Scarcity Social Proof Tag -->
-                    <div class="flex items-center space-x-1.5 text-xs text-red-600 font-bold mb-3">
-                        <span class="text-sm">🔥</span>
-                        <span>8 sold in last 25 hours</span>
-                    </div>
-
-                    <!-- Intro Teaser Paragraph -->
-                    <p class="text-xs md:text-sm text-gray-600 leading-relaxed font-light mb-4">
-                        Looking for formal shoes for work, a wedding, graduation or other official event? SOLO brings its royal formal collection...
-                    </p>
 
                     <!-- Meta Specs Table -->
                     <div class="space-y-1.5 text-xs text-gray-600 border-t border-b border-gray-100 py-3 mb-4">
                         <p><span class="font-bold text-gray-800">SKU:</span> SL-{{ product.id|stringformat:"06d" }}</p>
                         <p><span class="font-bold text-gray-800">Availability:</span> <span class="text-emerald-600 font-bold">In stock</span></p>
-                        <p><span class="font-bold text-gray-800">Product type:</span> {{ product.category.name|default:"Loro-piana" }}</p>
+                        <p><span class="font-bold text-gray-800">Product type:</span> {{ product.category.name|default:"Footwear" }}</p>
                     </div>
 
                     <!-- Price Display -->
-                    <div class="flex items-baseline space-x-3 mb-3">
+                    <div class="flex items-baseline space-x-3 mb-6">
                         {% if product.regular_price and product.regular_price > product.active_price %}
                         <span class="text-lg text-gray-400 line-through font-medium">Rs.{{ product.regular_price }}</span>
                         {% endif %}
                         <span class="text-2xl md:text-3xl font-black text-red-600">Rs.{{ product.active_price }}</span>
-                    </div>
-
-                    <!-- Low Stock Progress Bar -->
-                    <div class="bg-red-50 border border-red-100 rounded-xl p-3 mb-6 space-y-2">
-                        <div class="flex justify-between items-center text-xs font-bold text-red-700">
-                            <span>Please hurry! Only 2 left in stock</span>
-                        </div>
-                        <div class="w-full h-1.5 bg-red-100 rounded-full overflow-hidden">
-                            <div class="w-1/4 h-full bg-emerald-500 rounded-full"></div>
-                        </div>
                     </div>
 
                     <!-- Dual Size Selector Grid -->
@@ -156,15 +129,9 @@
                             ☍
                         </button>
                     </div>
-
-                    <!-- Live Viewer Counter Badge -->
-                    <div class="flex items-center space-x-2 text-xs text-gray-600 pt-2">
-                        <span class="text-sm">👁</span>
-                        <span>10 customers are viewing this product</span>
-                    </div>
                 </div>
 
-                <!-- Collapsible Accordion 1: Description (Matching Screenshot 2) -->
+                <!-- Collapsible Accordion 1: Description -->
                 <div class="border-t border-gray-200 pt-4">
                     <details class="group border-b border-gray-200 pb-4 cursor-pointer" open>
                         <summary class="flex justify-between items-center font-bold text-gray-900 uppercase tracking-wider text-sm list-none">
@@ -172,17 +139,13 @@
                             <span class="text-gray-500 group-open:rotate-45 transition transform text-lg font-light">+</span>
                         </summary>
                         <div class="mt-4 text-xs text-gray-700 space-y-3 leading-relaxed">
-                            <p>Looking for formal shoes for work, a wedding, graduation or other official event? SOLO brings its royal formal collection:</p>
-                            <ul class="space-y-1.5 font-normal list-none pl-1">
-                                <li>• <strong class="text-gray-900">Upper :</strong> imported Cow leather</li>
-                                <li>• <strong class="text-gray-900">Lining :</strong> Anti-Bacterial synthetic leather lining</li>
-                                <li>• <strong class="text-gray-900">Sole :</strong> Rubber sole</li>
-                                <li>• <strong class="text-gray-900">In Sole :</strong> Soft Jelly insole providing addition comfort at key pressure point of the foot.</li>
-                                <li>• <strong class="text-gray-900">Finish :</strong> Italian Spray</li>
-                                <li>• <strong class="text-gray-900">Made :</strong> Hand crafted</li>
-                                <li>• <strong class="text-gray-900">Colour :</strong> {{ product.name }}</li>
-                                <li>• <strong class="text-gray-900">Occasion :</strong> Casual, events, and Casual meetings and other</li>
-                            </ul>
+                            {% if product.description %}
+                                <div class="prose max-w-none text-xs text-gray-700 leading-relaxed font-medium">
+                                    {{ product.description|linebreaks }}
+                                </div>
+                            {% else %}
+                                <p class="text-xs text-gray-500 italic">No additional details specified for this item.</p>
+                            {% endif %}
                         </div>
                     </details>
 
@@ -276,7 +239,6 @@
                 {% for rel in related_products %}
                 <div class="group flex flex-col justify-between text-left cursor-pointer bg-white rounded-2xl p-2 border border-gray-100 hover:border-black transition shadow-sm">
                     <div class="relative overflow-hidden rounded-xl bg-[#f8f8f8] mb-3 aspect-[3/4] flex items-center justify-center" onclick="openQuickViewModal('{{ rel.name|escapejs }}', '{{ rel.active_price }}', '{{ rel.regular_price }}', '{% if rel.main_image %}{{ rel.main_image.image.url }}{% endif %}', '{{ rel.secondary_image_url }}', '{{ rel.slug }}')">
-                        <span class="absolute top-2 left-2 z-10 bg-red-600 text-white text-[9px] font-black px-1.5 py-0.5 rounded shadow">-50%</span>
                         {% if rel.main_image %}
                             <img src="{{ rel.main_image.image.url }}" alt="{{ rel.name }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                         {% else %}
@@ -309,11 +271,11 @@
         {% endif %}
     </div>
 
-    <!-- Brand Footer & Location Info (Matching Screenshot 4) -->
+    <!-- Brand Footer & Location Info -->
     <footer class="bg-white border-t border-gray-200 mt-16 pt-12 pb-24 text-left">
-        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div class="max-w-7xl mx-auto px-4">
             <!-- Brand Info & Address -->
-            <div class="space-y-4 text-xs text-gray-700">
+            <div class="space-y-4 text-xs text-gray-700 max-w-2xl">
                 <h2 class="text-2xl font-serif font-black tracking-widest text-gray-900">SOLO</h2>
                 <p class="italic text-gray-500">Every step you take is a journey towards elegance.</p>
                 
@@ -361,28 +323,6 @@
                             <p><a href="/terms-of-service/" class="hover:underline">Terms of Service</a></p>
                         </div>
                     </details>
-                </div>
-            </div>
-
-            <!-- Newsletter Signup -->
-            <div class="space-y-4">
-                <h3 class="font-bold text-sm text-gray-900 uppercase tracking-widest">NEWSLETTER SIGN UP</h3>
-                <p class="text-xs text-gray-500">Sign up for exclusive updates & discounts</p>
-                
-                <form onsubmit="event.preventDefault(); alert('Thank you for subscribing to SOLO Newsletter!');" class="flex items-center space-x-2">
-                    <input type="email" required placeholder="enter email address" class="flex-1 bg-neutral-800 text-white text-xs px-4 py-3 rounded focus:outline-none">
-                    <button type="submit" class="bg-white border border-black text-black font-bold text-xs uppercase px-6 py-3 rounded hover:bg-black hover:text-white transition">
-                        SUBMIT
-                    </button>
-                </form>
-
-                <!-- Social Icons -->
-                <div class="flex items-center space-x-4 pt-4 text-gray-600 text-sm">
-                    <span class="hover:text-black cursor-pointer font-bold">f</span>
-                    <span class="hover:text-black cursor-pointer font-bold">📷</span>
-                    <span class="hover:text-black cursor-pointer font-bold">🎵</span>
-                    <span class="hover:text-black cursor-pointer font-bold">👻</span>
-                    <span class="hover:text-black cursor-pointer font-bold">▶</span>
                 </div>
             </div>
         </div>
