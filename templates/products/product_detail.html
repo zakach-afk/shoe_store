@@ -114,12 +114,6 @@
                         </div>
                     </div>
 
-                    <!-- Main Action Row -->
-                    <div class="mb-4">
-                        <button type="button" onclick="submitDetailBuyNow('{{ product.name|escapejs }}', '{{ product.active_price }}', '{% if product.main_image %}{{ product.main_image.image.url }}{% endif %}')" class="w-full h-13 bg-neutral-900 hover:bg-black text-white font-extrabold text-xs uppercase tracking-widest rounded-lg transition shadow-lg flex items-center justify-center">
-                            BUY IT NOW
-                        </button>
-                    </div>
                 </div>
 
                 <!-- Collapsible Accordion 1: Description -->
@@ -362,7 +356,10 @@
     }
 
     function submitDetailBuyNow(name, price, img) {
-        openQuickViewModal(name, price, price, img, '');
+        const itemSize = currentDetailSize || '40/7';
+        const itemQty = currentDetailQty || 1;
+        addToCart(name, price, price, img, itemSize, 'Black', itemQty, true);
+        window.location.href = '/checkout/';
     }
 
     function toggleDetailReviewForm() {

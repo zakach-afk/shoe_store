@@ -1307,7 +1307,7 @@
             }
         }
 
-        function addToCart(name, price, regPrice, image, size, color, qty = 1) {
+        function addToCart(name, price, regPrice, image, size, color, qty = 1, skipDrawer = false) {
             const numPrice = parsePkrPrice(price);
             const itemSize = size || selectedQvSize || '7/40';
             const itemColor = color || selectedQvColor || 'Black';
@@ -1326,7 +1326,9 @@
                 });
             }
             saveCart();
-            openCartDrawer();
+            if (!skipDrawer) {
+                openCartDrawer();
+            }
         }
 
         function updateCartItemQty(index, change) {
